@@ -22,6 +22,7 @@ public class Main extends Application{
 		b1.setOnAction(e -> {boolean result = ConfirmBox.display("FKING BABIES", "KILL YO SELF"); System.out.println(result);});
 		StackPane l1 = new StackPane();
 		l1.getChildren().add(b1);
+		
 		Scene s1 = new Scene(l1, 300, 300);
 		stage.setScene(s1);
 		stage.setTitle("onose");
