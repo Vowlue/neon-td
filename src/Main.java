@@ -8,6 +8,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+//banana :3
+
 public class Main extends Application{
 	
 	public static void main(String[] args){
