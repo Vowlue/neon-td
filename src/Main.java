@@ -19,7 +19,7 @@ public class Main extends Application{
 	@Override
 	public void start(Stage stage) throws Exception {
 		Button b1 = new Button("IMA SHOOT OUT SOME KIDS");
-		b1.setOnAction(e -> AlertBox.display("FKING BABIES", "KILL YO SELF"));
+		b1.setOnAction(e -> {boolean result = ConfirmBox.display("FKING BABIES", "KILL YO SELF"); System.out.println(result);});
 		StackPane l1 = new StackPane();
 		l1.getChildren().add(b1);
 		Scene s1 = new Scene(l1, 300, 300);
