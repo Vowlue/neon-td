@@ -1,0 +1,6 @@
+Notes for JavaFX:
+
+Main Window is called stage. 
+On the stage, you can set it to a specific scene to view.
+Scenes require a layout (StackPane, VBox, HBox).
+Use the layout to add elements onto the Scene it is a part of using getChildren().
