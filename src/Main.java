@@ -66,10 +66,10 @@ public class Main extends Application{
 			Circle circle = new Circle(150, Color.web("white", 0.05));
 			circle.setStrokeType(StrokeType.OUTSIDE);
 			circle.setStroke(Color.web("white", 0.16));
-			circle.setStrokeWidth(1);
+			circle.setStrokeWidth(5);
 			circles.getChildren().add(circle);
 		}
-		//circles.setEffect(new BoxBlur(10, 10, 3));
+		circles.setEffect(new BoxBlur(10, 10, 3));
 		
 		Group blendModeGroup = 
 			new Group(new Group(new Rectangle(scene.getWidth(), scene.getHeight(),
