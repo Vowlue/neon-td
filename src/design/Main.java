@@ -1,5 +1,6 @@
 package design;
 import java.io.FileInputStream;
+import java.util.Arrays;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -18,12 +19,14 @@ public class Main extends Application{
 	Stage window;
 	private final int GAME_HEIGHT = 700;
 	private final int GAME_WIDTH = 1000;
+	private final int TILE_TYPES = 4; // path, water, air, land
 	public static void main(String[] args){
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage stage) throws Exception {
+		generateMap(10, 10);
 		window = stage;
 		window.setTitle("TD GAME");
 		
@@ -57,4 +60,62 @@ public class Main extends Application{
 		window.setScene(game);
 		window.show();
 	}
+	private int[][] generateMap(int height, int width){
+		// 1: path, 2: water, 3: air, 4: land
+		//first, generate the path, then add some water + air, fill in rest with 
+		//land. water and air will be a completely different number each time
+		//however they cannot take up so much space such that the land will look
+		//sparse
+		
+		int[][] map = new int[height][width];
+		map[0][1] = 1;
+		map[1][1] = 1;
+		int curX = 1;
+		int curY = 1;
+		while(curX != 0 && curX != map[0].length-1 && curY != 0 && curY != map.length-1){
+			curX += randomInt(0, 1);
+			curY += randomInt(0, 1);
+			map[curY][curX] = 1;
+		}
+		for(int[] a: map){
+			System.out.println(Arrays.toString(a));
+		}
+		return map;
+	}
+	private int randomInt(int low, int high){
+		return (int)(Math.random()*(high-low+1))+low;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
