@@ -22,7 +22,11 @@ public class Main extends Application{
 	Stage window;
 	private final int GAME_HEIGHT = 700;
 	private final int GAME_WIDTH = 1000;
-	private final int TILE_TYPES = 4; // path, water, air, land
+	private final int PATH = 1;
+	private final int WATER = 2;
+	private final int AIR = 3;
+	private final int LAND = 4;
+	private final int EMPTY = 0;
 	public static void main(String[] args){
 		launch(args);
 	}
@@ -66,10 +70,10 @@ public class Main extends Application{
 			for(int j = 0; j<10; j++){
 				ImageView iv;
 				switch(map[j][i]){
-				case 1: iv = new ImageView(new Image(new FileInputStream("images/one.png")));break;
-				case 2: iv = new ImageView(new Image(new FileInputStream("images/two.png")));break;
-				case 3: iv = new ImageView(new Image(new FileInputStream("images/three.png")));break;
-				case 4: iv = new ImageView(new Image(new FileInputStream("images/four.png")));break;
+				case PATH: iv = new ImageView(new Image(new FileInputStream("images/one.png")));break;
+				case WATER: iv = new ImageView(new Image(new FileInputStream("images/two.png")));break;
+				case AIR: iv = new ImageView(new Image(new FileInputStream("images/three.png")));break;
+				case LAND: iv = new ImageView(new Image(new FileInputStream("images/four.png")));break;
 				default: iv = null;break;
 				}
 				Pane p = new Pane(iv);
@@ -93,23 +97,23 @@ public class Main extends Application{
 		int[][] map = new int[height][width];
 		//generate the path
 		for(int i = 0; i<width; i++){
-			map[height/2][i] = 1;
+			map[height/2][i] = PATH;
 		}
 		//randomly fill in some water + air
 		int generations = (height*width)/2;
 		while(generations > 0){
 			int randX = randomInt(0, width-1);
 			int randY = randomInt(0, height-1);
-			if(map[randY][randX] == 0){
+			if(map[randY][randX] == EMPTY){
 				generations--;
-				map[randY][randX] = randomInt(2,3);
+				map[randY][randX] = randomInt(WATER, AIR);
 			}
 		}
 		//land
 		for(int i = 0; i<height; i++){
 			for(int j = 0; j<width; j++){
-				if(map[i][j] == 0)
-					map[i][j] = 4;
+				if(map[i][j] == EMPTY)
+					map[i][j] = LAND;
 			}
 		}
 		for(int[] a: map){
