@@ -14,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -59,13 +60,19 @@ public class Main extends Application{
 		
 		GridPane gridPane = new GridPane();
 		ColumnConstraints c = new ColumnConstraints();
+		RowConstraints r = new RowConstraints();
 		c.setPercentWidth(10);
+		r.setPercentHeight(10);
 		for(int i = 0; i<10; i++){
 			gridPane.getColumnConstraints().add(c);
 		}
 		for(int i = 0; i<10; i++){
-			gridPane.add(new ImageView(new Image(new FileInputStream("images/one.png"))), i, 0);
-			
+			gridPane.getRowConstraints().add(r);
+		}
+		for(int i = 0; i<10; i++){
+			for(int j = 0; j<10; j++){
+				gridPane.add(new ImageView(new Image(new FileInputStream("images/one.png"))), i, j);
+			}
 		}
 		gameLayout.setCenter(gridPane);
 		Scene game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
