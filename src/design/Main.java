@@ -29,7 +29,7 @@ public class Main extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		generateMap(10, 10);
+		int[][] map = generateMap(10, 10);
 		window = stage;
 		window.setTitle("TD GAME");
 		
@@ -53,11 +53,6 @@ public class Main extends Application{
 		Pane actionMenu = new Pane(actionHold);
 		gameLayout.setLeft(actionMenu);
 		
-		ImageView map = new ImageView(new Image(new FileInputStream("images/placehold1.png")));
-		map.setFitWidth(.7*GAME_WIDTH);
-		map.setFitHeight(.95*GAME_HEIGHT);
-		Pane gameField = new Pane(map);
-		
 		GridPane gridPane = new GridPane();
 		ColumnConstraints c = new ColumnConstraints();
 		RowConstraints r = new RowConstraints();
@@ -71,7 +66,18 @@ public class Main extends Application{
 		}
 		for(int i = 0; i<10; i++){
 			for(int j = 0; j<10; j++){
-				gridPane.add(new ImageView(new Image(new FileInputStream("images/one.png"))), i, j);
+				ImageView iv;
+				switch(map[j][i]){
+				case 1: iv = new ImageView(new Image(new FileInputStream("images/one.png")));break;
+				case 2: iv = new ImageView(new Image(new FileInputStream("images/two.png")));break;
+				case 3: iv = new ImageView(new Image(new FileInputStream("images/three.png")));break;
+				case 4: iv = new ImageView(new Image(new FileInputStream("images/four.png")));break;
+				default: iv = null;break;
+				}
+				Pane p = new Pane(iv);
+				iv.fitWidthProperty().bind(p.widthProperty());
+				iv.fitHeightProperty().bind(p.heightProperty());
+				gridPane.add(p, i, j);
 			}
 		}
 		gameLayout.setCenter(gridPane);
