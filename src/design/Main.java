@@ -60,8 +60,6 @@ public class Main extends Application{
 		r.setPercentHeight(10);
 		for(int i = 0; i<10; i++){
 			gridPane.getColumnConstraints().add(c);
-		}
-		for(int i = 0; i<10; i++){
 			gridPane.getRowConstraints().add(r);
 		}
 		for(int i = 0; i<10; i++){
