@@ -11,6 +11,8 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -54,8 +56,18 @@ public class Main extends Application{
 		map.setFitWidth(.7*GAME_WIDTH);
 		map.setFitHeight(.95*GAME_HEIGHT);
 		Pane gameField = new Pane(map);
-		gameLayout.setCenter(gameField);
 		
+		GridPane gridPane = new GridPane();
+		ColumnConstraints c = new ColumnConstraints();
+		c.setPercentWidth(10);
+		for(int i = 0; i<10; i++){
+			gridPane.getColumnConstraints().add(c);
+		}
+		for(int i = 0; i<10; i++){
+			gridPane.add(new ImageView(new Image(new FileInputStream("images/one.png"))), i, 0);
+			
+		}
+		gameLayout.setCenter(gridPane);
 		Scene game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
 		window.setScene(game);
 		window.show();
@@ -68,14 +80,26 @@ public class Main extends Application{
 		//sparse
 		
 		int[][] map = new int[height][width];
-		map[0][1] = 1;
-		map[1][1] = 1;
-		int curX = 1;
-		int curY = 1;
-		while(curX != 0 && curX != map[0].length-1 && curY != 0 && curY != map.length-1){
-			curX += randomInt(0, 1);
-			curY += randomInt(0, 1);
-			map[curY][curX] = 1;
+		//generate the path
+		for(int i = 0; i<width; i++){
+			map[height/2][i] = 1;
+		}
+		//randomly fill in some water + air
+		int generations = (height*width)/2;
+		while(generations > 0){
+			int randX = randomInt(0, width-1);
+			int randY = randomInt(0, height-1);
+			if(map[randY][randX] == 0){
+				generations--;
+				map[randY][randX] = randomInt(2,3);
+			}
+		}
+		//land
+		for(int i = 0; i<height; i++){
+			for(int j = 0; j<width; j++){
+				if(map[i][j] == 0)
+					map[i][j] = 4;
+			}
 		}
 		for(int[] a: map){
 			System.out.println(Arrays.toString(a));
