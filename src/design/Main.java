@@ -27,13 +27,15 @@ public class Main extends Application{
 	private final int AIR = 3;
 	private final int LAND = 4;
 	private final int EMPTY = 0;
+	private final int HEIGHT_D = 20;
+	private final int WIDTH_D = 20;
 	public static void main(String[] args){
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		int[][] map = generateMap(10, 10);
+		int[][] map = generateMap();
 		window = stage;
 		window.setTitle("TD GAME");
 		
@@ -60,17 +62,17 @@ public class Main extends Application{
 		GridPane gridPane = new GridPane();
 		ColumnConstraints c = new ColumnConstraints();
 		RowConstraints r = new RowConstraints();
-		c.setPercentWidth(10);
-		r.setPercentHeight(10);
-		for(int i = 0; i<10; i++){
+		c.setPercentWidth(100/WIDTH_D);
+		r.setPercentHeight(100/HEIGHT_D);
+		for(int i = 0; i<HEIGHT_D; i++){
 			gridPane.getColumnConstraints().add(c);
 			gridPane.getRowConstraints().add(r);
 		}
-		for(int i = 0; i<10; i++){
-			for(int j = 0; j<10; j++){
+		for(int i = 0; i<HEIGHT_D; i++){
+			for(int j = 0; j<WIDTH_D; j++){
 				ImageView iv;
 				switch(map[j][i]){
-				case PATH: iv = new ImageView(new Image(new FileInputStream("images/one.png")));break;
+				case PATH: iv = new ImageView(new Image(new FileInputStream("images/path.png")));break;
 				case WATER: iv = new ImageView(new Image(new FileInputStream("images/two.png")));break;
 				case AIR: iv = new ImageView(new Image(new FileInputStream("images/three.png")));break;
 				case LAND: iv = new ImageView(new Image(new FileInputStream("images/four.png")));break;
@@ -87,31 +89,31 @@ public class Main extends Application{
 		window.setScene(game);
 		window.show();
 	}
-	private int[][] generateMap(int height, int width){
+	private int[][] generateMap(){
 		// 1: path, 2: water, 3: air, 4: land
 		//first, generate the path, then add some water + air, fill in rest with 
 		//land. water and air will be a completely different number each time
 		//however they cannot take up so much space such that the land will look
 		//sparse
 		
-		int[][] map = new int[height][width];
+		int[][] map = new int[HEIGHT_D][WIDTH_D];
 		//generate the path
-		for(int i = 0; i<width; i++){
-			map[height/2][i] = PATH;
+		for(int i = 0; i<WIDTH_D; i++){
+			map[HEIGHT_D/2][i] = PATH;
 		}
 		//randomly fill in some water + air
-		int generations = (height*width)/2;
+		int generations = (HEIGHT_D*WIDTH_D)/2;
 		while(generations > 0){
-			int randX = randomInt(0, width-1);
-			int randY = randomInt(0, height-1);
+			int randX = randomInt(0, WIDTH_D-1);
+			int randY = randomInt(0, HEIGHT_D-1);
 			if(map[randY][randX] == EMPTY){
 				generations--;
 				map[randY][randX] = randomInt(WATER, AIR);
 			}
 		}
 		//land
-		for(int i = 0; i<height; i++){
-			for(int j = 0; j<width; j++){
+		for(int i = 0; i<HEIGHT_D; i++){
+			for(int j = 0; j<WIDTH_D; j++){
 				if(map[i][j] == EMPTY)
 					map[i][j] = LAND;
 			}
