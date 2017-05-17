@@ -76,7 +76,7 @@ public class Main extends Application{
 				case WATER: iv = new ImageView(new Image(new FileInputStream("images/two.png")));break;
 				case AIR: iv = new ImageView(new Image(new FileInputStream("images/three.png")));break;
 				case LAND: iv = new ImageView(new Image(new FileInputStream("images/four.png")));break;
-				default: iv = null;break;
+				default: iv = new ImageView(new Image(new FileInputStream("images/one.png")));break;
 				}
 				Pane p = new Pane(iv);
 				iv.fitWidthProperty().bind(p.widthProperty());
@@ -98,26 +98,8 @@ public class Main extends Application{
 		
 		int[][] map = new int[HEIGHT_D][WIDTH_D];
 		//generate the path
-		for(int i = 0; i<WIDTH_D; i++){
-			map[HEIGHT_D/2][i] = PATH;
-		}
-		//randomly fill in some water + air
-		int generations = (HEIGHT_D*WIDTH_D)/2;
-		while(generations > 0){
-			int randX = randomInt(0, WIDTH_D-1);
-			int randY = randomInt(0, HEIGHT_D-1);
-			if(map[randY][randX] == EMPTY){
-				generations--;
-				map[randY][randX] = randomInt(WATER, AIR);
-			}
-		}
-		//land
-		for(int i = 0; i<HEIGHT_D; i++){
-			for(int j = 0; j<WIDTH_D; j++){
-				if(map[i][j] == EMPTY)
-					map[i][j] = LAND;
-			}
-		}
+		int xx = 0; int yy = 10;
+		
 		for(int[] a: map){
 			System.out.println(Arrays.toString(a));
 		}
