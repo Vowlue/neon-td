@@ -72,10 +72,10 @@ public class Main extends Application{
 			for(int j = 0; j<WIDTH_D; j++){
 				ImageView iv;
 				switch(map[j][i]){
-				case BLACK: iv = new ImageView(new Image(new FileInputStream("images/path.png")));break;
-				case BLUE: iv = new ImageView(new Image(new FileInputStream("images/two.png")));break;
-				case YELLOW: iv = new ImageView(new Image(new FileInputStream("images/three.png")));break;
-				case GREEN: iv = new ImageView(new Image(new FileInputStream("images/four.png")));break;
+				case BLACK: iv = new ImageView(new Image(new FileInputStream("images/black tile.png")));break;
+				case BLUE: iv = new ImageView(new Image(new FileInputStream("images/blue unshaded tile.png")));break;
+				case YELLOW: iv = new ImageView(new Image(new FileInputStream("images/yellow unshaded tile.png")));break;
+				case GREEN: iv = new ImageView(new Image(new FileInputStream("images/green unshaded tile.png")));break;
 				default: iv = new ImageView(new Image(new FileInputStream("images/grass.png")));break;
 				}
 				Pane p = new Pane(iv);
