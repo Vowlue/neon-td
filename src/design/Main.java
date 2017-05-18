@@ -76,7 +76,7 @@ public class Main extends Application{
 				case WATER: iv = new ImageView(new Image(new FileInputStream("images/two.png")));break;
 				case AIR: iv = new ImageView(new Image(new FileInputStream("images/three.png")));break;
 				case LAND: iv = new ImageView(new Image(new FileInputStream("images/four.png")));break;
-				default: iv = new ImageView(new Image(new FileInputStream("images/one.png")));break;
+				default: iv = new ImageView(new Image(new FileInputStream("images/grass.png")));break;
 				}
 				Pane p = new Pane(iv);
 				iv.fitWidthProperty().bind(p.widthProperty());
@@ -98,8 +98,32 @@ public class Main extends Application{
 		
 		int[][] map = new int[HEIGHT_D][WIDTH_D];
 		//generate the path
-		int xx = 0; int yy = 10;
-		
+		int p1 = 10;
+		int p2 = 0;
+		while(p2 < 5){
+			map[p1][p2] = 1;
+			p2++;
+		}
+		while(p1 > 4){
+			map[p1][p2] = 1;
+			p1--;
+		}
+		while(p2 < 10){
+			map[p1][p2] = 1;
+			p2++;
+		}
+		while(p1 < 16){
+			map[p1][p2] = 1;
+			p1++;
+		}
+		while(p2 < 15){
+			map[p1][p2] = 1;
+			p2++;
+		}
+		while(p1 > -1){
+			map[p1][p2] = 1;
+			p1--;
+		}
 		for(int[] a: map){
 			System.out.println(Arrays.toString(a));
 		}
