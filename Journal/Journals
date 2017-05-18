@@ -1,5 +1,8 @@
 Journals Here
 
+LIKELY THEME OPTION: PROBABLY USE A THEME OF COLORS AND CERTAIN TOWERS CAN ONLY BE PLACED IN SPECIFIC COLORS??
+COLOR IDEAS: BLACK PATH, NEON COLORS FOR THE SPECIFIC TILES YELLOW BLUE GREEN
+
 5/4/17: Today, I plan to learn how to set up a window in JavaFX, from Scenes to Stages. Today, I learned how to use the GridPane and Group layouts to create scenes. Tomorrow, I will try to explore more types of layouts to find one that I may use for my game.
 5/5/17: Today, I plan on researching how to use CSS to apply it to my scenes in JavaFX. Today, I learned that it is possible to create custom layouts, so I might make one to use for my project. Apparently, CSS is another file you must add to your project, so I am also planning out the packages I need to organize my project.
 5/8/17: Today, I plan on researching what kind of UI elements can be added to the screen in order to set up the game. However, with the limited amount of elements, I may have to customize my own that will fit the task. Also, I am thinking of what UI elements I would like to include in my title screen which will be used to lead the player to the game. Next time, I will try to design the layout of the game.

@@ -22,10 +22,10 @@ public class Main extends Application{
 	Stage window;
 	private final int GAME_HEIGHT = 700;
 	private final int GAME_WIDTH = 1000;
-	private final int PATH = 1;
-	private final int WATER = 2;
-	private final int AIR = 3;
-	private final int LAND = 4;
+	private final int BLACK = 1;
+	private final int BLUE = 2;
+	private final int YELLOW = 3;
+	private final int GREEN = 4;
 	private final int EMPTY = 0;
 	private final int HEIGHT_D = 20;
 	private final int WIDTH_D = 20;
@@ -72,10 +72,10 @@ public class Main extends Application{
 			for(int j = 0; j<WIDTH_D; j++){
 				ImageView iv;
 				switch(map[j][i]){
-				case PATH: iv = new ImageView(new Image(new FileInputStream("images/path.png")));break;
-				case WATER: iv = new ImageView(new Image(new FileInputStream("images/two.png")));break;
-				case AIR: iv = new ImageView(new Image(new FileInputStream("images/three.png")));break;
-				case LAND: iv = new ImageView(new Image(new FileInputStream("images/four.png")));break;
+				case BLACK: iv = new ImageView(new Image(new FileInputStream("images/path.png")));break;
+				case BLUE: iv = new ImageView(new Image(new FileInputStream("images/two.png")));break;
+				case YELLOW: iv = new ImageView(new Image(new FileInputStream("images/three.png")));break;
+				case GREEN: iv = new ImageView(new Image(new FileInputStream("images/four.png")));break;
 				default: iv = new ImageView(new Image(new FileInputStream("images/grass.png")));break;
 				}
 				Pane p = new Pane(iv);
@@ -101,28 +101,34 @@ public class Main extends Application{
 		int p1 = 10;
 		int p2 = 0;
 		while(p2 < 5){
-			map[p1][p2] = 1;
+			map[p1][p2] = BLACK;
 			p2++;
 		}
 		while(p1 > 4){
-			map[p1][p2] = 1;
+			map[p1][p2] = BLACK;
 			p1--;
 		}
 		while(p2 < 10){
-			map[p1][p2] = 1;
+			map[p1][p2] = BLACK;
 			p2++;
 		}
 		while(p1 < 16){
-			map[p1][p2] = 1;
+			map[p1][p2] = BLACK;
 			p1++;
 		}
 		while(p2 < 15){
-			map[p1][p2] = 1;
+			map[p1][p2] = BLACK;
 			p2++;
 		}
 		while(p1 > -1){
-			map[p1][p2] = 1;
+			map[p1][p2] = BLACK;
 			p1--;
+		}
+		for(int i = 0; i<HEIGHT_D; i++){
+			for(int j = 0; j<WIDTH_D; j++){
+				if(map[i][j] != BLACK)
+					map[i][j] = randomInt(2, 4);
+			}
 		}
 		for(int[] a: map){
 			System.out.println(Arrays.toString(a));
