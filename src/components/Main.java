@@ -1,4 +1,4 @@
-package design;
+package components;
 import java.io.FileInputStream;
 import java.util.Arrays;
 
@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
@@ -22,11 +23,11 @@ public class Main extends Application{
 	Stage window;
 	private final int GAME_HEIGHT = 700;
 	private final int GAME_WIDTH = 1000;
+	private final int EMPTY = 0;
 	private final int BLACK = 1;
 	private final int BLUE = 2;
 	private final int YELLOW = 3;
 	private final int GREEN = 4;
-	private final int EMPTY = 0;
 	private final int HEIGHT_D = 20;
 	private final int WIDTH_D = 20;
 	public static void main(String[] args){
@@ -40,6 +41,7 @@ public class Main extends Application{
 		window.setTitle("TD GAME");
 		
 		BorderPane gameLayout = new BorderPane();
+		gameLayout.setStyle("-fx-background-color: #000000");
 		
 		ImageView topHold = new ImageView(new Image(new FileInputStream("images/placehold2.png")));
 		topHold.setFitWidth(GAME_WIDTH);
@@ -47,26 +49,37 @@ public class Main extends Application{
 		Pane topMenu = new Pane(topHold);
 		gameLayout.setTop(topMenu);
 		
-		ImageView shopHold = new ImageView(new Image(new FileInputStream("images/placehold3.png")));
-		shopHold.setFitWidth(.2*GAME_WIDTH);
-		shopHold.setFitHeight(.95*GAME_HEIGHT);
-		Pane shopMenu = new Pane(shopHold);
-		gameLayout.setRight(shopMenu);
-		
 		ImageView actionHold = new ImageView(new Image(new FileInputStream("images/placehold4.png")));
 		actionHold.setFitWidth(.1*GAME_WIDTH);
 		actionHold.setFitHeight(.95*GAME_HEIGHT);
 		Pane actionMenu = new Pane(actionHold);
 		gameLayout.setLeft(actionMenu);
 		
-		GridPane gridPane = new GridPane();
+		//THIS IS THE CODE FOR THE FRONT END OF THE SHOP
+		/*ImageView shopHold = new ImageView(new Image(new FileInputStream("images/placehold3.png")));
+		shopHold.setFitWidth(.2*GAME_WIDTH);
+		shopHold.setFitHeight(.95*GAME_HEIGHT);*/
+		VBox shopMenu = new VBox();
+		VBox towerMenu = new VBox();
+		Label towerTitle = new Label("Towers");
+		HBox blueMenu = new HBox(5);
+		blueMenu.setPadding(new Insets(10, 5, 10, 5));
+		blueMenu.setStyle("-fx-background-color:#3399FF");
+		blueMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
+		towerMenu.getChildren().addAll(towerTitle, blueMenu);
+		VBox eventMenu = new VBox();
+		shopMenu.getChildren().addAll(towerMenu, eventMenu);
+		gameLayout.setRight(shopMenu);
+		
+		//THIS IS THE CODE FOR THE FRONT END OF THE MAP
+		GridPane mapLayout = new GridPane();
 		ColumnConstraints c = new ColumnConstraints();
 		RowConstraints r = new RowConstraints();
 		c.setPercentWidth(100/WIDTH_D);
 		r.setPercentHeight(100/HEIGHT_D);
 		for(int i = 0; i<HEIGHT_D; i++){
-			gridPane.getColumnConstraints().add(c);
-			gridPane.getRowConstraints().add(r);
+			mapLayout.getColumnConstraints().add(c);
+			mapLayout.getRowConstraints().add(r);
 		}
 		for(int i = 0; i<HEIGHT_D; i++){
 			for(int j = 0; j<WIDTH_D; j++){
@@ -81,10 +94,10 @@ public class Main extends Application{
 				Pane p = new Pane(iv);
 				iv.fitWidthProperty().bind(p.widthProperty());
 				iv.fitHeightProperty().bind(p.heightProperty());
-				gridPane.add(p, i, j);
+				mapLayout.add(p, i, j);
 			}
 		}
-		gameLayout.setCenter(gridPane);
+		gameLayout.setCenter(mapLayout);
 		Scene game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
 		window.setScene(game);
 		window.show();
@@ -126,12 +139,9 @@ public class Main extends Application{
 		}
 		for(int i = 0; i<HEIGHT_D; i++){
 			for(int j = 0; j<WIDTH_D; j++){
-				if(map[i][j] != BLACK)
+				if(map[i][j] == EMPTY)
 					map[i][j] = randomInt(2, 4);
 			}
-		}
-		for(int[] a: map){
-			System.out.println(Arrays.toString(a));
 		}
 		return map;
 	}
