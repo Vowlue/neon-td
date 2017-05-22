@@ -1,4 +1,5 @@
 package components;
+import java.awt.Paint;
 import java.io.FileInputStream;
 import java.util.Arrays;
 
@@ -18,8 +19,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import objects.Enemy;
 
 public class Main extends Application{
 	Stage window;
@@ -102,6 +106,8 @@ public class Main extends Application{
 			}
 		}
 		gameLayout.setCenter(mapLayout);
+	
+		gameLayout.getChildren().add(new Enemy(4));
 		
 		Scene game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
 		window.setScene(game);
