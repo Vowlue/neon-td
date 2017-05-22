@@ -2,6 +2,7 @@ package components;
 import java.io.FileInputStream;
 import java.util.Arrays;
 
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
@@ -18,6 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Main extends Application{
 	Stage window;
@@ -68,6 +70,8 @@ public class Main extends Application{
 		blueMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
 		towerMenu.getChildren().addAll(towerTitle, blueMenu);
 		VBox eventMenu = new VBox();
+		Label eventTitle = new Label("Events");
+		GridPane eventGrid = new GridPane();
 		shopMenu.getChildren().addAll(towerMenu, eventMenu);
 		gameLayout.setRight(shopMenu);
 		
@@ -98,6 +102,7 @@ public class Main extends Application{
 			}
 		}
 		gameLayout.setCenter(mapLayout);
+		
 		Scene game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
 		window.setScene(game);
 		window.show();
