@@ -24,13 +24,14 @@ public class Enemy extends Circle{
 			t.setByX(xMovement[i]);
 			t.setByY(yMovement[i]);
 			
-			int delay = 0;
+			double delay = 0;
 			for(int j = i; j>0; j--){
 				delay += 1.000*Math.abs(xMovement[j]+yMovement[j])/speed;
 			}
 			t.setDelay(Duration.seconds(delay));
 			
 			System.out.println(delay);
+			System.out.println(xMovement[i]+ " " + yMovement[i]);
 			
 			t.play();
 			
