@@ -90,6 +90,7 @@ public class Main extends Application{
 		
 		//THIS IS THE CODE FOR THE FRONT END OF THE MAP
 		GridPane mapLayout = new GridPane();
+		mapLayout.setId("map");
 		ColumnConstraints c = new ColumnConstraints();
 		RowConstraints r = new RowConstraints();
 		c.setPercentWidth(100/WIDTH_D);
@@ -116,7 +117,7 @@ public class Main extends Application{
 		}
 		gameLayout.setCenter(mapLayout);
 		game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
-		
+		game.getStylesheets().add("style/TDStyle.css");
 		game.setOnKeyPressed(e -> {
 			Enemy z = new Enemy(4);
 			z.setOnMousePressed(n -> z.setStage((int)(Math.random()*5)));
