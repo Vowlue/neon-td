@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -26,7 +27,7 @@ import javafx.util.Duration;
 import objects.Enemy;
 
 public class Main extends Application{
-	Stage window;
+	// CONSTANTS
 	private final int GAME_HEIGHT = 700;
 	private final int GAME_WIDTH = 1000;
 	private final int EMPTY = 0;
@@ -36,6 +37,14 @@ public class Main extends Application{
 	private final int GREEN = 4;
 	private final int HEIGHT_D = 20;
 	private final int WIDTH_D = 20;
+	
+	//GAME VARIABLES
+	private static int playerHp = 3;
+	
+	//GAME ELEMENTS
+	private Stage window;
+	private Scene game;
+	private static BorderPane gameLayout;
 	public static void main(String[] args){
 		launch(args);
 	}
@@ -46,7 +55,7 @@ public class Main extends Application{
 		window = stage;
 		window.setTitle("TD GAME");
 		
-		BorderPane gameLayout = new BorderPane();
+		gameLayout = new BorderPane();
 		gameLayout.setStyle("-fx-background-color: #000000");
 		
 		ImageView topHold = new ImageView(new Image(new FileInputStream("images/placehold2.png")));
@@ -106,10 +115,16 @@ public class Main extends Application{
 			}
 		}
 		gameLayout.setCenter(mapLayout);
-	
-		gameLayout.getChildren().add(new Enemy(4));
+		game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
 		
-		Scene game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
+		game.setOnKeyPressed(e -> {
+			Enemy z = new Enemy(4);
+			z.setOnMousePressed(n -> z.setStage((int)(Math.random()*5)));
+			if(e.getCode() == KeyCode.A){
+				gameLayout.getChildren().add(z);
+			}
+		});
+		
 		window.setScene(game);
 		window.show();
 	}
@@ -160,7 +175,16 @@ public class Main extends Application{
 		return (int)(Math.random()*(high-low+1))+low;
 	}
 	
-	
+	public static int getPlayerHp() {
+		return playerHp;
+	}
+
+	public static void setPlayerHp(int playerHp) {
+		Main.playerHp = playerHp;
+	}
+	public static void removeEnemy(Enemy en){
+		gameLayout.getChildren().remove(en);
+	}
 	
 	
 	
