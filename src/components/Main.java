@@ -56,7 +56,6 @@ public class Main extends Application{
 		window.setTitle("TD GAME");
 		
 		gameLayout = new BorderPane();
-		gameLayout.setStyle("-fx-background-color: #000000");
 		
 		ImageView topHold = new ImageView(new Image(new FileInputStream("images/placehold2.png")));
 		topHold.setFitWidth(GAME_WIDTH);
@@ -80,11 +79,20 @@ public class Main extends Application{
 		HBox blueMenu = new HBox(5);
 		blueMenu.setPadding(new Insets(10, 5, 10, 5));
 		blueMenu.setStyle("-fx-background-color:#3399FF");
+		HBox yellowMenu = new HBox(5);
+		yellowMenu.setPadding(new Insets(10, 5, 10, 5));
+		yellowMenu.setStyle("-fx-background-color:yellow");
+		HBox greenMenu = new HBox(5);
+		greenMenu.setPadding(new Insets(10, 5, 10, 5));
+		greenMenu.setStyle("-fx-background-color:green");
 		blueMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
-		towerMenu.getChildren().addAll(towerTitle, blueMenu);
+		yellowMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
+		greenMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
+		towerMenu.getChildren().addAll(new Label("Towers"), new Label("Blues"), blueMenu, new Label("Yellows"), yellowMenu, new Label("Greens"), greenMenu);
 		VBox eventMenu = new VBox();
 		Label eventTitle = new Label("Events");
 		GridPane eventGrid = new GridPane();
+		eventMenu.getChildren().addAll(eventTitle, eventGrid);
 		shopMenu.getChildren().addAll(towerMenu, eventMenu);
 		gameLayout.setRight(shopMenu);
 		
@@ -119,7 +127,7 @@ public class Main extends Application{
 		game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
 		game.getStylesheets().add("style/TDStyle.css");
 		game.setOnKeyPressed(e -> {
-			Enemy z = new Enemy(4);
+			Enemy z = new Enemy((int)(Math.random()*5));
 			z.setOnMousePressed(n -> z.setStage((int)(Math.random()*5)));
 			if(e.getCode() == KeyCode.A){
 				gameLayout.getChildren().add(z);
