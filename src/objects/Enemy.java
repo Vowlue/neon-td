@@ -11,8 +11,8 @@ public class Enemy extends Circle{
 	private final Color[] colorArr = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.PINK};
 	private final static int[] radiusArr = {10, 11, 12, 13, 14, 15};
 	private final int speed = 300; //pixels per second set back to ~100 when done
-	private int[] xMovement = {171, 0, 169, 0, 168, 0};
-	private int[] yMovement = {0, -200, 0, 399, 0, -532};
+	private double[] xMovement = {171, 0, 169, 0, 168, 0};
+	private double[] yMovement = {0, -200, 0, 399, 0, -532};
 	private SequentialTransition seq;
 	public Enemy(int stage) {
 		super(101+radiusArr[stage], 384, radiusArr[stage]);
