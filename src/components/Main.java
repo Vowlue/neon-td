@@ -25,6 +25,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import objects.Enemy;
+import objects.Tower;
 
 public class Main extends Application{
 	// CONSTANTS
@@ -44,7 +45,7 @@ public class Main extends Application{
 	//GAME ELEMENTS
 	private Stage window;
 	private Scene game;
-	private static BorderPane gameLayout;
+	public static BorderPane gameLayout;
 	public static void main(String[] args){
 		launch(args);
 	}
@@ -86,7 +87,8 @@ public class Main extends Application{
 		HBox greenMenu = new HBox(5);
 		greenMenu.setPadding(new Insets(10, 5, 10, 5));
 		greenMenu.setStyle("-fx-background-color:green");
-		blueMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
+		Tower t = new Tower(new Image(new FileInputStream("images/star.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13);
+		blueMenu.getChildren().addAll(t, new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
 		yellowMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
 		greenMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
 		towerMenu.getChildren().addAll(new Label("Towers"), new Label("Blues"), blueMenu, new Label("Yellows"), yellowMenu, new Label("Greens"), greenMenu);
@@ -99,7 +101,6 @@ public class Main extends Application{
 		eventContainer.getChildren().addAll(eventTitle, eventMenu);
 		shopMenu.getChildren().addAll(towerMenu, eventContainer);
 		gameLayout.setRight(shopMenu);
-		
 		//THIS IS THE CODE FOR THE FRONT END OF THE MAP
 		GridPane mapLayout = new GridPane();
 		mapLayout.setId("map");
@@ -129,6 +130,7 @@ public class Main extends Application{
 		}
 		gameLayout.setCenter(mapLayout);
 		game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
+		game.setOnMouseClicked(e -> System.out.print("x"));
 		game.getStylesheets().add("style/TDStyle.css");
 		game.setOnKeyPressed(e -> {
 			Enemy z = new Enemy((int)(Math.random()*5));
