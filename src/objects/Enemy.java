@@ -10,7 +10,7 @@ import javafx.util.Duration;
 public class Enemy extends Circle{
 	private final Color[] colorArr = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.PINK};
 	private final static int[] radiusArr = {10, 11, 12, 13, 14, 15};
-	private final int speed = 300; //pixels per second set back to ~100 when done
+	private final int speed = 40; //pixels per second set back to ~100 when done
 	private double[] xMovement = {171, 0, 169, 0, 168, 0};
 	private double[] yMovement = {0, -200, 0, 399, 0, -532};
 	private SequentialTransition seq;
@@ -24,7 +24,7 @@ public class Enemy extends Circle{
 	private void transitionAction(){
 		seq = new SequentialTransition();
 		for(int i = 0; i<xMovement.length; i++){
-			double duration = 1.000*Math.abs(xMovement[i]+yMovement[i])/speed*1.000;
+			double duration = Math.abs(xMovement[i]+yMovement[i])/speed*1.000;
 			TranslateTransition t = new TranslateTransition();
 			t.setDuration(Duration.seconds(duration));
 			t.setNode(this);
