@@ -76,6 +76,7 @@ public class Main extends Application{
 		VBox shopMenu = new VBox();
 		VBox towerMenu = new VBox();
 		Label towerTitle = new Label("Towers");
+		towerTitle.setId("towerTitle");
 		HBox blueMenu = new HBox(5);
 		blueMenu.setPadding(new Insets(10, 5, 10, 5));
 		blueMenu.setStyle("-fx-background-color:#3399FF");
@@ -89,11 +90,14 @@ public class Main extends Application{
 		yellowMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
 		greenMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
 		towerMenu.getChildren().addAll(new Label("Towers"), new Label("Blues"), blueMenu, new Label("Yellows"), yellowMenu, new Label("Greens"), greenMenu);
-		VBox eventMenu = new VBox();
+		VBox eventContainer = new VBox();
 		Label eventTitle = new Label("Events");
-		GridPane eventGrid = new GridPane();
-		eventMenu.getChildren().addAll(eventTitle, eventGrid);
-		shopMenu.getChildren().addAll(towerMenu, eventMenu);
+		HBox eventMenu = new HBox(5);
+		eventMenu.setPadding(new Insets(10, 5, 10, 5));
+		eventMenu.setStyle("-fx-background-color:pink");
+		eventMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
+		eventContainer.getChildren().addAll(eventTitle, eventMenu);
+		shopMenu.getChildren().addAll(towerMenu, eventContainer);
 		gameLayout.setRight(shopMenu);
 		
 		//THIS IS THE CODE FOR THE FRONT END OF THE MAP
