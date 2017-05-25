@@ -1,15 +1,13 @@
 package components;
-import java.awt.Paint;
 import java.io.FileInputStream;
-import java.util.Arrays;
+import java.util.ArrayList;
 
-import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -20,11 +18,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+import objects.BlueTower;
 import objects.Enemy;
+import objects.PlaceHolder;
 import objects.Tower;
 
 public class Main extends Application{
@@ -46,6 +43,7 @@ public class Main extends Application{
 	private Stage window;
 	private Scene game;
 	public static BorderPane gameLayout;
+	public static GridPane mapLayout;
 	public static void main(String[] args){
 		launch(args);
 	}
@@ -87,7 +85,7 @@ public class Main extends Application{
 		HBox greenMenu = new HBox(5);
 		greenMenu.setPadding(new Insets(10, 5, 10, 5));
 		greenMenu.setStyle("-fx-background-color:green");
-		Tower t = new Tower(new Image(new FileInputStream("images/star.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13);
+		Tower t = new BlueTower(new Image(new FileInputStream("images/star.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13);
 		blueMenu.getChildren().addAll(t, new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
 		yellowMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
 		greenMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
@@ -102,7 +100,7 @@ public class Main extends Application{
 		shopMenu.getChildren().addAll(towerMenu, eventContainer);
 		gameLayout.setRight(shopMenu);
 		//THIS IS THE CODE FOR THE FRONT END OF THE MAP
-		GridPane mapLayout = new GridPane();
+		mapLayout = new GridPane();
 		mapLayout.setId("map");
 		ColumnConstraints c = new ColumnConstraints();
 		RowConstraints r = new RowConstraints();
@@ -123,6 +121,13 @@ public class Main extends Application{
 				default: iv = new ImageView(new Image(new FileInputStream("images/grass.png")));break;
 				}
 				Pane p = new Pane(iv);
+				switch(map[j][i]){
+				case BLACK: p.getStyleClass().add("path");break;
+				case BLUE: p.getStyleClass().add("blue tile");break;
+				case YELLOW: p.getStyleClass().add("yellow tile");break;
+				case GREEN: p.getStyleClass().add("green tile");break;
+				default: p.getStyleClass().add("broke");break;
+				}
 				iv.fitWidthProperty().bind(p.widthProperty());
 				iv.fitHeightProperty().bind(p.heightProperty());
 				mapLayout.add(p, i, j);
@@ -130,7 +135,6 @@ public class Main extends Application{
 		}
 		gameLayout.setCenter(mapLayout);
 		game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
-		game.setOnMouseClicked(e -> System.out.print("x"));
 		game.getStylesheets().add("style/TDStyle.css");
 		game.setOnKeyPressed(e -> {
 			Enemy z = new Enemy((int)(Math.random()*5));
@@ -142,6 +146,8 @@ public class Main extends Application{
 		
 		window.setScene(game);
 		window.show();
+		
+		System.out.println(getAllNodes(mapLayout));
 	}
 	private int[][] generateMap(){
 		// 1: path, 2: water, 3: air, 4: land
@@ -199,6 +205,19 @@ public class Main extends Application{
 	}
 	public static void removeEnemy(Enemy en){
 		gameLayout.getChildren().remove(en);
+	}
+	public static ArrayList<Node> getAllNodes(Parent root) {
+	    ArrayList<Node> nodes = new ArrayList<Node>();
+	    addAllDescendents(root, nodes);
+	    return nodes;
+	}
+
+	private static void addAllDescendents(Parent parent, ArrayList<Node> nodes) {
+	    for (Node node : parent.getChildrenUnmodifiable()) {
+	        nodes.add(node);
+	        if (node instanceof Parent)
+	            addAllDescendents((Parent)node, nodes);
+	    }
 	}
 	
 	
