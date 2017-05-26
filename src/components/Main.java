@@ -53,6 +53,8 @@ public class Main extends Application{
 		int[][] map = generateMap();
 		window = stage;
 		window.setTitle("TD GAME");
+		window.show();//NOTHING HAS HEIGHT UNTIL THE WINDOW IS SHOWNN FOR SOME REASON
+		
 		
 		gameLayout = new BorderPane();
 		
@@ -145,9 +147,7 @@ public class Main extends Application{
 		});
 		
 		window.setScene(game);
-		window.show();
 		
-		System.out.println(getAllNodes(mapLayout));
 	}
 	private int[][] generateMap(){
 		// 1: path, 2: water, 3: air, 4: land
