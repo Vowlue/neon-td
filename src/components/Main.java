@@ -150,12 +150,6 @@ public class Main extends Application{
 		
 	}
 	private int[][] generateMap(){
-		// 1: path, 2: water, 3: air, 4: land
-		//first, generate the path, then add some water + air, fill in rest with 
-		//land. water and air will be a completely different number each time
-		//however they cannot take up so much space such that the land will look
-		//sparse
-		
 		int[][] map = new int[HEIGHT_D][WIDTH_D];
 		//generate the path
 		int p1 = 10;
