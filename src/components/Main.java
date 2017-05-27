@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import objects.BlueTower;
 import objects.Enemy;
 import objects.PlaceHolder;
+import objects.Tile;
 import objects.Tower;
 
 public class Main extends Application{
@@ -122,7 +123,7 @@ public class Main extends Application{
 				case GREEN: iv = new ImageView(new Image(new FileInputStream("images/green unshaded tile.png")));break;
 				default: iv = new ImageView(new Image(new FileInputStream("images/grass.png")));break;
 				}
-				Pane p = new Pane(iv);
+				Tile p = new Tile(iv);
 				switch(map[j][i]){
 				case BLACK: p.getStyleClass().add("path");break;
 				case BLUE: p.getStyleClass().add("blue tile");break;
