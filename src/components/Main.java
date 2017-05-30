@@ -74,8 +74,6 @@ public class Main extends Application{
 		int[][] map = generateMap();
 		window = stage;
 		window.setTitle("TD GAME");
-		window.show();//NOTHING HAS HEIGHT UNTIL THE WINDOW IS SHOWNN FOR SOME REASON
-		
 		
 		gameLayout = new BorderPane();
 		
@@ -168,6 +166,7 @@ public class Main extends Application{
 		});
 		
 		window.setScene(game);
+		window.show();//NOTHING HAS HEIGHT UNTIL THE WINDOW IS SHOWNN FOR SOME REASON
 		
 	}
 	
