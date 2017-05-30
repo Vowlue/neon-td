@@ -10,10 +10,10 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 
-public class BlueTower extends Tower{
+public class BlueTowerIcon extends TowerIcon{
 
-	public BlueTower(Image i, double width, double height) {
-		super(i, width, height, Tower.BLUE);
+	public BlueTowerIcon(Image i, double width, double height) {
+		super(i, width, height, TowerIcon.BLUE);
 		this.setOnMouseClicked(e ->{
 			ObservableList<Node> nodes = Main.mapLayout.getChildren();
 			for(Node n: nodes){

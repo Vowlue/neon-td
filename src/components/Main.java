@@ -19,11 +19,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import objects.BlueTower;
+import objects.BlueTowerIcon;
 import objects.Enemy;
 import objects.PlaceHolder;
 import objects.Tile;
-import objects.Tower;
+import objects.TowerIcon;
 
 public class Main extends Application{
 	// CONSTANTS
@@ -41,7 +41,7 @@ public class Main extends Application{
 	private static int playerHp = 3;
 	
 	//MANAGEMENT VARIABLES
-	private static Tower storedTower;
+	private static TowerIcon storedTower;
 	
 	//GAME ELEMENTS
 	private Stage window;
@@ -106,7 +106,7 @@ public class Main extends Application{
 		HBox greenMenu = new HBox(5);
 		greenMenu.setPadding(new Insets(10, 5, 10, 5));
 		greenMenu.setStyle("-fx-background-color:green");
-		Tower t = new BlueTower(new Image(new FileInputStream("images/star.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13);
+		TowerIcon t = new BlueTowerIcon(new Image(new FileInputStream("images/star.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13);
 		blueMenu.getChildren().addAll(t, new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
 		yellowMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
 		greenMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
@@ -173,10 +173,10 @@ public class Main extends Application{
 	public static void addNode(Node n){
 		gameLayout.getChildren().add(n);
 	}
-	public static void storeTower(Tower t){
+	public static void storeTower(TowerIcon t){
 		storedTower = t;
 	}
-	public static Tower getTower(){
+	public static TowerIcon getTower(){
 		return storedTower;
 	}
 	private int[][] generateMap(){

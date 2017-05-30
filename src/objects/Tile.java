@@ -31,7 +31,7 @@ public class Tile extends Pane{
 	public void changeImage(Image i){
 		getImageView().setImage(i);
 	}
-	public void placeTower(Tower t){
+	public void placeTower(TowerIcon t){
 		if(canPlace){
 			Main.addNode(new Rectangle(Main.mapLayout.getLayoutX()+getLayoutX(), Main.mapLayout.getLayoutY()+getLayoutY(), getWidth(), getHeight()));
 		}
