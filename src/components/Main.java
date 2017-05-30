@@ -240,7 +240,7 @@ public class Main extends Application{
 	            addAllDescendents((Parent)node, nodes);
 	    }
 	}
-	//need a get all tiles and maybe make it a overloaded method one of which with a strong for style??/
+	// USE OBSERVABLE LIST need a get all tiles and maybe make it a overloaded method one of which with a strong for style??/
 	
 	
 	
