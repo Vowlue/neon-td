@@ -3,6 +3,7 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -240,7 +241,18 @@ public class Main extends Application{
 	            addAllDescendents((Parent)node, nodes);
 	    }
 	}
-	// USE OBSERVABLE LIST need a get all tiles and maybe make it a overloaded method one of which with a strong for style??/
+	public static ObservableList<Node> getAllTiles(){
+		return mapLayout.getChildren();
+	}
+	public static ArrayList<Tile> getAllTiles(String style){
+		ArrayList<Tile> ret = new ArrayList<Tile>();
+		ObservableList<Node> nodes = getAllTiles();
+		for(Node n: nodes){
+			if(n.getStyleClass().contains(style))
+				ret.add((Tile)n);
+		}
+		return ret;
+	}
 	
 	
 	

@@ -1,5 +1,7 @@
 package objects;
 
+import java.util.ArrayList;
+
 import components.Main;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -15,16 +17,14 @@ public class BlueTowerIcon extends TowerIcon{
 	public BlueTowerIcon(Image i, double width, double height) {
 		super(i, width, height, TowerIcon.BLUE);
 		this.setOnMouseClicked(e ->{
-			ObservableList<Node> nodes = Main.mapLayout.getChildren();
-			for(Node n: nodes){
-				if(n.getStyleClass().contains("blue tile")){
-					Tile t = (Tile)n;
+			ArrayList<Tile> tiles = Main.getAllTiles("blue tile");
+			for(Tile t: tiles){
 					t.setBackground(new Background(new BackgroundFill(Color.rgb(64, 36, 123), new CornerRadii(4), Insets.EMPTY)));
 					t.setPlacement(true);
 					Main.storeTower(this);
 				}
 			}
-		});
+		);
 	}
 
 }

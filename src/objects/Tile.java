@@ -10,12 +10,20 @@ import javafx.scene.shape.Rectangle;
 
 public class Tile extends Pane{
 	private boolean canPlace;
+	private boolean hasTower;
 	public Tile(ImageView iv){
 		super(iv);
 		canPlace = false;
+		hasTower = false;
 		this.setOnMouseClicked(e -> {
 			placeTower(Main.getTower());
 		});
+	}
+	public boolean hasTower() {
+		return hasTower;
+	}
+	public void setHasTower(boolean hasTower) {
+		this.hasTower = hasTower;
 	}
 	public ImageView getImageView(){
 		ObservableList<Node> l = getChildren();
