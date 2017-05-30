@@ -40,17 +40,37 @@ public class Main extends Application{
 	//GAME VARIABLES
 	private static int playerHp = 3;
 	
+	//MANAGEMENT VARIABLES
+	private static Tower storedTower;
+	
 	//GAME ELEMENTS
 	private Stage window;
 	private Scene game;
 	public static BorderPane gameLayout;
 	public static GridPane mapLayout;
+	
+	//GAME IMAGES
+	public static Image blackTile;
+	public static Image uBlueTile;
+	public static Image blueTile;
+	public static Image uGreenTile;
+	public static Image greenTile;
+	public static Image uYellowTile;
+	public static Image yellowTile;
+	
 	public static void main(String[] args){
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage stage) throws Exception {
+		blackTile = new Image(new FileInputStream("images/black tile.png"));
+		uBlueTile = new Image(new FileInputStream("images/blue unshaded tile.png"));
+		blueTile = new Image(new FileInputStream("images/blue shaded tile.png"));
+		uGreenTile = new Image(new FileInputStream("images/green unshaded tile.png"));
+		greenTile = new Image(new FileInputStream("images/green shaded tile.png"));
+		uYellowTile = new Image(new FileInputStream("images/yellow unshaded tile.png"));
+		yellowTile = new Image(new FileInputStream("images/yellow shaded tile.png"));
 		int[][] map = generateMap();
 		window = stage;
 		window.setTitle("TD GAME");
@@ -117,10 +137,10 @@ public class Main extends Application{
 			for(int j = 0; j<WIDTH_D; j++){
 				ImageView iv;
 				switch(map[j][i]){
-				case BLACK: iv = new ImageView(new Image(new FileInputStream("images/black tile.png")));break;
-				case BLUE: iv = new ImageView(new Image(new FileInputStream("images/blue unshaded tile.png")));break;
-				case YELLOW: iv = new ImageView(new Image(new FileInputStream("images/yellow unshaded tile.png")));break;
-				case GREEN: iv = new ImageView(new Image(new FileInputStream("images/green unshaded tile.png")));break;
+				case BLACK: iv = new ImageView(blackTile);break;
+				case BLUE: iv = new ImageView(uBlueTile);break;
+				case YELLOW: iv = new ImageView(uYellowTile);break;
+				case GREEN: iv = new ImageView(uGreenTile);break;
 				default: iv = new ImageView(new Image(new FileInputStream("images/grass.png")));break;
 				}
 				Tile p = new Tile(iv);
@@ -149,6 +169,16 @@ public class Main extends Application{
 		
 		window.setScene(game);
 		
+	}
+	
+	public static void addNode(Node n){
+		gameLayout.getChildren().add(n);
+	}
+	public static void storeTower(Tower t){
+		storedTower = t;
+	}
+	public static Tower getTower(){
+		return storedTower;
 	}
 	private int[][] generateMap(){
 		int[][] map = new int[HEIGHT_D][WIDTH_D];
@@ -190,11 +220,9 @@ public class Main extends Application{
 	private int randomInt(int low, int high){
 		return (int)(Math.random()*(high-low+1))+low;
 	}
-	
 	public static int getPlayerHp() {
 		return playerHp;
 	}
-
 	public static void setPlayerHp(int playerHp) {
 		Main.playerHp = playerHp;
 	}
@@ -206,7 +234,6 @@ public class Main extends Application{
 	    addAllDescendents(root, nodes);
 	    return nodes;
 	}
-
 	private static void addAllDescendents(Parent parent, ArrayList<Node> nodes) {
 	    for (Node node : parent.getChildrenUnmodifiable()) {
 	        nodes.add(node);
@@ -214,7 +241,7 @@ public class Main extends Application{
 	            addAllDescendents((Parent)node, nodes);
 	    }
 	}
-	
+	//need a get all tiles and maybe make it a overloaded method one of which with a strong for style??/
 	
 	
 	
