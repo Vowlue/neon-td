@@ -5,3 +5,6 @@
 #map{
 	-fx-background-color: #110022;
 }
+HBox, VBox {
+    -fx-alignment: center;
+}
