@@ -5,8 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
 
 public class Tile extends Pane{
 	private boolean canPlace;
@@ -40,8 +40,18 @@ public class Tile extends Pane{
 		getImageView().setImage(i);
 	}
 	public void placeTower(TowerIcon t){
-		if(canPlace){
-			Main.addNode(new Rectangle(Main.mapLayout.getLayoutX()+getLayoutX(), Main.mapLayout.getLayoutY()+getLayoutY(), getWidth(), getHeight()));
+		if(canPlace && !hasTower){
+			ObservableList<Node> nodes = Main.getAllTiles();
+			for(Node n: nodes){
+				Tile tile = (Tile)n;
+				tile.setCanPlace(false);
+				tile.setBackground(Background.EMPTY);
+			}
+			this.hasTower = true;
+			Main.addNode(new Tower(t.getImage(), Main.mapLayout.getLayoutX()+getLayoutX(), Main.mapLayout.getLayoutY()+getLayoutY(), getWidth(), getHeight()));
 		}
+	}
+	public void setCanPlace(boolean b){
+		canPlace = b;
 	}
 }

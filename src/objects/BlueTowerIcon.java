@@ -1,11 +1,8 @@
 package objects;
 
 import java.util.ArrayList;
-
 import components.Main;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
