@@ -20,7 +20,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import objects.BlueTowerIcon;
 import objects.Enemy;
 import objects.PlaceHolder;
 import objects.Tile;
@@ -43,7 +42,6 @@ public class Main extends Application{
 	//GAME VARIABLES
 	private static int playerHp = 3;
 	
-	//MANAGEMENT VARIABLES
 	private static TowerIcon storedTower;
 	
 	//GAME ELEMENTS
@@ -85,6 +83,7 @@ public class Main extends Application{
 		
 		starTower = new Image(new FileInputStream("images/towers/star.png"));
 		b = new Image(new FileInputStream("images/towers/b.png"));
+		
 		int[][] map = generateMap();
 		window = stage;
 		window.setTitle("Neon Tower Defense");
@@ -117,7 +116,7 @@ public class Main extends Application{
 		HBox greenMenu = new HBox(5);
 		greenMenu.setPadding(new Insets(10, 5, 10, 5));
 		greenMenu.setStyle("-fx-background-color:green");
-		TowerIcon t = new BlueTowerIcon(starTower);
+		TowerIcon t = new TowerIcon(starTower, TowerIcon.BLUE);
 		blueMenu.getChildren().addAll(t, new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
 		yellowMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
 		greenMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));

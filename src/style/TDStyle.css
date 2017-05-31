@@ -1,5 +1,6 @@
 .root{
-	
+	-fx-font-family: verdana;
+	-fx-font-size: 20;
 }
 #map{
 	-fx-background-color: #110022;

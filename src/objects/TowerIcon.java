@@ -11,10 +11,10 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 
-public abstract class TowerIcon extends ImageView{
-	final static String BLUE = "blue tile";
-	final static String GREEN = "green tile";
-	final static String YELLOW = "yellow tile";
+public class TowerIcon extends ImageView{
+	public final static String BLUE = "blue tile";
+	public final static String GREEN = "green tile";
+	public final static String YELLOW = "yellow tile";
 	
 	boolean clicked;
 	
@@ -46,7 +46,10 @@ public abstract class TowerIcon extends ImageView{
 		clicked = true;
 		ArrayList<Tile> tiles = Main.getAllTiles(type);
 		for(Tile t: tiles){
-				t.setBackground(new Background(new BackgroundFill(Color.rgb(64, 36, 123), new CornerRadii(4), Insets.EMPTY)));
+			switch(type){
+			case BLUE: t.setBackground(new Background(new BackgroundFill(Color.rgb(64, 36, 123), new CornerRadii(4), Insets.EMPTY))); break;
+			default: t.setBackground(Background.EMPTY); break;
+			}
 				t.setPlacement(true);
 				Main.storeTower(this);
 		}
