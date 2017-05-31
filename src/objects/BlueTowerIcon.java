@@ -11,8 +11,8 @@ import javafx.scene.paint.Color;
 
 public class BlueTowerIcon extends TowerIcon{
 
-	public BlueTowerIcon(Image i, double width, double height) {
-		super(i, width, height, TowerIcon.BLUE);
+	public BlueTowerIcon(Image i) {
+		super(i, TowerIcon.BLUE);
 		this.setOnMouseClicked(e ->{
 			ArrayList<Tile> tiles = Main.getAllTiles("blue tile");
 			for(Tile t: tiles){

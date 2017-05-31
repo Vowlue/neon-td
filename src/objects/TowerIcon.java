@@ -1,5 +1,6 @@
 package objects;
 
+import components.Main;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -8,10 +9,10 @@ public abstract class TowerIcon extends ImageView{
 	final static int GREEN = 1;
 	final static int YELLOW = 2;
 	
-	public TowerIcon(Image i, double width, double height, int type) {
+	public TowerIcon(Image i, int type) {
 		super(i);
-		setFitWidth(width);
-		setFitHeight(height);
+		setFitWidth(Main.iconWidth);
+		setFitHeight(Main.iconHeight);
 		
 	}
 	

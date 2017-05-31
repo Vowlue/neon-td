@@ -28,8 +28,8 @@ import objects.TowerIcon;
 
 public class Main extends Application{
 	// CONSTANTS
-	private final int GAME_HEIGHT = 700;
-	private final int GAME_WIDTH = 1000;
+	private final static int GAME_HEIGHT = 700;
+	private final static int GAME_WIDTH = 1000;
 	private final int EMPTY = 0;
 	private final int BLACK = 1;
 	private final int BLUE = 2;
@@ -38,6 +38,8 @@ public class Main extends Application{
 	private final int HEIGHT_D = 20;
 	private final int WIDTH_D = 20;
 	
+	public static final double iconWidth = (.2*GAME_WIDTH)/4;
+	public static final double iconHeight = (.95*GAME_HEIGHT)/13;
 	//GAME VARIABLES
 	private static int playerHp = 3;
 	
@@ -59,6 +61,17 @@ public class Main extends Application{
 	public static Image uYellowTile;
 	public static Image yellowTile;
 	
+	public static Image starTower;
+	public static Image b;
+	public static Image c;
+	public static Image d;
+	public static Image e;
+	public static Image f;
+	public static Image g;
+	public static Image h;
+	public static Image i;
+	
+	
 	public static void main(String[] args){
 		launch(args);
 	}
@@ -69,6 +82,9 @@ public class Main extends Application{
 		uBlueTile = new Image(new FileInputStream("images/blue unshaded tile.png"));
 		uGreenTile = new Image(new FileInputStream("images/green unshaded tile.png"));
 		uYellowTile = new Image(new FileInputStream("images/yellow unshaded tile.png"));
+		
+		starTower = new Image(new FileInputStream("images/towers/star.png"));
+		b = new Image(new FileInputStream("images/towers/b.png"));
 		int[][] map = generateMap();
 		window = stage;
 		window.setTitle("TD GAME");
@@ -88,9 +104,6 @@ public class Main extends Application{
 		gameLayout.setLeft(actionMenu);
 		
 		//THIS IS THE CODE FOR THE FRONT END OF THE SHOP
-		/*ImageView shopHold = new ImageView(new Image(new FileInputStream("images/placehold3.png")));
-		shopHold.setFitWidth(.2*GAME_WIDTH);
-		shopHold.setFitHeight(.95*GAME_HEIGHT);*/
 		VBox shopMenu = new VBox();
 		VBox towerMenu = new VBox();
 		Label towerTitle = new Label("Towers");
@@ -104,7 +117,7 @@ public class Main extends Application{
 		HBox greenMenu = new HBox(5);
 		greenMenu.setPadding(new Insets(10, 5, 10, 5));
 		greenMenu.setStyle("-fx-background-color:green");
-		TowerIcon t = new BlueTowerIcon(new Image(new FileInputStream("images/star.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13);
+		TowerIcon t = new BlueTowerIcon(starTower);
 		blueMenu.getChildren().addAll(t, new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
 		yellowMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
 		greenMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
