@@ -13,7 +13,6 @@ public abstract class TowerIcon extends ImageView{
 		setFitWidth(width);
 		setFitHeight(height);
 		
-		this.setOnMouseClicked(e -> System.out.print("s"));
 	}
 	
 

@@ -67,11 +67,8 @@ public class Main extends Application{
 	public void start(Stage stage) throws Exception {
 		blackTile = new Image(new FileInputStream("images/black tile.png"));
 		uBlueTile = new Image(new FileInputStream("images/blue unshaded tile.png"));
-		blueTile = new Image(new FileInputStream("images/blue shaded tile.png"));
 		uGreenTile = new Image(new FileInputStream("images/green unshaded tile.png"));
-		greenTile = new Image(new FileInputStream("images/green shaded tile.png"));
 		uYellowTile = new Image(new FileInputStream("images/yellow unshaded tile.png"));
-		yellowTile = new Image(new FileInputStream("images/yellow shaded tile.png"));
 		int[][] map = generateMap();
 		window = stage;
 		window.setTitle("TD GAME");
