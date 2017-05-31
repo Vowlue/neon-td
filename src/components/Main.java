@@ -87,7 +87,7 @@ public class Main extends Application{
 		b = new Image(new FileInputStream("images/towers/b.png"));
 		int[][] map = generateMap();
 		window = stage;
-		window.setTitle("TD GAME");
+		window.setTitle("Neon Tower Defense");
 		
 		gameLayout = new BorderPane();
 		
