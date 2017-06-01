@@ -48,6 +48,7 @@ public class Tile extends Pane{
 				tile.setBackground(Background.EMPTY);
 			}
 			this.hasTower = true;
+			Main.getTower().setClicked(false);
 			Main.addNode(new Tower(t.getImage(), Main.mapLayout.getLayoutX()+getLayoutX(), Main.mapLayout.getLayoutY()+getLayoutY(), getWidth(), getHeight()));
 		}
 	}

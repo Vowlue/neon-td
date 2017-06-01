@@ -43,6 +43,7 @@ public class Main extends Application{
 	private static int playerHp = 3;
 	
 	private static TowerIcon storedTower;
+	private static TowerIcon[] towerIcons;
 	
 	//GAME ELEMENTS
 	private Stage window;
@@ -59,7 +60,7 @@ public class Main extends Application{
 	public static Image uYellowTile;
 	public static Image yellowTile;
 	
-	public static Image starTower;
+	public static Image star;
 	public static Image amp;
 	public static Image battery;
 	public static Image booster;
@@ -81,7 +82,7 @@ public class Main extends Application{
 		uGreenTile = new Image(new FileInputStream("images/green unshaded tile.png"));
 		uYellowTile = new Image(new FileInputStream("images/yellow unshaded tile.png"));
 		
-		starTower = new Image(new FileInputStream("images/towers/star.png"));
+		star = new Image(new FileInputStream("images/towers/star.png"));
 		amp = new Image(new FileInputStream("images/towers/amp.png"));
 		battery = new Image(new FileInputStream("images/towers/battery.png"));
 		booster = new Image(new FileInputStream("images/towers/booster.png"));
@@ -90,6 +91,27 @@ public class Main extends Application{
 		gridshot = new Image(new FileInputStream("images/towers/gridshot.png"));
 		smaller = new Image(new FileInputStream("images/towers/smaller.png"));
 		sniper = new Image(new FileInputStream("images/towers/sniper.png"));
+		
+		TowerIcon starT = new TowerIcon(star, TowerIcon.BLUE);
+		TowerIcon ampT = new TowerIcon(amp, TowerIcon.BLUE);
+		TowerIcon batteryT = new TowerIcon(battery, TowerIcon.BLUE);
+		TowerIcon gridshotT = new TowerIcon(gridshot, TowerIcon.YELLOW);
+		TowerIcon smallerT = new TowerIcon(smaller, TowerIcon.YELLOW);
+		TowerIcon sniperT = new TowerIcon(sniper, TowerIcon.YELLOW);
+		TowerIcon boosterT = new TowerIcon(booster, TowerIcon.GREEN);
+		TowerIcon defenderT = new TowerIcon(defender, TowerIcon.GREEN);
+		TowerIcon gearT = new TowerIcon(gear, TowerIcon.GREEN);
+		towerIcons = new TowerIcon[9];
+		towerIcons[0] = starT;
+		towerIcons[1] = ampT;
+		towerIcons[2] = batteryT;
+		towerIcons[3] = gridshotT;
+		towerIcons[4] = smallerT;
+		towerIcons[5] = sniperT;
+		towerIcons[6] = boosterT;
+		towerIcons[7] = defenderT;
+		towerIcons[8] = gearT;
+		
 		
 		int[][] map = generateMap();
 		window = stage;
@@ -123,10 +145,10 @@ public class Main extends Application{
 		HBox greenMenu = new HBox(5);
 		greenMenu.setPadding(new Insets(10, 5, 10, 5));
 		greenMenu.setStyle("-fx-background-color:green");
-		TowerIcon t = new TowerIcon(starTower, TowerIcon.BLUE);
-		blueMenu.getChildren().addAll(t, new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
-		yellowMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
-		greenMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
+		
+		blueMenu.getChildren().addAll(starT, ampT, batteryT);
+		yellowMenu.getChildren().addAll(gridshotT, smallerT, sniperT);
+		greenMenu.getChildren().addAll(boosterT, defenderT, gearT);
 		towerMenu.getChildren().addAll(new Label("Towers"), new Label("Blues"), blueMenu, new Label("Yellows"), yellowMenu, new Label("Greens"), greenMenu);
 		VBox eventContainer = new VBox();
 		Label eventTitle = new Label("Events");
@@ -272,7 +294,13 @@ public class Main extends Application{
 		}
 		return ret;
 	}
-	
+	public static boolean placingTower(){
+		for(TowerIcon t: towerIcons){
+			if(t.getClicked())
+				return true;
+		}
+		return false;
+	}
 	
 	
 	

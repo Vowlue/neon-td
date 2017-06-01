@@ -34,6 +34,12 @@ public class TowerIcon extends ImageView{
 			}
 		);
 	}
+	public boolean getClicked(){
+		return clicked;
+	}
+	public void setClicked(boolean b){
+		clicked = b;
+	}
 	private void undoSelection() {
 		clicked = false;
 		ArrayList<Tile> tiles = Main.getAllTiles(type);
@@ -43,17 +49,26 @@ public class TowerIcon extends ImageView{
 		}
 	}
 	private void selectTower(){
-		clicked = true;
-		ArrayList<Tile> tiles = Main.getAllTiles(type);
-		for(Tile t: tiles){
-			switch(type){
-			case BLUE: t.setBackground(new Background(new BackgroundFill(Color.rgb(64, 36, 123), new CornerRadii(4), Insets.EMPTY))); break;
-			default: t.setBackground(Background.EMPTY); break;
-			}
+		if(!Main.placingTower()){
+			clicked = true;
+			ArrayList<Tile> tiles = Main.getAllTiles(type);
+			Main.storeTower(this);
+			for(Tile t: tiles){
+				if(!t.hasTower()){
+					switch(type){
+					case BLUE: 
+						t.setBackground(new Background(new BackgroundFill(Color.rgb(64, 36, 123), new CornerRadii(4), Insets.EMPTY))); break;
+					case YELLOW:
+						t.setBackground(new Background(new BackgroundFill(Color.rgb(253, 219, 0), new CornerRadii(4), Insets.EMPTY))); break;
+					case GREEN:
+						t.setBackground(new Background(new BackgroundFill(Color.rgb(119, 219, 0), new CornerRadii(4), Insets.EMPTY))); break;
+					default: 
+						t.setBackground(Background.EMPTY); break;
+					}
 				t.setPlacement(true);
-				Main.storeTower(this);
+				}
+			}
 		}
 	}
 	
-
 }
