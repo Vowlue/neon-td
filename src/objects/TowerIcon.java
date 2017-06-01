@@ -15,9 +15,7 @@ public class TowerIcon extends ImageView{
 	public final static String BLUE = "blue tile";
 	public final static String GREEN = "green tile";
 	public final static String YELLOW = "yellow tile";
-	
 	boolean clicked;
-	
 	private String type;
 	
 	public TowerIcon(Image i, String type) {
