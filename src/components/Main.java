@@ -60,14 +60,14 @@ public class Main extends Application{
 	public static Image yellowTile;
 	
 	public static Image starTower;
-	public static Image b;
-	public static Image c;
-	public static Image d;
-	public static Image e;
-	public static Image f;
-	public static Image g;
-	public static Image h;
-	public static Image i;
+	public static Image amp;
+	public static Image battery;
+	public static Image booster;
+	public static Image defender;
+	public static Image gear;
+	public static Image gridshot;
+	public static Image smaller;
+	public static Image sniper;
 	
 	
 	public static void main(String[] args){
@@ -82,7 +82,14 @@ public class Main extends Application{
 		uYellowTile = new Image(new FileInputStream("images/yellow unshaded tile.png"));
 		
 		starTower = new Image(new FileInputStream("images/towers/star.png"));
-		b = new Image(new FileInputStream("images/towers/b.png"));
+		amp = new Image(new FileInputStream("images/towers/amp.png"));
+		battery = new Image(new FileInputStream("images/towers/battery.png"));
+		booster = new Image(new FileInputStream("images/towers/booster.png"));
+		defender = new Image(new FileInputStream("images/towers/defender.png"));
+		gear = new Image(new FileInputStream("images/towers/gear.png"));
+		gridshot = new Image(new FileInputStream("images/towers/gridshot.png"));
+		smaller = new Image(new FileInputStream("images/towers/smaller.png"));
+		sniper = new Image(new FileInputStream("images/towers/sniper.png"));
 		
 		int[][] map = generateMap();
 		window = stage;
@@ -130,6 +137,9 @@ public class Main extends Application{
 		eventContainer.getChildren().addAll(eventTitle, eventMenu);
 		shopMenu.getChildren().addAll(towerMenu, eventContainer);
 		gameLayout.setRight(shopMenu);
+		
+		
+		
 		//THIS IS THE CODE FOR THE FRONT END OF THE MAP
 		mapLayout = new GridPane();
 		mapLayout.setId("map");
