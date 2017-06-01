@@ -112,17 +112,19 @@ public class Main extends Application{
 		towerIcons[7] = defenderT;
 		towerIcons[8] = gearT;
 		
-		
 		int[][] map = generateMap();
 		window = stage;
 		window.setTitle("Neon Tower Defense");
 		
 		gameLayout = new BorderPane();
 		
-		ImageView topHold = new ImageView(new Image(new FileInputStream("images/placehold2.png")));
+		/*ImageView topHold = new ImageView(new Image(new FileInputStream("images/placehold2.png")));
 		topHold.setFitWidth(GAME_WIDTH);
 		topHold.setFitHeight(.05*GAME_HEIGHT);
-		Pane topMenu = new Pane(topHold);
+		Pane topMenu = new Pane(topHold);*/
+		Pane topMenu = new Pane();
+		topMenu.setPrefWidth(GAME_WIDTH);
+		topMenu.setPrefHeight(.05*GAME_HEIGHT);
 		gameLayout.setTop(topMenu);
 		
 		ImageView actionHold = new ImageView(new Image(new FileInputStream("images/placehold4.png")));
