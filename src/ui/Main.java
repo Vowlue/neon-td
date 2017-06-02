@@ -27,7 +27,7 @@ import objects.TowerIcon;
 
 public class Main extends Application{
 	// CONSTANTS
-	private final static int GAME_HEIGHT = 700;
+	final static int GAME_HEIGHT = 700;
 	private final static int GAME_WIDTH = 1000;
 	private final int EMPTY = 0;
 	private final int BLACK = 1;
@@ -40,7 +40,7 @@ public class Main extends Application{
 	public static final double iconWidth = (.2*GAME_WIDTH)/4;
 	public static final double iconHeight = (.95*GAME_HEIGHT)/13;
 	//GAME VARIABLES
-	private static int playerHp = 3;
+	private static int playerLives = 3;
 	
 	private static TowerIcon storedTower;
 	private static TowerIcon[] towerIcons;
@@ -67,6 +67,7 @@ public class Main extends Application{
 	private static Image smaller;
 	private static Image sniper;
 	
+	public static Image heart;
 	
 	public static void main(String[] args){
 		launch(args);
@@ -88,6 +89,8 @@ public class Main extends Application{
 		gridshot = new Image(new FileInputStream("images/towers/gridshot.png"));
 		smaller = new Image(new FileInputStream("images/towers/smaller.png"));
 		sniper = new Image(new FileInputStream("images/towers/sniper.png"));
+		
+		heart = new Image(new FileInputStream("images/heart.png"));
 		
 		TowerIcon starT = new TowerIcon(star, TowerIcon.BLUE);
 		TowerIcon ampT = new TowerIcon(amp, TowerIcon.BLUE);
@@ -120,18 +123,21 @@ public class Main extends Application{
 		topHold.setFitHeight(.05*GAME_HEIGHT);
 		Pane topMenu = new Pane(topHold);*/
 		Pane topMenu = new Pane();
+		topMenu.setStyle("-fx-background-color:#260d0d");
 		topMenu.setPrefWidth(GAME_WIDTH);
 		topMenu.setPrefHeight(.05*GAME_HEIGHT);
+		topMenu.getChildren().add(new LivesIndicator(playerLives));
 		gameLayout.setTop(topMenu);
 		
-		ImageView actionHold = new ImageView(new Image(new FileInputStream("images/placehold4.png")));
-		actionHold.setFitWidth(.1*GAME_WIDTH);
-		actionHold.setFitHeight(.95*GAME_HEIGHT);
+		Pane actionHold = new Pane();
+		actionHold.setPrefWidth(.1*GAME_WIDTH);
+		actionHold.prefHeight(.95*GAME_HEIGHT);
 		Pane actionMenu = new Pane(actionHold);
 		gameLayout.setLeft(actionMenu);
 		
 		//THIS IS THE CODE FOR THE FRONT END OF THE SHOP
 		VBox shopMenu = new VBox();
+		shopMenu.setStyle("-fx-background-color:#330033");
 		VBox towerMenu = new VBox();
 		Label towerTitle = new Label("Towers");
 		towerTitle.setId("towerTitle");
@@ -198,6 +204,7 @@ public class Main extends Application{
 		gameLayout.setCenter(mapLayout);
 		game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
 		game.getStylesheets().add("style/TDStyle.css");
+		//TESTING REMOVE LATER
 		game.setOnKeyPressed(e -> {
 			Enemy z = new Enemy((int)(Math.random()*5));
 			z.setOnMousePressed(n -> z.setStage((int)(Math.random()*5)));
@@ -207,6 +214,8 @@ public class Main extends Application{
 		});
 		
 		window.setScene(game);
+		window.setResizable(false);
+		window.sizeToScene();
 		window.show();//NOTHING HAS HEIGHT UNTIL THE WINDOW IS SHOWNN FOR SOME REASON
 		
 	}
@@ -261,10 +270,10 @@ public class Main extends Application{
 		return (int)(Math.random()*(high-low+1))+low;
 	}
 	public static int getPlayerHp() {
-		return playerHp;
+		return playerLives;
 	}
-	public static void setPlayerHp(int playerHp) {
-		Main.playerHp = playerHp;
+	public static void setPlayerHp(int hp) {
+		playerLives = hp;
 	}
 	public static void removeEnemy(Enemy en){
 		gameLayout.getChildren().remove(en);
