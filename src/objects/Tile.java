@@ -1,12 +1,12 @@
 package objects;
 
-import components.Main;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
+import ui.Main;
 
 public class Tile extends Pane{
 	private boolean canPlace;

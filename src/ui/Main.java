@@ -1,4 +1,4 @@
-package components;
+package ui;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 
@@ -52,23 +52,20 @@ public class Main extends Application{
 	public static GridPane mapLayout;
 	
 	//GAME IMAGES
-	public static Image blackTile;
-	public static Image uBlueTile;
-	public static Image blueTile;
-	public static Image uGreenTile;
-	public static Image greenTile;
-	public static Image uYellowTile;
-	public static Image yellowTile;
+	private static Image blackTile;
+	private static Image uBlueTile;
+	private static Image uGreenTile;
+	private static Image uYellowTile;
 	
-	public static Image star;
-	public static Image amp;
-	public static Image battery;
-	public static Image booster;
-	public static Image defender;
-	public static Image gear;
-	public static Image gridshot;
-	public static Image smaller;
-	public static Image sniper;
+	private static Image star;
+	private static Image amp;
+	private static Image battery;
+	private static Image booster;
+	private static Image defender;
+	private static Image gear;
+	private static Image gridshot;
+	private static Image smaller;
+	private static Image sniper;
 	
 	
 	public static void main(String[] args){

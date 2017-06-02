@@ -2,7 +2,6 @@ package objects;
 
 import java.util.ArrayList;
 
-import components.Main;
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,6 +9,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
+import ui.Main;
 
 public class TowerIcon extends ImageView{
 	public final static String BLUE = "blue tile";
