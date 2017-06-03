@@ -46,7 +46,7 @@ public class TowerIcon extends Pane{
 	public Image getImage(){
 		return iv.getImage();
 	}
-	public boolean getClicked(){
+	public boolean isClicked(){
 		return clicked;
 	}
 	public void setClicked(boolean b){

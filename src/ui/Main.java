@@ -1,5 +1,6 @@
 package ui;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javafx.application.Application;
@@ -43,8 +44,19 @@ public class Main extends Application{
 	private static int playerLives = 10;
 	private static int playerSparks = 500;
 	
+	int[][] map;
+	
 	private static TowerIcon storedTower;
 	private static TowerIcon[] towerIcons;
+	TowerIcon starT;
+	TowerIcon ampT;
+	TowerIcon batteryT;
+	TowerIcon boosterT;
+	TowerIcon defenderT;
+	TowerIcon gearT;
+	TowerIcon gridshotT;
+	TowerIcon smallerT;
+	TowerIcon sniperT;
 	
 	//GAME ELEMENTS
 	private Stage window;
@@ -99,15 +111,15 @@ public class Main extends Application{
 		spark = new Image(new FileInputStream("images/spark.png"));
 		towersLogo = new Image(new FileInputStream("images/towers.png"));
 		
-		TowerIcon starT = new TowerIcon(star, TowerIcon.BLUE);
-		TowerIcon ampT = new TowerIcon(amp, TowerIcon.BLUE);
-		TowerIcon batteryT = new TowerIcon(battery, TowerIcon.BLUE);
-		TowerIcon gridshotT = new TowerIcon(gridshot, TowerIcon.YELLOW);
-		TowerIcon smallerT = new TowerIcon(smaller, TowerIcon.YELLOW);
-		TowerIcon sniperT = new TowerIcon(sniper, TowerIcon.YELLOW);
-		TowerIcon boosterT = new TowerIcon(booster, TowerIcon.GREEN);
-		TowerIcon defenderT = new TowerIcon(defender, TowerIcon.GREEN);
-		TowerIcon gearT = new TowerIcon(gear, TowerIcon.GREEN);
+		starT = new TowerIcon(star, TowerIcon.BLUE);
+		ampT = new TowerIcon(amp, TowerIcon.BLUE);
+		batteryT = new TowerIcon(battery, TowerIcon.BLUE);
+		gridshotT = new TowerIcon(gridshot, TowerIcon.YELLOW);
+		smallerT = new TowerIcon(smaller, TowerIcon.YELLOW);
+		sniperT = new TowerIcon(sniper, TowerIcon.YELLOW);
+		boosterT = new TowerIcon(booster, TowerIcon.GREEN);
+		defenderT = new TowerIcon(defender, TowerIcon.GREEN);
+		gearT = new TowerIcon(gear, TowerIcon.GREEN);
 		towerIcons = new TowerIcon[9];
 		towerIcons[0] = starT;
 		towerIcons[1] = ampT;
@@ -119,12 +131,39 @@ public class Main extends Application{
 		towerIcons[7] = defenderT;
 		towerIcons[8] = gearT;
 		
-		int[][] map = generateMap();
 		window = stage;
 		window.setTitle("Neon Tower Defense");
 		
 		gameLayout = new BorderPane();
 		
+		setupTopMenu();
+		setupActionMenu();
+		setupShopMenu();
+		setupMap();
+		
+		game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
+		game.getStylesheets().add("style/TDStyle.css");
+		//TESTING REMOVE LATER
+		game.setOnKeyPressed(e -> {
+			Enemy z = new Enemy((int)(Math.random()*5));
+			z.setOnMousePressed(n -> z.setStage((int)(Math.random()*5)));
+			if(e.getCode() == KeyCode.A){
+				gameLayout.getChildren().add(z);
+			}
+			if(e.getCode() == KeyCode.S){
+				lifeInd.removeLife();
+			}
+		});
+		
+		window.setScene(game);
+		window.setResizable(false);
+		window.sizeToScene();
+		window.show();//NOTHING HAS HEIGHT UNTIL THE WINDOW IS SHOWNN FOR SOME REASON
+		
+	}
+	
+	//SET UP METHODS
+	private void setupTopMenu(){
 		HBox topMenu = new HBox();
 		topMenu.getStyleClass().add("uimenu");
 		topMenu.setStyle("-fx-background-color:#260d0d");
@@ -134,14 +173,15 @@ public class Main extends Application{
 		sprkInd = new SparksIndicator(playerSparks);
 		topMenu.getChildren().addAll(lifeInd, sprkInd);
 		gameLayout.setTop(topMenu);
-		
+	}
+	private void setupActionMenu(){
 		Pane actionHold = new Pane();
 		actionHold.setPrefWidth(.1*GAME_WIDTH);
 		actionHold.prefHeight(.95*GAME_HEIGHT);
 		Pane actionMenu = new Pane(actionHold);
 		gameLayout.setLeft(actionMenu);
-		
-		//THIS IS THE CODE FOR THE FRONT END OF THE SHOP
+	}
+	private void setupShopMenu() throws FileNotFoundException{
 		VBox shopMenu = new VBox();
 		shopMenu.setStyle("-fx-background-color:#330033");
 		VBox towerMenu = new VBox();
@@ -162,10 +202,9 @@ public class Main extends Application{
 		eventContainer.getChildren().addAll(eventTitle, eventMenu);
 		shopMenu.getChildren().addAll(towerMenu, eventContainer);
 		gameLayout.setRight(shopMenu);
-		
-		
-		
-		//THIS IS THE CODE FOR THE FRONT END OF THE MAP
+	}
+	private void setupMap() throws FileNotFoundException{
+		map = generateMap();
 		mapLayout = new GridPane();
 		mapLayout.setId("map");
 		ColumnConstraints c = new ColumnConstraints();
@@ -200,27 +239,8 @@ public class Main extends Application{
 			}
 		}
 		gameLayout.setCenter(mapLayout);
-		game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
-		game.getStylesheets().add("style/TDStyle.css");
-		//TESTING REMOVE LATER
-		game.setOnKeyPressed(e -> {
-			Enemy z = new Enemy((int)(Math.random()*5));
-			z.setOnMousePressed(n -> z.setStage((int)(Math.random()*5)));
-			if(e.getCode() == KeyCode.A){
-				gameLayout.getChildren().add(z);
-			}
-			if(e.getCode() == KeyCode.S){
-				lifeInd.removeLife();
-			}
-		});
-		
-		window.setScene(game);
-		window.setResizable(false);
-		window.sizeToScene();
-		window.show();//NOTHING HAS HEIGHT UNTIL THE WINDOW IS SHOWNN FOR SOME REASON
-		
 	}
-	
+	//HELPERS
 	public static void addNode(Node n){
 		gameLayout.getChildren().add(n);
 	}
@@ -305,7 +325,7 @@ public class Main extends Application{
 	}
 	public static boolean placingTower(){
 		for(TowerIcon t: towerIcons){
-			if(t.getClicked())
+			if(t.isClicked())
 				return true;
 		}
 		return false;

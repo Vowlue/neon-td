@@ -9,7 +9,7 @@ VBox, .menu  {
     -fx-alignment: center;
 }
 Label{
-	-fx-text-fill: white;
+	-fx-text-fill: black;
 }
 .uimenu{
 	-fx-alignment: bottom-right;
