@@ -62,7 +62,11 @@ public class Main extends Application{
 	private Stage window;
 	private Scene game;
 	public static BorderPane gameLayout;
+	
 	public static GridPane mapLayout;
+	HBox topMenu;
+	static VBox shopMenu;
+	Pane actionHold;
 	
 	private LivesIndicator lifeInd;
 	private SparksIndicator sprkInd;
@@ -164,7 +168,7 @@ public class Main extends Application{
 	
 	//SET UP METHODS
 	private void setupTopMenu(){
-		HBox topMenu = new HBox();
+		topMenu = new HBox();
 		topMenu.getStyleClass().add("uimenu");
 		topMenu.setStyle("-fx-background-color:#260d0d");
 		topMenu.setPrefWidth(GAME_WIDTH);
@@ -175,14 +179,14 @@ public class Main extends Application{
 		gameLayout.setTop(topMenu);
 	}
 	private void setupActionMenu(){
-		Pane actionHold = new Pane();
+		actionHold = new Pane();
 		actionHold.setPrefWidth(.1*GAME_WIDTH);
 		actionHold.prefHeight(.95*GAME_HEIGHT);
 		Pane actionMenu = new Pane(actionHold);
 		gameLayout.setLeft(actionMenu);
 	}
 	private void setupShopMenu() throws FileNotFoundException{
-		VBox shopMenu = new VBox();
+		shopMenu = new VBox();
 		shopMenu.setStyle("-fx-background-color:#330033");
 		VBox towerMenu = new VBox();
 		ImageView towerTitle = new ImageView(towersLogo);
@@ -200,7 +204,8 @@ public class Main extends Application{
 		eventMenu.setStyle("-fx-background-color:pink");
 		eventMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
 		eventContainer.getChildren().addAll(eventTitle, eventMenu);
-		shopMenu.getChildren().addAll(towerMenu, eventContainer);
+		DescriptionUI dui = new DescriptionUI("Come a little closer. Wait, that's too close. Move a little to the left. Move back a little farther. OK, stay right there.");
+		shopMenu.getChildren().addAll(towerMenu, eventContainer, dui);
 		gameLayout.setRight(shopMenu);
 	}
 	private void setupMap() throws FileNotFoundException{

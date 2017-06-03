@@ -14,3 +14,7 @@ Label{
 .uimenu{
 	-fx-alignment: bottom-right;
 }
+#description{
+	-fx-font-family: helvetica;
+	-fx-font-size: 15;
+}
