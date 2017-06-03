@@ -5,9 +5,12 @@
 #map{
 	-fx-background-color: #110022;
 }
-VBox {
+VBox, .menu  {
     -fx-alignment: center;
 }
 Label{
-	-fx-text-fill: aquamarine;
+	-fx-text-fill: white;
+}
+.uimenu{
+	-fx-alignment: bottom-right;
 }

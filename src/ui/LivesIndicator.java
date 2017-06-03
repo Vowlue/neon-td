@@ -14,6 +14,7 @@ public class LivesIndicator extends HBox{
 	public LivesIndicator(int lives) {
 		Label lText = new Label("Lives");
 		getChildren().add(lText);
+		setStyle("-fx-alignment: center-right");
 		for(int i = 0; i<lives; i++){
 			ImageView iv = new ImageView(Main.heart);
 			iv.setFitHeight(.05*Main.GAME_HEIGHT);
@@ -22,6 +23,7 @@ public class LivesIndicator extends HBox{
 		}
 		setBackground(new Background(new BackgroundFill(Color.web("#3385ff"), new CornerRadii(5), Insets.EMPTY)));
 		counter = lives;
+		this.setPrefWidth(Main.GAME_WIDTH*.4);
 	}
 	public void removeLife(){
 		if(counter >= 0)

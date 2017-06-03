@@ -2,27 +2,38 @@ package objects;
 
 import java.util.ArrayList;
 
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import ui.Main;
 
-public class TowerIcon extends ImageView{
+public class TowerIcon extends Pane{
 	public final static String BLUE = "blue tile";
 	public final static String GREEN = "green tile";
 	public final static String YELLOW = "yellow tile";
 	boolean clicked;
 	private String type;
+	private ImageView iv;
 	
 	public TowerIcon(Image i, String type) {
-		super(i);
+		super(new ImageView(i));
+		this.setStyle("-fx-background-color: purple");
+		ObservableList<Node> nodes = this.getChildren();
+		iv = null;
+		for(Node n: nodes){
+			if(n instanceof ImageView)
+				iv = (ImageView)n;
+		}
 		this.type = type; 
-		setFitWidth(Main.iconWidth);
-		setFitHeight(Main.iconHeight);
+		iv.setFitWidth(Main.iconWidth);
+		iv.setFitHeight(Main.iconHeight);
 		clicked = false;
 		this.setOnMouseClicked(e ->{
 			if(!clicked)
@@ -31,6 +42,9 @@ public class TowerIcon extends ImageView{
 				undoSelection();
 			}
 		);
+	}
+	public Image getImage(){
+		return iv.getImage();
 	}
 	public boolean getClicked(){
 		return clicked;

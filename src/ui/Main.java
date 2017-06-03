@@ -28,7 +28,7 @@ import objects.TowerIcon;
 public class Main extends Application{
 	// CONSTANTS
 	final static int GAME_HEIGHT = 700;
-	private final static int GAME_WIDTH = 1000;
+	final static int GAME_WIDTH = 1000;
 	private final int EMPTY = 0;
 	private final int BLACK = 1;
 	private final int BLUE = 2;
@@ -73,7 +73,7 @@ public class Main extends Application{
 	
 	public static Image heart;
 	public static Image spark;
-	
+	public static Image towersLogo;
 	public static void main(String[] args){
 		launch(args);
 	}
@@ -97,6 +97,7 @@ public class Main extends Application{
 		
 		heart = new Image(new FileInputStream("images/heart.png"));
 		spark = new Image(new FileInputStream("images/spark.png"));
+		towersLogo = new Image(new FileInputStream("images/towers.png"));
 		
 		TowerIcon starT = new TowerIcon(star, TowerIcon.BLUE);
 		TowerIcon ampT = new TowerIcon(amp, TowerIcon.BLUE);
@@ -124,11 +125,8 @@ public class Main extends Application{
 		
 		gameLayout = new BorderPane();
 		
-		/*ImageView topHold = new ImageView(new Image(new FileInputStream("images/placehold2.png")));
-		topHold.setFitWidth(GAME_WIDTH);
-		topHold.setFitHeight(.05*GAME_HEIGHT);
-		Pane topMenu = new Pane(topHold);*/
 		HBox topMenu = new HBox();
+		topMenu.getStyleClass().add("uimenu");
 		topMenu.setStyle("-fx-background-color:#260d0d");
 		topMenu.setPrefWidth(GAME_WIDTH);
 		topMenu.setPrefHeight(.05*GAME_HEIGHT);
@@ -147,22 +145,14 @@ public class Main extends Application{
 		VBox shopMenu = new VBox();
 		shopMenu.setStyle("-fx-background-color:#330033");
 		VBox towerMenu = new VBox();
-		Label towerTitle = new Label("Towers");
+		ImageView towerTitle = new ImageView(towersLogo);
+		towerTitle.setFitHeight(40);
+		towerTitle.setFitWidth(150);
 		towerTitle.setId("towerTitle");
-		HBox blueMenu = new HBox(5);
-		blueMenu.setPadding(new Insets(10, 5, 10, 5));
-		blueMenu.setStyle("-fx-background-color:#3399FF");
-		HBox yellowMenu = new HBox(5);
-		yellowMenu.setPadding(new Insets(10, 5, 10, 5));
-		yellowMenu.setStyle("-fx-background-color:yellow");
-		HBox greenMenu = new HBox(5);
-		greenMenu.setPadding(new Insets(10, 5, 10, 5));
-		greenMenu.setStyle("-fx-background-color:green");
-		
-		blueMenu.getChildren().addAll(starT, ampT, batteryT);
-		yellowMenu.getChildren().addAll(gridshotT, smallerT, sniperT);
-		greenMenu.getChildren().addAll(boosterT, defenderT, gearT);
-		towerMenu.getChildren().addAll(new Label("Towers"), new Label("Blues"), blueMenu, new Label("Yellows"), yellowMenu, new Label("Greens"), greenMenu);
+		TowerMenu blueMenu = new TowerMenu("Blue Towers", starT, ampT, batteryT, "#3399FF");
+		TowerMenu yellowMenu = new TowerMenu("Yellow Towers", gridshotT, smallerT, sniperT, "yellow");
+		TowerMenu greenMenu = new TowerMenu("Green Towers", boosterT, defenderT, gearT, "green");
+		towerMenu.getChildren().addAll(towerTitle, blueMenu, yellowMenu, greenMenu);
 		VBox eventContainer = new VBox();
 		Label eventTitle = new Label("Events");
 		HBox eventMenu = new HBox(5);
