@@ -21,8 +21,9 @@ public class TowerIcon extends Pane{
 	boolean clicked;
 	private String type;
 	private ImageView iv;
+	private String description;
 	
-	public TowerIcon(Image i, String type) {
+	public TowerIcon(Image i, String type, String description) {
 		super(new ImageView(i));
 		this.setStyle("-fx-background-color: purple");
 		ObservableList<Node> nodes = this.getChildren();
@@ -35,6 +36,12 @@ public class TowerIcon extends Pane{
 		iv.setFitWidth(Main.iconWidth);
 		iv.setFitHeight(Main.iconHeight);
 		clicked = false;
+		this.setOnMouseEntered(e ->{
+			Main.dui.changeText(description);
+		});
+		this.setOnMouseExited(e ->{
+			Main.dui.changeText("");
+		});
 		this.setOnMouseClicked(e ->{
 			if(!clicked)
 				selectTower();

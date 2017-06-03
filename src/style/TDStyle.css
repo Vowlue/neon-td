@@ -18,3 +18,6 @@ Label{
 	-fx-font-family: helvetica;
 	-fx-font-size: 15;
 }
+Label{
+	-fx-alignment: top-left;
+}
