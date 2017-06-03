@@ -40,7 +40,8 @@ public class Main extends Application{
 	public static final double iconWidth = (.2*GAME_WIDTH)/4;
 	public static final double iconHeight = (.95*GAME_HEIGHT)/13;
 	//GAME VARIABLES
-	private static int playerLives = 3;
+	private static int playerLives = 10;
+	private static int playerSparks = 500;
 	
 	private static TowerIcon storedTower;
 	private static TowerIcon[] towerIcons;
@@ -50,6 +51,9 @@ public class Main extends Application{
 	private Scene game;
 	public static BorderPane gameLayout;
 	public static GridPane mapLayout;
+	
+	private LivesIndicator lifeInd;
+	private SparksIndicator sprkInd;
 	
 	//GAME IMAGES
 	private static Image blackTile;
@@ -68,6 +72,7 @@ public class Main extends Application{
 	private static Image sniper;
 	
 	public static Image heart;
+	public static Image spark;
 	
 	public static void main(String[] args){
 		launch(args);
@@ -91,6 +96,7 @@ public class Main extends Application{
 		sniper = new Image(new FileInputStream("images/towers/sniper.png"));
 		
 		heart = new Image(new FileInputStream("images/heart.png"));
+		spark = new Image(new FileInputStream("images/spark.png"));
 		
 		TowerIcon starT = new TowerIcon(star, TowerIcon.BLUE);
 		TowerIcon ampT = new TowerIcon(amp, TowerIcon.BLUE);
@@ -122,11 +128,13 @@ public class Main extends Application{
 		topHold.setFitWidth(GAME_WIDTH);
 		topHold.setFitHeight(.05*GAME_HEIGHT);
 		Pane topMenu = new Pane(topHold);*/
-		Pane topMenu = new Pane();
+		HBox topMenu = new HBox();
 		topMenu.setStyle("-fx-background-color:#260d0d");
 		topMenu.setPrefWidth(GAME_WIDTH);
 		topMenu.setPrefHeight(.05*GAME_HEIGHT);
-		topMenu.getChildren().add(new LivesIndicator(playerLives));
+		lifeInd = new LivesIndicator(playerLives);
+		sprkInd = new SparksIndicator(playerSparks);
+		topMenu.getChildren().addAll(lifeInd, sprkInd);
 		gameLayout.setTop(topMenu);
 		
 		Pane actionHold = new Pane();
@@ -210,6 +218,9 @@ public class Main extends Application{
 			z.setOnMousePressed(n -> z.setStage((int)(Math.random()*5)));
 			if(e.getCode() == KeyCode.A){
 				gameLayout.getChildren().add(z);
+			}
+			if(e.getCode() == KeyCode.S){
+				lifeInd.removeLife();
 			}
 		});
 		

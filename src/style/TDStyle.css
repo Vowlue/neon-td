@@ -5,6 +5,9 @@
 #map{
 	-fx-background-color: #110022;
 }
-HBox, VBox {
+VBox {
     -fx-alignment: center;
+}
+Label{
+	-fx-text-fill: aquamarine;
 }
