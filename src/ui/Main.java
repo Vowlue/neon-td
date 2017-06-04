@@ -68,8 +68,8 @@ public class Main extends Application{
 	static VBox shopMenu;
 	Pane actionHold;
 	
-	private LivesIndicator lifeInd;
-	private SparksIndicator sprkInd;
+	private static LivesIndicator lifeInd;
+	private static SparksIndicator sprkInd;
 	public static DescriptionUI dui;
 	
 	//GAME IMAGES
@@ -116,15 +116,15 @@ public class Main extends Application{
 		spark = new Image(new FileInputStream("images/spark.png"));
 		towersLogo = new Image(new FileInputStream("images/towers.png"));
 		
-		starT = new TowerIcon(star, TowerIcon.BLUE, "An an valley indeed so no wonder future nature vanity. Debating all she mistaken indulged believed provided declared. He many kept on draw lain song as same. Whether at dearest certain spirits is entered in to. Rich fine bred real use too many good. She compliment unaffected expression favourable any. Unknown chiefly showing to conduct no. Hung as love evil able to post at as. ");
-		ampT = new TowerIcon(amp, TowerIcon.BLUE, "a");
-		batteryT = new TowerIcon(battery, TowerIcon.BLUE, "b");
-		gridshotT = new TowerIcon(gridshot, TowerIcon.YELLOW, "c");
-		smallerT = new TowerIcon(smaller, TowerIcon.YELLOW, "d");
-		sniperT = new TowerIcon(sniper, TowerIcon.YELLOW, "e");
-		boosterT = new TowerIcon(booster, TowerIcon.GREEN, "f");
-		defenderT = new TowerIcon(defender, TowerIcon.GREEN, "g");
-		gearT = new TowerIcon(gear, TowerIcon.GREEN, "h");
+		starT = new TowerIcon(0, star, TowerIcon.BLUE, "An an valley indeed so no wonder future nature vanity. Debating all she mistaken indulged believed provided declared. He many kept on draw lain song as same. Whether at dearest certain spirits is entered in to. Rich fine bred real use too many good. She compliment unaffected expression favourable any. Unknown chiefly showing to conduct no. Hung as love evil able to post at as. ");
+		ampT = new TowerIcon(0, amp, TowerIcon.BLUE, "a");
+		batteryT = new TowerIcon(0, battery, TowerIcon.BLUE, "b");
+		gridshotT = new TowerIcon(0, gridshot, TowerIcon.YELLOW, "c");
+		smallerT = new TowerIcon(0, smaller, TowerIcon.YELLOW, "d");
+		sniperT = new TowerIcon(0, sniper, TowerIcon.YELLOW, "e");
+		boosterT = new TowerIcon(0, booster, TowerIcon.GREEN, "f");
+		defenderT = new TowerIcon(0, defender, TowerIcon.GREEN, "g");
+		gearT = new TowerIcon(0, gear, TowerIcon.GREEN, "h");
 		towerIcons = new TowerIcon[9];
 		towerIcons[0] = starT;
 		towerIcons[1] = ampT;
@@ -246,7 +246,7 @@ public class Main extends Application{
 		}
 		gameLayout.setCenter(mapLayout);
 	}
-	//HELPERS
+	//METHODS OF CLASS
 	public static void addNode(Node n){
 		gameLayout.getChildren().add(n);
 	}
@@ -256,6 +256,11 @@ public class Main extends Application{
 	public static TowerIcon getTower(){
 		return storedTower;
 	}
+	public static void loseLife(){
+		setPlayerHp(Main.getPlayerHp()-1);
+		lifeInd.removeLife();
+	}
+	//HELPERS
 	private int[][] generateMap(){
 		int[][] map = new int[HEIGHT_D][WIDTH_D];
 		//generate the path

@@ -14,7 +14,7 @@ public class LivesIndicator extends HBox{
 	public LivesIndicator(int lives) {
 		Label lText = new Label("Lives");
 		getChildren().add(lText);
-		setStyle("-fx-alignment: center-right");
+		setStyle("-fx-alignment: center-left");
 		for(int i = 0; i<lives; i++){
 			ImageView iv = new ImageView(Main.heart);
 			iv.setFitHeight(.05*Main.GAME_HEIGHT);

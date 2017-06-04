@@ -5,16 +5,18 @@ import java.util.ArrayList;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import ui.Main;
 
-public class TowerIcon extends Pane{
+public class TowerIcon extends VBox{
 	public final static String BLUE = "blue tile";
 	public final static String GREEN = "green tile";
 	public final static String YELLOW = "yellow tile";
@@ -23,18 +25,14 @@ public class TowerIcon extends Pane{
 	private ImageView iv;
 	private String description;
 	
-	public TowerIcon(Image i, String type, String description) {
-		super(new ImageView(i));
-		this.setStyle("-fx-background-color: purple");
-		ObservableList<Node> nodes = this.getChildren();
-		iv = null;
-		for(Node n: nodes){
-			if(n instanceof ImageView)
-				iv = (ImageView)n;
-		}
+	public TowerIcon(int cost, Image i, String type, String description) {
+		super();
+		iv = new ImageView(i);
+		this.setStyle("-fx-background-color: purple; -fx-alignment: center;");
 		this.type = type; 
 		iv.setFitWidth(Main.iconWidth);
 		iv.setFitHeight(Main.iconHeight);
+		Label lb = new Label(""+cost);
 		clicked = false;
 		this.setOnMouseEntered(e ->{
 			Main.dui.changeText(description);
@@ -49,6 +47,7 @@ public class TowerIcon extends Pane{
 				undoSelection();
 			}
 		);
+		getChildren().addAll(iv, lb);
 	}
 	public Image getImage(){
 		return iv.getImage();
