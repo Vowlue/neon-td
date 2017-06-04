@@ -1,7 +1,6 @@
 package objects;
 
 import javafx.animation.PathTransition;
-import javafx.animation.SequentialTransition;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.LineTo;
