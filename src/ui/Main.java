@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -20,10 +21,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import objects.Enemy;
 import objects.PlaceHolder;
 import objects.Tile;
+import objects.Tower;
 import objects.TowerIcon;
 
 public class Main extends Application{
@@ -68,6 +71,7 @@ public class Main extends Application{
 	static VBox shopMenu;
 	Pane actionHold;
 	
+	private static NextWaveButton nextWave;
 	private static LivesIndicator lifeInd;
 	private static SparksIndicator sprkInd;
 	public static DescriptionUI dui;
@@ -91,6 +95,7 @@ public class Main extends Application{
 	public static Image heart;
 	public static Image spark;
 	public static Image towersLogo;
+	static Image forward;
 	public static void main(String[] args){
 		launch(args);
 	}
@@ -115,6 +120,8 @@ public class Main extends Application{
 		heart = new Image(new FileInputStream("images/heart.png"));
 		spark = new Image(new FileInputStream("images/spark.png"));
 		towersLogo = new Image(new FileInputStream("images/towers.png"));
+		forward = new Image(new FileInputStream("images/forward.png"));
+		
 		
 		starT = new TowerIcon(0, star, TowerIcon.BLUE, "An an valley indeed so no wonder future nature vanity. Debating all she mistaken indulged believed provided declared. He many kept on draw lain song as same. Whether at dearest certain spirits is entered in to. Rich fine bred real use too many good. She compliment unaffected expression favourable any. Unknown chiefly showing to conduct no. Hung as love evil able to post at as. ");
 		ampT = new TowerIcon(0, amp, TowerIcon.BLUE, "a");
@@ -140,13 +147,14 @@ public class Main extends Application{
 		window.setTitle("Neon Tower Defense");
 		
 		gameLayout = new BorderPane();
-		
 		setupTopMenu();
 		setupActionMenu();
 		setupShopMenu();
 		setupMap();
 		
 		game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
+		//game.addEventFilter(MouseEvent.MOUSE_PRESSED, x -> {System.out.println(x.getSceneX() + " " + x.getSceneY());handle();});
+		game.addEventFilter(MouseEvent.MOUSE_PRESSED, x -> {handle();});
 		game.getStylesheets().add("style/TDStyle.css");
 		//TESTING REMOVE LATER
 		game.setOnKeyPressed(e -> {
@@ -163,7 +171,8 @@ public class Main extends Application{
 		window.setScene(game);
 		window.setResizable(false);
 		window.sizeToScene();
-		window.show();//NOTHING HAS HEIGHT UNTIL THE WINDOW IS SHOWNN FOR SOME REASON
+		window.show();
+		
 		
 	}
 	
@@ -174,9 +183,10 @@ public class Main extends Application{
 		topMenu.setStyle("-fx-background-color:#260d0d");
 		topMenu.setPrefWidth(GAME_WIDTH);
 		topMenu.setPrefHeight(.05*GAME_HEIGHT);
+		nextWave = new NextWaveButton();
 		lifeInd = new LivesIndicator(playerLives);
 		sprkInd = new SparksIndicator(playerSparks);
-		topMenu.getChildren().addAll(lifeInd, sprkInd);
+		topMenu.getChildren().addAll(nextWave, lifeInd, sprkInd);
 		gameLayout.setTop(topMenu);
 	}
 	private void setupActionMenu(){
@@ -253,7 +263,7 @@ public class Main extends Application{
 	public static void storeTower(TowerIcon t){
 		storedTower = t;
 	}
-	public static TowerIcon getTower(){
+	public static TowerIcon getTowerIcon(){
 		return storedTower;
 	}
 	public static void loseLife(){
@@ -307,6 +317,9 @@ public class Main extends Application{
 	public static void setPlayerHp(int hp) {
 		playerLives = hp;
 	}
+	public static void removeNode(Node n){
+		gameLayout.getChildren().remove(n);
+	}
 	public static void removeEnemy(Enemy en){
 		gameLayout.getChildren().remove(en);
 	}
@@ -340,6 +353,17 @@ public class Main extends Application{
 				return true;
 		}
 		return false;
+	}
+	public static void createIndicator(Circle c){
+		addNode(c);
+	}
+	private static void handle(){
+		Object[] nodes = gameLayout.getChildren().toArray();
+		for(Object n: nodes){
+			if(n instanceof Tower){
+				((Tower)n).unshowOptions();
+			}
+		}
 	}
 	
 	

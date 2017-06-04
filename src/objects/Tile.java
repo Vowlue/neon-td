@@ -6,6 +6,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import ui.Main;
 
 public class Tile extends Pane{
@@ -15,9 +17,8 @@ public class Tile extends Pane{
 		super(iv);
 		canPlace = false;
 		hasTower = false;
-		this.setOnMouseClicked(e -> {
-			placeTower(Main.getTower());
-		});
+		
+		this.setOnMouseClicked(e -> placeTower(Main.getTowerIcon()));
 	}
 	public boolean hasTower() {
 		return hasTower;
@@ -48,7 +49,7 @@ public class Tile extends Pane{
 				tile.setBackground(Background.EMPTY);
 			}
 			this.hasTower = true;
-			Main.getTower().setClicked(false);
+			Main.getTowerIcon().setClicked(false);
 			Main.addNode(new Tower(t.getImage(), Main.mapLayout.getLayoutX()+getLayoutX(), Main.mapLayout.getLayoutY()+getLayoutY(), getWidth(), getHeight()));
 		}
 	}
