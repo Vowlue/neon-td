@@ -20,17 +20,20 @@ public class TowerIcon extends VBox{
 	public final static String BLUE = "blue tile";
 	public final static String GREEN = "green tile";
 	public final static String YELLOW = "yellow tile";
+	
 	boolean clicked;
 	private String type;
 	private ImageView iv;
 	private String description;
 	private int range;
+	private String color;
 	
-	public TowerIcon(int range, int cost, Image i, String type, String description) {
+	public TowerIcon(String type, int range, int cost, Image i, String color, String description) {
 		super();
 		iv = new ImageView(i);
 		this.setStyle("-fx-background-color: purple; -fx-alignment: center;");
-		this.type = type; 
+		this.type = type;
+		this.color = color; 
 		this.range = range;
 		iv.setFitWidth(Main.iconWidth);
 		iv.setFitHeight(Main.iconHeight);
@@ -51,6 +54,9 @@ public class TowerIcon extends VBox{
 		);
 		getChildren().addAll(iv, lb);
 	}
+	public String getType(){
+		return type;
+	}
 	public int getRange(){
 		return range;
 	}
@@ -65,7 +71,7 @@ public class TowerIcon extends VBox{
 	}
 	private void undoSelection() {
 		clicked = false;
-		ArrayList<Tile> tiles = Main.getAllTiles(type);
+		ArrayList<Tile> tiles = Main.getAllTiles(color);
 		for(Tile t: tiles){
 				t.setBackground(Background.EMPTY);
 				t.setPlacement(false);
@@ -74,11 +80,11 @@ public class TowerIcon extends VBox{
 	private void selectTower(){
 		if(!Main.placingTower()){
 			clicked = true;
-			ArrayList<Tile> tiles = Main.getAllTiles(type);
+			ArrayList<Tile> tiles = Main.getAllTiles(color);
 			Main.storeTower(this);
 			for(Tile t: tiles){
 				if(!t.hasTower()){
-					switch(type){
+					switch(color){
 					case BLUE: 
 						t.setBackground(new Background(new BackgroundFill(Color.rgb(64, 36, 123), new CornerRadii(4), Insets.EMPTY))); break;
 					case YELLOW:

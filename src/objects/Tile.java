@@ -50,7 +50,12 @@ public class Tile extends Pane{
 			}
 			this.hasTower = true;
 			Main.getTowerIcon().setClicked(false);
-			Main.addNode(new Tower(t.getImage(), Main.mapLayout.getLayoutX()+getLayoutX(), Main.mapLayout.getLayoutY()+getLayoutY(), getWidth(), getHeight(), t.getRange()));
+			//change tower depending on the instanceof the tower
+			switch(t.getType()){
+			case(Main.MULTI_TARGET): 
+				Main.addNode(new AOETower(t.getImage(), Main.mapLayout.getLayoutX()+getLayoutX(), Main.mapLayout.getLayoutY()+getLayoutY(), getWidth(), getHeight(), t.getRange()));
+			default: break;
+			}
 		}
 	}
 	public void setCanPlace(boolean b){

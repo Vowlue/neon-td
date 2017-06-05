@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import ui.Main;
 
-public class Tower extends ImageView{
+public abstract class Tower extends ImageView{
 	private Circle indicator;
 	private int range;
 	private boolean showingIndicator;

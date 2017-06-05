@@ -10,13 +10,14 @@ import javafx.util.Duration;
 import ui.Main;
 
 public class Enemy extends Circle{
+	//stage is between 0~4 inclusive
 	private final Color[] colorArr = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.PINK};
 	private final static int[] radiusArr = {10, 11, 12, 13, 14, 15};
 	private final double[] pathX = {285, 285, 452, 452, 620, 620};
 	private final double[] pathY = {383, 185, 185, 583, 583, 50};
-	private int hp;
 	private PathTransition pt;
 	private int stage;
+	private int hp;
 	public Enemy(int stage) {
 		super(101+radiusArr[stage], 384, radiusArr[stage]);
 		hp = 10+stage*20;
@@ -32,7 +33,7 @@ public class Enemy extends Circle{
 	        path.getElements().add(new LineTo(pathX[i], pathY[i]));
 	    }
 	    pt = new PathTransition();
-	    pt.setDuration(Duration.millis(10000));
+	    pt.setDuration(Duration.millis(10000+2000*stage));//10000+2000*stage
 	    pt.setPath(path);
 	    pt.setNode(this);
 	    pt.setOnFinished(e -> {
@@ -41,12 +42,24 @@ public class Enemy extends Circle{
 	    });
 	    pt.play();
 	}
+	public int getNewStage(){
+		if(hp > 70)
+			return 4;
+		if(hp > 50)
+			return 3;
+		if(hp > 30)
+			return 2;
+		if(hp > 10)
+			return 1;
+		return 0;
+	}
 	public void setStage(int stage){
 		this.setRadius(radiusArr[stage]);
 		this.setStroke(colorArr[stage]);
 	}
 	public void takeDamage(int damage){
 		hp-=damage;
+		setStage(getNewStage());
 		if(hp <= 0)
 			Main.removeEnemy(this);
 	}

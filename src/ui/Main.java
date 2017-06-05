@@ -43,6 +43,10 @@ public class Main extends Application{
 	private final int HEIGHT_D = 20;
 	private final int WIDTH_D = 20;
 	
+	public final static String SINGLE_TARGET = "st";
+	public final static String MULTI_TARGET = "aoe";
+	public final static String ULTITY = "util";
+	
 	public static final double iconWidth = (.2*GAME_WIDTH)/4;
 	public static final double iconHeight = (.95*GAME_HEIGHT)/13;
 	//GAME VARIABLES
@@ -53,15 +57,7 @@ public class Main extends Application{
 	
 	private static TowerIcon storedTower;
 	private static TowerIcon[] towerIcons;
-	TowerIcon starT;
-	TowerIcon ampT;
-	TowerIcon batteryT;
-	TowerIcon boosterT;
-	TowerIcon defenderT;
-	TowerIcon gearT;
-	TowerIcon gridshotT;
-	TowerIcon smallerT;
-	TowerIcon sniperT;
+	public static ArrayList<Enemy> enemies;
 	
 	//GAME ELEMENTS
 	private Stage window;
@@ -72,6 +68,16 @@ public class Main extends Application{
 	HBox topMenu;
 	static VBox shopMenu;
 	Pane actionHold;
+	
+	TowerIcon starT;
+	TowerIcon ampT;
+	TowerIcon batteryT;
+	TowerIcon boosterT;
+	TowerIcon defenderT;
+	TowerIcon gearT;
+	TowerIcon gridshotT;
+	TowerIcon smallerT;
+	TowerIcon sniperT;
 	
 	private static NextWaveButton nextWave;
 	private static LivesIndicator lifeInd;
@@ -125,15 +131,15 @@ public class Main extends Application{
 		forward = new Image(new FileInputStream("images/forward.png"));
 		
 		
-		starT = new TowerIcon(50, 0, star, TowerIcon.BLUE, "An an valley indeed so no wonder future nature vanity. Debating all she mistaken indulged believed provided declared. He many kept on draw lain song as same. Whether at dearest certain spirits is entered in to. Rich fine bred real use too many good. She compliment unaffected expression favourable any. Unknown chiefly showing to conduct no. Hung as love evil able to post at as. ");
-		ampT = new TowerIcon(50, 0, amp, TowerIcon.BLUE, "a");
-		batteryT = new TowerIcon(50, 0, battery, TowerIcon.BLUE, "b");
-		gridshotT = new TowerIcon(50, 0, gridshot, TowerIcon.YELLOW, "c");
-		smallerT = new TowerIcon(50, 0, smaller, TowerIcon.YELLOW, "d");
-		sniperT = new TowerIcon(50, 0, sniper, TowerIcon.YELLOW, "e");
-		boosterT = new TowerIcon(50, 0, booster, TowerIcon.GREEN, "f");
-		defenderT = new TowerIcon(50, 0, defender, TowerIcon.GREEN, "g");
-		gearT = new TowerIcon(50, 0, gear, TowerIcon.GREEN, "h");
+		starT = new TowerIcon(MULTI_TARGET, 50, 0, star, TowerIcon.BLUE, "An an valley indeed so no wonder future nature vanity. Debating all she mistaken indulged believed provided declared. He many kept on draw lain song as same. Whether at dearest certain spirits is entered in to. Rich fine bred real use too many good. She compliment unaffected expression favourable any. Unknown chiefly showing to conduct no. Hung as love evil able to post at as. ");
+		//ampT = new TowerIcon(50, 0, amp, TowerIcon.BLUE, "a");
+		//batteryT = new TowerIcon(50, 0, battery, TowerIcon.BLUE, "b");
+		gridshotT = new TowerIcon(MULTI_TARGET, 50, 0, gridshot, TowerIcon.YELLOW, "c");
+		//smallerT = new TowerIcon(50, 0, smaller, TowerIcon.YELLOW, "d");
+		//sniperT = new TowerIcon(50, 0, sniper, TowerIcon.YELLOW, "e");
+		//boosterT = new TowerIcon(50, 0, booster, TowerIcon.GREEN, "f");
+		//defenderT = new TowerIcon(50, 0, defender, TowerIcon.GREEN, "g");
+		gearT = new TowerIcon(MULTI_TARGET, 50, 0, gear, TowerIcon.GREEN, "h");
 		towerIcons = new TowerIcon[9];
 		towerIcons[0] = starT;
 		towerIcons[1] = ampT;
@@ -160,10 +166,8 @@ public class Main extends Application{
 		game.getStylesheets().add("style/TDStyle.css");
 		//TESTING REMOVE LATER
 		game.setOnKeyPressed(e -> {
-			Enemy z = new Enemy((int)(Math.random()*5));
-			z.setOnMousePressed(n -> z.setStage((int)(Math.random()*5)));
 			if(e.getCode() == KeyCode.A){
-				gameLayout.getChildren().add(z);
+				spawnEnemy();
 			}
 			if(e.getCode() == KeyCode.S){
 				lifeInd.removeLife();
@@ -371,6 +375,15 @@ public class Main extends Application{
 				((Tower)n).unshowOptions();
 			}
 		}
+	}
+	private void spawnEnemy(){
+		Enemy e = new Enemy((int)(Math.random()*5));
+		gameLayout.getChildren().add(e);
+		enemies.add(e);
+	}
+	public double getDistanceBetween(Node n1, Node n2){
+		return Math.sqrt(0);
+		
 	}
 	
 	
