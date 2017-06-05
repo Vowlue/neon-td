@@ -1,4 +1,5 @@
 package ui;
+import java.awt.Point;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -7,11 +8,13 @@ import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventTarget;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -130,15 +133,15 @@ public class Main extends Application{
 		towersLogo = new Image(new FileInputStream("images/towers.png"));
 		forward = new Image(new FileInputStream("images/forward.png"));
 		
-		
+		//turn to different types of towers later
 		starT = new TowerIcon(MULTI_TARGET, 50, 0, star, TowerIcon.BLUE, "An an valley indeed so no wonder future nature vanity. Debating all she mistaken indulged believed provided declared. He many kept on draw lain song as same. Whether at dearest certain spirits is entered in to. Rich fine bred real use too many good. She compliment unaffected expression favourable any. Unknown chiefly showing to conduct no. Hung as love evil able to post at as. ");
-		//ampT = new TowerIcon(50, 0, amp, TowerIcon.BLUE, "a");
-		//batteryT = new TowerIcon(50, 0, battery, TowerIcon.BLUE, "b");
+		ampT = new TowerIcon(MULTI_TARGET, 50, 0, amp, TowerIcon.BLUE, "a");
+		batteryT = new TowerIcon(MULTI_TARGET, 50, 0, battery, TowerIcon.BLUE, "b");
 		gridshotT = new TowerIcon(MULTI_TARGET, 50, 0, gridshot, TowerIcon.YELLOW, "c");
-		//smallerT = new TowerIcon(50, 0, smaller, TowerIcon.YELLOW, "d");
-		//sniperT = new TowerIcon(50, 0, sniper, TowerIcon.YELLOW, "e");
-		//boosterT = new TowerIcon(50, 0, booster, TowerIcon.GREEN, "f");
-		//defenderT = new TowerIcon(50, 0, defender, TowerIcon.GREEN, "g");
+		smallerT = new TowerIcon(MULTI_TARGET, 50, 0, smaller, TowerIcon.YELLOW, "d");
+		sniperT = new TowerIcon(MULTI_TARGET, 50, 0, sniper, TowerIcon.YELLOW, "e");
+		boosterT = new TowerIcon(MULTI_TARGET, 50, 0, booster, TowerIcon.GREEN, "f");
+		defenderT = new TowerIcon(MULTI_TARGET, 50, 0, defender, TowerIcon.GREEN, "g");
 		gearT = new TowerIcon(MULTI_TARGET, 50, 0, gear, TowerIcon.GREEN, "h");
 		towerIcons = new TowerIcon[9];
 		towerIcons[0] = starT;
@@ -161,7 +164,7 @@ public class Main extends Application{
 		setupMap();
 		
 		game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
-		//game.addEventFilter(MouseEvent.MOUSE_PRESSED, x -> {System.out.println(x.getSceneX() + " " + x.getSceneY());handle();});
+		//game.addEventFilter(MouseEvent.MOUSE_PRESSED, x -> {System.out.println(x.getSceneX() + " " + x.getSceneY());handle(x);});
 		game.addEventFilter(MouseEvent.MOUSE_PRESSED, x -> {handle(x);});
 		game.getStylesheets().add("style/TDStyle.css");
 		//TESTING REMOVE LATER
@@ -179,7 +182,7 @@ public class Main extends Application{
 		window.sizeToScene();
 		window.show();
 		
-		
+		System.out.println(getCenterCoords(starT));
 	}
 	
 	//SET UP METHODS
@@ -384,6 +387,10 @@ public class Main extends Application{
 	public double getDistanceBetween(Node n1, Node n2){
 		return Math.sqrt(0);
 		
+	}
+	private Point getCenterCoords(Node node){
+		Bounds b = node.localToScene(node.getBoundsInLocal());
+		return new Point((int)(b.getMinX()+b.getWidth()/2), (int)(b.getMinY()+b.getHeight()/2));
 	}
 	
 	
