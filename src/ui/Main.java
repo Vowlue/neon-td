@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventTarget;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -123,15 +125,15 @@ public class Main extends Application{
 		forward = new Image(new FileInputStream("images/forward.png"));
 		
 		
-		starT = new TowerIcon(0, star, TowerIcon.BLUE, "An an valley indeed so no wonder future nature vanity. Debating all she mistaken indulged believed provided declared. He many kept on draw lain song as same. Whether at dearest certain spirits is entered in to. Rich fine bred real use too many good. She compliment unaffected expression favourable any. Unknown chiefly showing to conduct no. Hung as love evil able to post at as. ");
-		ampT = new TowerIcon(0, amp, TowerIcon.BLUE, "a");
-		batteryT = new TowerIcon(0, battery, TowerIcon.BLUE, "b");
-		gridshotT = new TowerIcon(0, gridshot, TowerIcon.YELLOW, "c");
-		smallerT = new TowerIcon(0, smaller, TowerIcon.YELLOW, "d");
-		sniperT = new TowerIcon(0, sniper, TowerIcon.YELLOW, "e");
-		boosterT = new TowerIcon(0, booster, TowerIcon.GREEN, "f");
-		defenderT = new TowerIcon(0, defender, TowerIcon.GREEN, "g");
-		gearT = new TowerIcon(0, gear, TowerIcon.GREEN, "h");
+		starT = new TowerIcon(50, 0, star, TowerIcon.BLUE, "An an valley indeed so no wonder future nature vanity. Debating all she mistaken indulged believed provided declared. He many kept on draw lain song as same. Whether at dearest certain spirits is entered in to. Rich fine bred real use too many good. She compliment unaffected expression favourable any. Unknown chiefly showing to conduct no. Hung as love evil able to post at as. ");
+		ampT = new TowerIcon(50, 0, amp, TowerIcon.BLUE, "a");
+		batteryT = new TowerIcon(50, 0, battery, TowerIcon.BLUE, "b");
+		gridshotT = new TowerIcon(50, 0, gridshot, TowerIcon.YELLOW, "c");
+		smallerT = new TowerIcon(50, 0, smaller, TowerIcon.YELLOW, "d");
+		sniperT = new TowerIcon(50, 0, sniper, TowerIcon.YELLOW, "e");
+		boosterT = new TowerIcon(50, 0, booster, TowerIcon.GREEN, "f");
+		defenderT = new TowerIcon(50, 0, defender, TowerIcon.GREEN, "g");
+		gearT = new TowerIcon(50, 0, gear, TowerIcon.GREEN, "h");
 		towerIcons = new TowerIcon[9];
 		towerIcons[0] = starT;
 		towerIcons[1] = ampT;
@@ -154,7 +156,7 @@ public class Main extends Application{
 		
 		game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
 		//game.addEventFilter(MouseEvent.MOUSE_PRESSED, x -> {System.out.println(x.getSceneX() + " " + x.getSceneY());handle();});
-		game.addEventFilter(MouseEvent.MOUSE_PRESSED, x -> {handle();});
+		game.addEventFilter(MouseEvent.MOUSE_PRESSED, x -> {handle(x);});
 		game.getStylesheets().add("style/TDStyle.css");
 		//TESTING REMOVE LATER
 		game.setOnKeyPressed(e -> {
@@ -357,7 +359,12 @@ public class Main extends Application{
 	public static void createIndicator(Circle c){
 		addNode(c);
 	}
-	private static void handle(){
+	private static void handle(Event e){
+		//if the target of the event is a Tower and it is currently showing its indicator, don't allow the event to happen
+		EventTarget et = e.getTarget();
+		if(et instanceof Tower && ((Tower)et).isShowing()){
+			return;
+		}
 		Object[] nodes = gameLayout.getChildren().toArray();
 		for(Object n: nodes){
 			if(n instanceof Tower){

@@ -8,18 +8,23 @@ import ui.Main;
 
 public class Tower extends ImageView{
 	private Circle indicator;
+	private int range;
 	private boolean showingIndicator;
 	//tower needs to be able to fire... maybe make this abstract
-	public Tower(Image i, double x, double y, double width, double height){
+	public Tower(Image i, double x, double y, double width, double height, int range){
 		super(i);
 		setX(x);
 		setY(y);
 		setFitWidth(width);
 		setFitHeight(height);
+		this.range = range;
 		showingIndicator = false;
-		indicator = new Circle(x+width/2, y+height/2, 50, Color.rgb(0, 0, 153, 0.6));
+		indicator = new Circle(x+width/2, y+height/2, range, Color.rgb(0, 0, 153, 0.6));
 		indicator.setStroke(Color.rgb(0, 0, 128, 0.8));
 		this.setOnMouseClicked(e -> showOptions());
+	}
+	public boolean isShowing(){
+		return showingIndicator;
 	}
 	private void showOptions(){
 		if(!showingIndicator){
@@ -34,10 +39,10 @@ public class Tower extends ImageView{
 			Main.removeNode(indicator);
 		}
 	}
+	public int getRange(){
+		return range;
+	}
 	private void rotate(){
 		this.setRotate(this.getRotate()+1);
-	}
-	public void fire(){
-		
 	}
 }

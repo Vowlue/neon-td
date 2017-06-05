@@ -24,12 +24,14 @@ public class TowerIcon extends VBox{
 	private String type;
 	private ImageView iv;
 	private String description;
+	private int range;
 	
-	public TowerIcon(int cost, Image i, String type, String description) {
+	public TowerIcon(int range, int cost, Image i, String type, String description) {
 		super();
 		iv = new ImageView(i);
 		this.setStyle("-fx-background-color: purple; -fx-alignment: center;");
 		this.type = type; 
+		this.range = range;
 		iv.setFitWidth(Main.iconWidth);
 		iv.setFitHeight(Main.iconHeight);
 		Label lb = new Label(""+cost);
@@ -48,6 +50,9 @@ public class TowerIcon extends VBox{
 			}
 		);
 		getChildren().addAll(iv, lb);
+	}
+	public int getRange(){
+		return range;
 	}
 	public Image getImage(){
 		return iv.getImage();

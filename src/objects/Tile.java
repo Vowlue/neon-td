@@ -50,7 +50,7 @@ public class Tile extends Pane{
 			}
 			this.hasTower = true;
 			Main.getTowerIcon().setClicked(false);
-			Main.addNode(new Tower(t.getImage(), Main.mapLayout.getLayoutX()+getLayoutX(), Main.mapLayout.getLayoutY()+getLayoutY(), getWidth(), getHeight()));
+			Main.addNode(new Tower(t.getImage(), Main.mapLayout.getLayoutX()+getLayoutX(), Main.mapLayout.getLayoutY()+getLayoutY(), getWidth(), getHeight(), t.getRange()));
 		}
 	}
 	public void setCanPlace(boolean b){
