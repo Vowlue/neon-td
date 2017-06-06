@@ -33,3 +33,8 @@ tower upgrades:::
 animations for firing? animations when enemies die/get hit?
 work on game over;
 change -fx-whatever into cs form if possible;
+
+towers:
+electric
+firey aoe
+laser
