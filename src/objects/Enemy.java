@@ -41,6 +41,11 @@ public class Enemy extends Circle{
 	    	Main.loseLife();
 	    });
 	    pt.play();
+	    
+	}
+	//need method that will return its percentage of track completed
+	public Duration getCurrent(){
+		return pt.getCurrentTime();
 	}
 	public int getNewStage(){
 		if(hp > 70)

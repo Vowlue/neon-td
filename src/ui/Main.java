@@ -154,6 +154,8 @@ public class Main extends Application{
 		towerIcons[7] = defenderT;
 		towerIcons[8] = gearT;
 		
+		enemies = new ArrayList<Enemy>();
+		
 		window = stage;
 		window.setTitle("Neon Tower Defense");
 		
@@ -168,9 +170,11 @@ public class Main extends Application{
 		game.addEventFilter(MouseEvent.MOUSE_PRESSED, x -> {handle(x);});
 		game.getStylesheets().add("style/TDStyle.css");
 		//TESTING REMOVE LATER
+		Enemy en = new Enemy((int)(Math.random()*5));
+		game.setOnMouseClicked(a -> System.out.println(en.getCurrent()));
 		game.setOnKeyPressed(e -> {
 			if(e.getCode() == KeyCode.A){
-				spawnEnemy();
+				spawnEnemy(en);
 			}
 			if(e.getCode() == KeyCode.S){
 				lifeInd.removeLife();
@@ -181,8 +185,6 @@ public class Main extends Application{
 		window.setResizable(false);
 		window.sizeToScene();
 		window.show();
-		
-		System.out.println(getCenterCoords(starT));
 	}
 	
 	//SET UP METHODS
@@ -379,14 +381,14 @@ public class Main extends Application{
 			}
 		}
 	}
-	private void spawnEnemy(){
-		Enemy e = new Enemy((int)(Math.random()*5));
+	private void spawnEnemy(Enemy e){
 		gameLayout.getChildren().add(e);
 		enemies.add(e);
 	}
 	public double getDistanceBetween(Node n1, Node n2){
-		return Math.sqrt(0);
-		
+		Point p1 = getCenterCoords(n1);
+		Point p2 = getCenterCoords(n2);
+		return Math.sqrt(Math.pow(p1.getX()-p2.getX(), 2) + Math.pow(p1.getY()-p2.getY(), 2));
 	}
 	private Point getCenterCoords(Node node){
 		Bounds b = node.localToScene(node.getBoundsInLocal());
