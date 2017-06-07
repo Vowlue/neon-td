@@ -1,5 +1,6 @@
 package objects;
 
 public interface Aimer {
-	void aim();
+	void aim(Enemy e);
+	void fire(Enemy e);
 }

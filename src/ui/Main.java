@@ -59,6 +59,7 @@ public class Main extends Application{
 	private static Tower storedTower;
 	private static TowerIcon[] towerIcons;
 	public static ArrayList<Enemy> enemies;
+	public static ArrayList<Tower> placedTowers;
 	
 	//GAME ELEMENTS
 	private Stage window;
@@ -131,9 +132,10 @@ public class Main extends Application{
 		towersLogo = new Image(new FileInputStream("images/towers.png"));
 		forward = new Image(new FileInputStream("images/forward.png"));
 		
+		placedTowers = new ArrayList<Tower>();
+		towerIcons = new TowerIcon[9];
 		//turn to different types of towers later
 		
-		towerIcons = new TowerIcon[9];
 		
 		enemies = new ArrayList<Enemy>();
 		
@@ -372,6 +374,10 @@ public class Main extends Application{
 	private Point getCenterCoords(Node node){
 		Bounds b = node.localToScene(node.getBoundsInLocal());
 		return new Point((int)(b.getMinX()+b.getWidth()/2), (int)(b.getMinY()+b.getHeight()/2));
+	}
+	public static void placeTower(Tower t){
+		placedTowers.add(t);
+		addNode(t);
 	}
 	
 	

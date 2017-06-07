@@ -50,8 +50,9 @@ public class Tile extends Pane{
 			}
 			this.hasTower = true;
 			t.getTowerIcon().setClicked(false);
-			//change tower depending on the instanceof the tower
-			//if(t instanceof whateverClass)
+			//change tower depending on the instanceof the tower?
+			//if(t instanceof whateverClass)?
+			Main.placeTower(t);
 		}
 	}
 	public void setCanPlace(boolean b){

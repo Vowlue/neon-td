@@ -26,10 +26,10 @@ going to use circles for enemies, change color and size when below a certain amo
 as for events, they will be temporary buffs/debuffs that cost currency to buy
 find events to add, cause them to do something
 towers need range X make towers fire??? make projectiles :o
-MAKE NEW TOWER CLASSES PERHAPS ONE TYPE FOR EACH??? single target aoe utitliy
 tower upgrades:::
 animations for firing? animations when enemies die/get hit?
 work on game over;
+add upgrade and property menu for towers when they are clicked
 change -fx-whatever into cs form if possible;
 
 towers:
