@@ -22,19 +22,19 @@ public class TowerIcon extends VBox{
 	public final static String YELLOW = "yellow tile";
 	
 	boolean clicked;
-	private String type;
 	private ImageView iv;
 	private String description;
 	private int range;
 	private String color;
+	private Tower tower;
 	
-	public TowerIcon(String type, int range, int cost, Image i, String color, String description) {
+	public TowerIcon(Tower tower, int range, int cost, Image i, String color, String description) {
 		super();
 		iv = new ImageView(i);
 		this.setStyle("-fx-background-color: purple; -fx-alignment: center;");
-		this.type = type;
 		this.color = color; 
 		this.range = range;
+		this.tower = tower;
 		iv.setFitWidth(Main.iconWidth);
 		iv.setFitHeight(Main.iconHeight);
 		Label lb = new Label(""+cost);
@@ -53,9 +53,6 @@ public class TowerIcon extends VBox{
 			}
 		);
 		getChildren().addAll(iv, lb);
-	}
-	public String getType(){
-		return type;
 	}
 	public int getRange(){
 		return range;
@@ -81,7 +78,7 @@ public class TowerIcon extends VBox{
 		if(!Main.placingTower()){
 			clicked = true;
 			ArrayList<Tile> tiles = Main.getAllTiles(color);
-			Main.storeTower(this);
+			Main.storeTower(tower);
 			for(Tile t: tiles){
 				if(!t.hasTower()){
 					switch(color){

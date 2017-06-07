@@ -14,7 +14,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -29,7 +28,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import objects.Enemy;
-import objects.PlaceHolder;
 import objects.Tile;
 import objects.Tower;
 import objects.TowerIcon;
@@ -58,7 +56,7 @@ public class Main extends Application{
 	
 	int[][] map;
 	
-	private static TowerIcon storedTower;
+	private static Tower storedTower;
 	private static TowerIcon[] towerIcons;
 	public static ArrayList<Enemy> enemies;
 	
@@ -71,16 +69,16 @@ public class Main extends Application{
 	HBox topMenu;
 	static VBox shopMenu;
 	Pane actionHold;
-	
-	TowerIcon starT;
-	TowerIcon ampT;
-	TowerIcon batteryT;
-	TowerIcon boosterT;
-	TowerIcon defenderT;
-	TowerIcon gearT;
-	TowerIcon gridshotT;
-	TowerIcon smallerT;
-	TowerIcon sniperT;
+
+	TowerIcon t1;
+	TowerIcon t2;
+	TowerIcon t3;
+	TowerIcon t4;
+	TowerIcon t5;
+	TowerIcon t6;
+	TowerIcon t7;
+	TowerIcon t8;
+	TowerIcon t9;
 	
 	private static NextWaveButton nextWave;
 	private static LivesIndicator lifeInd;
@@ -134,25 +132,8 @@ public class Main extends Application{
 		forward = new Image(new FileInputStream("images/forward.png"));
 		
 		//turn to different types of towers later
-		starT = new TowerIcon(MULTI_TARGET, 50, 0, star, TowerIcon.BLUE, "An an valley indeed so no wonder future nature vanity. Debating all she mistaken indulged believed provided declared. He many kept on draw lain song as same. Whether at dearest certain spirits is entered in to. Rich fine bred real use too many good. She compliment unaffected expression favourable any. Unknown chiefly showing to conduct no. Hung as love evil able to post at as. ");
-		ampT = new TowerIcon(MULTI_TARGET, 50, 0, amp, TowerIcon.BLUE, "a");
-		batteryT = new TowerIcon(MULTI_TARGET, 50, 0, battery, TowerIcon.BLUE, "b");
-		gridshotT = new TowerIcon(MULTI_TARGET, 50, 0, gridshot, TowerIcon.YELLOW, "c");
-		smallerT = new TowerIcon(MULTI_TARGET, 50, 0, smaller, TowerIcon.YELLOW, "d");
-		sniperT = new TowerIcon(MULTI_TARGET, 50, 0, sniper, TowerIcon.YELLOW, "e");
-		boosterT = new TowerIcon(MULTI_TARGET, 50, 0, booster, TowerIcon.GREEN, "f");
-		defenderT = new TowerIcon(MULTI_TARGET, 50, 0, defender, TowerIcon.GREEN, "g");
-		gearT = new TowerIcon(MULTI_TARGET, 50, 0, gear, TowerIcon.GREEN, "h");
+		
 		towerIcons = new TowerIcon[9];
-		towerIcons[0] = starT;
-		towerIcons[1] = ampT;
-		towerIcons[2] = batteryT;
-		towerIcons[3] = gridshotT;
-		towerIcons[4] = smallerT;
-		towerIcons[5] = sniperT;
-		towerIcons[6] = boosterT;
-		towerIcons[7] = defenderT;
-		towerIcons[8] = gearT;
 		
 		enemies = new ArrayList<Enemy>();
 		
@@ -213,16 +194,16 @@ public class Main extends Application{
 		towerTitle.setFitHeight(40);
 		towerTitle.setFitWidth(150);
 		towerTitle.setId("towerTitle");
-		TowerMenu blueMenu = new TowerMenu("Blue Towers", starT, ampT, batteryT, "#3399FF");
-		TowerMenu yellowMenu = new TowerMenu("Yellow Towers", gridshotT, smallerT, sniperT, "yellow");
-		TowerMenu greenMenu = new TowerMenu("Green Towers", boosterT, defenderT, gearT, "green");
-		towerMenu.getChildren().addAll(towerTitle, blueMenu, yellowMenu, greenMenu);
+		//TowerMenu blueMenu = new TowerMenu("Blue Towers", starT, ampT, batteryT, "#3399FF");
+		//TowerMenu yellowMenu = new TowerMenu("Yellow Towers", gridshotT, smallerT, sniperT, "yellow");
+		//TowerMenu greenMenu = new TowerMenu("Green Towers", boosterT, defenderT, gearT, "green");
+		//towerMenu.getChildren().addAll(towerTitle, blueMenu, yellowMenu, greenMenu);
 		VBox eventContainer = new VBox();
 		Label eventTitle = new Label("Events");
 		HBox eventMenu = new HBox(5);
 		eventMenu.setPadding(new Insets(10, 5, 10, 5));
 		eventMenu.setStyle("-fx-background-color:pink");
-		eventMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
+		//eventMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
 		eventContainer.getChildren().addAll(eventTitle, eventMenu);
 		dui = new DescriptionUI("");
 		shopMenu.getChildren().addAll(towerMenu, eventContainer, dui);
@@ -269,10 +250,10 @@ public class Main extends Application{
 	public static void addNode(Node n){
 		gameLayout.getChildren().add(n);
 	}
-	public static void storeTower(TowerIcon t){
+	public static void storeTower(Tower t){
 		storedTower = t;
 	}
-	public static TowerIcon getTowerIcon(){
+	public static Tower getTower(){
 		return storedTower;
 	}
 	public static void loseLife(){

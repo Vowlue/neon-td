@@ -18,7 +18,7 @@ public class Tile extends Pane{
 		canPlace = false;
 		hasTower = false;
 		
-		this.setOnMouseClicked(e -> placeTower(Main.getTowerIcon()));
+		this.setOnMouseClicked(e -> placeTower(Main.getTower()));
 	}
 	public boolean hasTower() {
 		return hasTower;
@@ -40,7 +40,7 @@ public class Tile extends Pane{
 	public void changeImage(Image i){
 		getImageView().setImage(i);
 	}
-	public void placeTower(TowerIcon t){
+	public void placeTower(Tower t){
 		if(canPlace && !hasTower){
 			ObservableList<Node> nodes = Main.getAllTiles();
 			for(Node n: nodes){
@@ -49,13 +49,9 @@ public class Tile extends Pane{
 				tile.setBackground(Background.EMPTY);
 			}
 			this.hasTower = true;
-			Main.getTowerIcon().setClicked(false);
+			t.getTowerIcon().setClicked(false);
 			//change tower depending on the instanceof the tower
-			switch(t.getType()){
-			case(Main.MULTI_TARGET): 
-				Main.addNode(new AOETower(t.getImage(), Main.mapLayout.getLayoutX()+getLayoutX(), Main.mapLayout.getLayoutY()+getLayoutY(), getWidth(), getHeight(), t.getRange()));
-			default: break;
-			}
+			//if(t instanceof whateverClass)
 		}
 	}
 	public void setCanPlace(boolean b){

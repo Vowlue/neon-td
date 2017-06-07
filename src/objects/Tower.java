@@ -45,4 +45,8 @@ public abstract class Tower extends ImageView{
 	private void rotate(){
 		this.setRotate(this.getRotate()+1);
 	}
+	//needs method to get the icon based on the tower
+	public TowerIcon getTowerIcon(){
+		return null;
+	}
 }

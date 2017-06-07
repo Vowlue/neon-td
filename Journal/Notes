@@ -23,8 +23,6 @@ For animations, use transitions
 		
 Notes for game:
 going to use circles for enemies, change color and size when below a certain amount of health
-each color of tower is going to specialize in 4 different things, but differently
-(single target, aoe, dot, cc)
 as for events, they will be temporary buffs/debuffs that cost currency to buy
 find events to add, cause them to do something
 towers need range X make towers fire??? make projectiles :o
@@ -35,11 +33,12 @@ work on game over;
 change -fx-whatever into cs form if possible;
 
 towers:
-electric aoe fires an electric shock that spreads to enemies close to each other
-fire aoe deals damage to the area around it and afflicts burn
-laser single fires repeated instant lasers at the closest enemy
-icy utlity slows down enemies in its radius
-shield tower utility when set up will protect a life and will sacrifice itself when life is lost
-sniper single target will constantly pick the first target to snipe
-mine tower: repeatedly spawns mines that deal a certain amount of damage in area around it
-booster tower: increases fire rate of towers around it
+electric fires an electric shock that spreads to enemies close to each other
+fire deals damage to the area around it and afflicts burn
+laser fires repeated instant lasers at the closest enemy
+icy slows down enemies in its radius
+shield when set up will protect a life and will sacrifice itself when life is lost
+sniper will constantly pick the first target to snipe
+mine repeatedly spawns mines that deal a certain amount of damage in area around it
+booster increases fire rate of towers around it
+orbital has orbitals around it that damages enemies that pass through
