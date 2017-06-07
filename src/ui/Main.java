@@ -170,11 +170,9 @@ public class Main extends Application{
 		game.addEventFilter(MouseEvent.MOUSE_PRESSED, x -> {handle(x);});
 		game.getStylesheets().add("style/TDStyle.css");
 		//TESTING REMOVE LATER
-		Enemy en = new Enemy((int)(Math.random()*5));
-		game.setOnMouseClicked(a -> System.out.println(en.getCurrent()));
 		game.setOnKeyPressed(e -> {
 			if(e.getCode() == KeyCode.A){
-				spawnEnemy(en);
+				spawnEnemy(new Enemy((int)(Math.random()*5)));
 			}
 			if(e.getCode() == KeyCode.S){
 				lifeInd.removeLife();

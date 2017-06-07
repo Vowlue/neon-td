@@ -41,4 +41,5 @@ laser single fires repeated instant lasers at the closest enemy
 icy utlity slows down enemies in its radius
 shield tower utility when set up will protect a life and will sacrifice itself when life is lost
 sniper single target will constantly pick the first target to snipe
-
+mine tower: repeatedly spawns mines that deal a certain amount of damage in area around it
+booster tower: increases fire rate of towers around it

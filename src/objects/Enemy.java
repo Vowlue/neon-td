@@ -18,9 +18,11 @@ public class Enemy extends Circle{
 	private PathTransition pt;
 	private int stage;
 	private int hp;
+	private Duration totTime;
 	public Enemy(int stage) {
 		super(101+radiusArr[stage], 384, radiusArr[stage]);
 		hp = 10+stage*20;
+		totTime = Duration.millis(10000+2000*stage);
 		setStroke(colorArr[stage]);
 		setFill(Color.TRANSPARENT);
 		this.stage = stage;
@@ -33,7 +35,7 @@ public class Enemy extends Circle{
 	        path.getElements().add(new LineTo(pathX[i], pathY[i]));
 	    }
 	    pt = new PathTransition();
-	    pt.setDuration(Duration.millis(10000+2000*stage));//10000+2000*stage
+	    pt.setDuration(totTime);//10000+2000*stage
 	    pt.setPath(path);
 	    pt.setNode(this);
 	    pt.setOnFinished(e -> {
@@ -43,7 +45,10 @@ public class Enemy extends Circle{
 	    pt.play();
 	    
 	}
-	//need method that will return its percentage of track completed
+	//method that will return its percentage of track completed
+	public double getCompletion(){
+		return pt.getCurrentTime().toMillis()/totTime.toMillis();
+	}
 	public Duration getCurrent(){
 		return pt.getCurrentTime();
 	}
