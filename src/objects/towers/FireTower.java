@@ -7,7 +7,7 @@ import ui.Main;
 public class FireTower extends Tower {
 
 	public FireTower(double x, double y, double width, double height) {
-		super(Main.fire, x, y, width, height, 100);
+		super("fire", Main.fire, x, y, width, height, 100);
 	}
 
 }

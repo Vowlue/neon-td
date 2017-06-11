@@ -3,7 +3,6 @@ import java.awt.Point;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -72,15 +71,15 @@ public class Main extends Application{
 	static VBox shopMenu;
 	Pane actionHold;
 
-	TowerIcon t1;
-	TowerIcon t2;
-	TowerIcon t3;
-	TowerIcon t4;
-	TowerIcon t5;
-	TowerIcon t6;
-	TowerIcon t7;
-	TowerIcon t8;
-	TowerIcon t9;
+	public static TowerIcon t1;
+	public static TowerIcon t2;
+	public static TowerIcon t3;
+	public static TowerIcon t4;
+	public static TowerIcon t5;
+	public static TowerIcon t6;
+	public static TowerIcon t7;
+	public static TowerIcon t8;
+	public static TowerIcon t9;
 	
 	private static NextWaveButton nextWave;
 	private static LivesIndicator lifeInd;
@@ -135,7 +134,24 @@ public class Main extends Application{
 		
 		placedTowers = new ArrayList<Tower>();
 		towerIcons = new TowerIcon[9];
-		t1 = null;
+		t1 = new TowerIcon("boost", 0, boost, TowerIcon.BLUE, "t1");
+		t2 = new TowerIcon("electric", 0, electric, TowerIcon.BLUE, "t2");
+		t3 = new TowerIcon("fire", 0, fire, TowerIcon.BLUE, "t3");
+		t4 = new TowerIcon("ice", 0, ice, TowerIcon.YELLOW, "t4");
+		t5 = new TowerIcon("laser", 0, laser, TowerIcon.YELLOW, "t5");
+		t6 = new TowerIcon("orbital", 0, orbital, TowerIcon.YELLOW, "t6");
+		t7 = new TowerIcon("shield", 0, shield, TowerIcon.GREEN, "t7");
+		t8 = new TowerIcon("mine", 0, mine, TowerIcon.GREEN, "t8");
+		t9 = new TowerIcon("sniper", 0, sniper, TowerIcon.GREEN, "t9");
+		towerIcons[0] = t1;
+		towerIcons[1] = t2;
+		towerIcons[2] = t3;
+		towerIcons[3] = t4;
+		towerIcons[4] = t5;
+		towerIcons[5] = t6;
+		towerIcons[6] = t7;
+		towerIcons[7] = t8;
+		towerIcons[8] = t9;
 		
 		
 		enemies = new ArrayList<Enemy>();
@@ -197,10 +213,10 @@ public class Main extends Application{
 		towerTitle.setFitHeight(40);
 		towerTitle.setFitWidth(150);
 		towerTitle.setId("towerTitle");
-		//TowerMenu blueMenu = new TowerMenu("Blue Towers", starT, ampT, batteryT, "#3399FF");
-		//TowerMenu yellowMenu = new TowerMenu("Yellow Towers", gridshotT, smallerT, sniperT, "yellow");
-		//TowerMenu greenMenu = new TowerMenu("Green Towers", boosterT, defenderT, gearT, "green");
-		//towerMenu.getChildren().addAll(towerTitle, blueMenu, yellowMenu, greenMenu);
+		TowerMenu blueMenu = new TowerMenu("Blue Towers", t1, t2, t3, "#3399FF");
+		TowerMenu yellowMenu = new TowerMenu("Yellow Towers", t4, t5, t6, "yellow");
+		TowerMenu greenMenu = new TowerMenu("Green Towers", t7, t8, t9, "green");
+		towerMenu.getChildren().addAll(towerTitle, blueMenu, yellowMenu, greenMenu);
 		VBox eventContainer = new VBox();
 		Label eventTitle = new Label("Events");
 		HBox eventMenu = new HBox(5);
@@ -256,28 +272,8 @@ public class Main extends Application{
 	public static void storeTower(TowerIcon t){
 		storedIcon = t;
 	}
-	public static Tower getTower(){
-		switch(storedIcon.getIdCode()){
-		case "booster": 
-			return new BoosterTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
-		case "electric": 
-			return new ElectricTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
-		case "fire": 
-			return new FireTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
-		case "ice": 
-			return new IceTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
-		case "laser": 
-			return new LaserTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
-		case "mine": 
-			return new MineTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
-		case "orbital": 
-			return new OrbitalTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
-		case "shield": 
-			return new ShieldTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
-		case "sniper": 
-			return new SniperTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
-		default: return null;
-		}
+	public static TowerIcon getTower(){
+		return storedIcon;
 	}
 	public static void loseLife(){
 		setPlayerHp(Main.getPlayerHp()-1);
@@ -396,9 +392,9 @@ public class Main extends Application{
 		Bounds b = node.localToScene(node.getBoundsInLocal());
 		return new Point((int)(b.getMinX()+b.getWidth()/2), (int)(b.getMinY()+b.getHeight()/2));
 	}
-	public static void placeTower(Tower t){
-		placedTowers.add(t);
-		addNode(t);
+	public static void placeTower(Tower tower, Tile tile){
+		placedTowers.add(tower);
+		addNode(tower);
 	}
 	
 	

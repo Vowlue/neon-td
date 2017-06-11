@@ -7,7 +7,7 @@ import ui.Main;
 public class IceTower extends Tower {
 
 	public IceTower(double x, double y, double width, double height) {
-		super(Main.ice, x, y, width, height, 150);
+		super("ice", Main.ice, x, y, width, height, 150);
 	}
 
 }

@@ -23,17 +23,15 @@ public class TowerIcon extends VBox{
 	
 	boolean clicked;
 	private ImageView iv;
-	private int range;
 	private String color;
 	private String idCode;
 	
-	public TowerIcon(String idCode, int range, int cost, Image i, String color, String description) {
+	public TowerIcon(String idCode, int cost, Image i, String color, String description) {
 		super();
 		this.idCode = idCode;
 		iv = new ImageView(i);
 		this.setStyle("-fx-background-color: purple; -fx-alignment: center;");
 		this.color = color; 
-		this.range = range;
 		iv.setFitWidth(Main.iconWidth);
 		iv.setFitHeight(Main.iconHeight);
 		Label lb = new Label(""+cost);
@@ -55,9 +53,6 @@ public class TowerIcon extends VBox{
 	}
 	public String getIdCode(){
 		return idCode;
-	}
-	public int getRange(){
-		return range;
 	}
 	public Image getImage(){
 		return iv.getImage();

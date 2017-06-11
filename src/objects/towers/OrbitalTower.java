@@ -7,7 +7,7 @@ import ui.Main;
 public class OrbitalTower extends Tower{
 
 	public OrbitalTower(double x, double y, double width, double height) {
-		super(Main.orbital, x, y, width, height, 50);
+		super("orbital",Main.orbital, x, y, width, height, 50);
 	}
 
 }

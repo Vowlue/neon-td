@@ -18,7 +18,7 @@ public class Tile extends Pane{
 		canPlace = false;
 		hasTower = false;
 		
-		this.setOnMouseClicked(e -> placeTower(Main.getTower()));
+		this.setOnMouseClicked(e -> placeTower(Main.getTower().getTowerIcon()));
 	}
 	public boolean hasTower() {
 		return hasTower;
@@ -50,9 +50,7 @@ public class Tile extends Pane{
 			}
 			this.hasTower = true;
 			t.getTowerIcon().setClicked(false);
-			//change tower depending on the instanceof the tower?
-			//if(t instanceof whateverClass)?
-			Main.placeTower(t);
+			Main.placeTower(t, this);
 		}
 	}
 	public void setCanPlace(boolean b){

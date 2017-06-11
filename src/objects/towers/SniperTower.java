@@ -7,7 +7,7 @@ import ui.Main;
 public class SniperTower extends Tower{
 
 	public SniperTower(double x, double y, double width, double height) {
-		super(Main.sniper, x, y, width, height, 1000);
+		super("sniper",Main.sniper, x, y, width, height, 1000);
 	}
 
 }

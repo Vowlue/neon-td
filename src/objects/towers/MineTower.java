@@ -7,7 +7,7 @@ import ui.Main;
 public class MineTower extends Tower{
 
 	public MineTower(double x, double y, double width, double height) {
-		super(Main.mine, x, y, width, height, 100);
+		super("mine", Main.mine, x, y, width, height, 100);
 	}
 
 }
