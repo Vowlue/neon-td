@@ -33,6 +33,7 @@ animations for firing? animations when enemies die/get hit?
 work on game over;
 add upgrade and property menu for towers when they are clicked
 change -fx-whatever into cs form if possible;
+make enemies give money when they die and change speed when attacked?
 
 towers:
 electric fires an electric shock that spreads to enemies close to each other 

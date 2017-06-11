@@ -2,34 +2,20 @@ package objects.towers;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.util.Duration;
-import objects.Attacker;
+import objects.AttackingTower;
 import objects.Enemy;
-import objects.Tower;
 import ui.Main;
 
-public class SniperTower extends Tower implements Attacker{
-	private int damage;
-	private boolean canFire;
-	private int delay; //in ms
+public class SniperTower extends AttackingTower{
 	public SniperTower(double x, double y, double width, double height) {
-		super("sniper",Main.sniper, x, y, width, height, 500);
-		damage = 10;
-		canFire = true;
-		delay = 500;
-	}
-	public void setDamage(int dmg){
-		damage = dmg;
+		super(10, 500, "sniper", Main.sniper, x, y, width, height, 500);
 	}
 	//maybe add an animation 
-	@Override
-	public void fire(Enemy e) {
-		if(canFire){
-			e.takeDamage(damage);
-			canFire = false;
-			Timeline timeline = new Timeline(new KeyFrame(
-			        Duration.millis(delay),
-			        ev -> canFire = true));
+	public void fire(Enemy enemy) {
+		if(canFire()){
+			enemy.takeDamage(getDamage());
+			setCanFire(false);
+			Timeline timeline = new Timeline(new KeyFrame(getDelay(), ev -> setCanFire(true)));
 			timeline.play();
 		}
 	}

@@ -20,7 +20,6 @@ public abstract class Tower extends ImageView{
 	private int range;
 	private boolean showingIndicator;
 	private String idCode;
-	//tower needs to be able to fire... maybe make this abstract
 	public Tower(String idCode, Image i, double x, double y, double width, double height, int range){
 		super(i);
 		setX(x);
@@ -59,7 +58,7 @@ public abstract class Tower extends ImageView{
 	private void rotate(){
 		this.setRotate(this.getRotate()+1);
 	}
-	//needs method to get the icon based on the tower
+	//gets a towericon based on idcode
 	public TowerIcon getTowerIcon(){
 		switch(idCode){
 		case "boost": 

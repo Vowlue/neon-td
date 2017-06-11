@@ -28,7 +28,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import objects.Attacker;
+import objects.AttackingTower;
 import objects.Enemy;
 import objects.Tile;
 import objects.Tower;
@@ -195,14 +195,14 @@ public class Main extends Application{
 	            	Enemy target = null;
 	            	double percentDone = 0;
 	            	for(Enemy e: enemies){
-	            		if(t instanceof Attacker && t.inRange(e) && 
+	            		if(t instanceof AttackingTower && t.inRange(e) && 
 	            		e.getCompletion() > percentDone){
 	            			target = e;
 	            			percentDone = e.getCompletion();
 	            		}
 	            	}
 	            	if(percentDone > 0)
-            			((Attacker)t).fire(target);
+            			((AttackingTower)t).fire(target);
 	            }
 	        }
 	    }.start();
