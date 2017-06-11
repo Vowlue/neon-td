@@ -1,21 +1,26 @@
 package objects.towers;
 
-import javafx.scene.image.Image;
-import objects.AttackingTower;
+import java.util.ArrayList;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import objects.AoeTower;
 import objects.Enemy;
-import objects.Tower;
 import ui.Main;
 
-public class FireTower extends AttackingTower{
-
+public class FireTower extends AoeTower{
 	public FireTower(double x, double y, double width, double height) {
-		super(1, 1, "fire", Main.fire, x, y, width, height, 100);
+		super(50, 3, 100, "fire", Main.fire, x, y, width, height);
 	}
-
 	@Override
-	public void fire(Enemy e) {
-		// TODO Auto-generated method stub
-		
+	public void fire(ArrayList<Enemy> enemies) {
+		if(canFire()){
+			for(Enemy e: enemies){
+				e.takeDamage(getDamage());
+			}
+			setCanFire(false);
+			new Timeline(new KeyFrame(getDelay(), ev -> setCanFire(true))).play();
+		}
 	}
 
 }

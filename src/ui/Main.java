@@ -28,7 +28,8 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import objects.AttackingTower;
+import objects.TargetedTower;
+import objects.AoeTower;
 import objects.Enemy;
 import objects.Tile;
 import objects.Tower;
@@ -192,17 +193,27 @@ public class Main extends Application{
 	        public void handle(long currentNanoTime)
 	        {
 	            for(Tower t: placedTowers){
-	            	Enemy target = null;
-	            	double percentDone = 0;
-	            	for(Enemy e: enemies){
-	            		if(t instanceof AttackingTower && t.inRange(e) && 
-	            		e.getCompletion() > percentDone){
-	            			target = e;
-	            			percentDone = e.getCompletion();
-	            		}
+	            	if(t instanceof TargetedTower){
+		            	Enemy target = null;
+		            	double percentDone = 0;
+		            	for(Enemy e: enemies){
+		            		if(t.inRange(e) && 
+		            		e.getCompletion() > percentDone){
+		            			target = e;
+		            			percentDone = e.getCompletion();
+		            		}
+		            	}
+		            	if(percentDone > 0)
+	            			((TargetedTower)t).fire(target);
 	            	}
-	            	if(percentDone > 0)
-            			((AttackingTower)t).fire(target);
+	            	else if(t instanceof AoeTower){
+	            		ArrayList<Enemy> inAoe = new ArrayList<Enemy>();
+	            		for(Enemy e: enemies){
+	            			if(t.inRange(e))
+	            				inAoe.add(e);
+	            		}
+	            		((AoeTower) t).fire(inAoe);
+	            	}
 	            }
 	        }
 	    }.start();
@@ -305,6 +316,81 @@ public class Main extends Application{
 		setPlayerHp(Main.getPlayerHp()-1);
 		lifeInd.removeLife();
 	}
+	public static double getDistanceBetween(Node n1, Node n2){
+		Point p1 = getCenterCoords(n1);
+		Point p2 = getCenterCoords(n2);
+		return Math.sqrt(Math.pow(p1.getX()-p2.getX(), 2) + Math.pow(p1.getY()-p2.getY(), 2));
+	}
+	public static void placeTower(TowerIcon ti, Tile tile){
+		Tower t;
+		double x = mapLayout.getLayoutX()+tile.getLayoutX();
+		double y = mapLayout.getLayoutY()+tile.getLayoutY();
+		double width = tile.getWidth();
+		double height = tile.getHeight();
+		switch(ti.getIdCode()){
+		case "boost": 
+			t = new BoosterTower(x,y,width,height);
+			break;
+		case "electric": 
+			t = new ElectricTower(x,y,width,height);break;
+		case "fire": 
+			t = new FireTower(x,y,width,height);break;
+		case "ice": 
+			t = new IceTower(x,y,width,height);break;
+		case "laser": 
+			t = new LaserTower(x,y,width,height);break;
+		case "mine": 
+			t = new MineTower(x,y,width,height);break;
+		case "orbital": 
+			t = new OrbitalTower(x,y,width,height);break;
+		case "shield": 
+			t = new ShieldTower(x,y,width,height);break;
+		case "sniper": 
+			t = new SniperTower(x,y,width,height);break;
+		default: t = null; break;
+		}
+		placedTowers.add(t);
+		addNode(t);
+	}
+	public static ObservableList<Node> getAllTiles(){
+		return mapLayout.getChildren();
+	}
+	public static ArrayList<Tile> getAllTiles(String style){
+		ArrayList<Tile> ret = new ArrayList<Tile>();
+		ObservableList<Node> nodes = getAllTiles();
+		for(Node n: nodes){
+			if(n.getStyleClass().contains(style))
+				ret.add((Tile)n);
+		}
+		return ret;
+	}
+	public static boolean placingTower(){
+		for(TowerIcon t: towerIcons){
+			if(t.isClicked())
+				return true;
+		}
+		return false;
+	}
+	public static void createIndicator(Circle c){
+		addNode(c);
+	}
+	public static int getPlayerHp() {
+		return playerLives;
+	}
+	public static void setPlayerHp(int hp) {
+		playerLives = hp;
+	}
+	public static void removeNode(Node n){
+		gameLayout.getChildren().remove(n);
+	}
+	public static void removeEnemy(Enemy en){
+		gameLayout.getChildren().remove(en);
+	}
+	public static ArrayList<Node> getAllNodes(Parent root) {
+	    ArrayList<Node> nodes = new ArrayList<Node>();
+	    addAllDescendents(root, nodes);
+	    return nodes;
+	}
 	//HELPERS
 	private int[][] generateMap(){
 		int[][] map = new int[HEIGHT_D][WIDTH_D];
@@ -346,51 +432,12 @@ public class Main extends Application{
 	private int randomInt(int low, int high){
 		return (int)(Math.random()*(high-low+1))+low;
 	}
-	public static int getPlayerHp() {
-		return playerLives;
-	}
-	public static void setPlayerHp(int hp) {
-		playerLives = hp;
-	}
-	public static void removeNode(Node n){
-		gameLayout.getChildren().remove(n);
-	}
-	public static void removeEnemy(Enemy en){
-		gameLayout.getChildren().remove(en);
-	}
-	public static ArrayList<Node> getAllNodes(Parent root) {
-	    ArrayList<Node> nodes = new ArrayList<Node>();
-	    addAllDescendents(root, nodes);
-	    return nodes;
-	}
 	private static void addAllDescendents(Parent parent, ArrayList<Node> nodes) {
 	    for (Node node : parent.getChildrenUnmodifiable()) {
 	        nodes.add(node);
 	        if (node instanceof Parent)
 	            addAllDescendents((Parent)node, nodes);
 	    }
-	}
-	public static ObservableList<Node> getAllTiles(){
-		return mapLayout.getChildren();
-	}
-	public static ArrayList<Tile> getAllTiles(String style){
-		ArrayList<Tile> ret = new ArrayList<Tile>();
-		ObservableList<Node> nodes = getAllTiles();
-		for(Node n: nodes){
-			if(n.getStyleClass().contains(style))
-				ret.add((Tile)n);
-		}
-		return ret;
-	}
-	public static boolean placingTower(){
-		for(TowerIcon t: towerIcons){
-			if(t.isClicked())
-				return true;
-		}
-		return false;
-	}
-	public static void createIndicator(Circle c){
-		addNode(c);
 	}
 	private static void handle(Event e){
 		//if the target of the event is a Tower and it is currently showing its indicator, don't allow the event to happen
@@ -409,47 +456,11 @@ public class Main extends Application{
 		gameLayout.getChildren().add(e);
 		enemies.add(e);
 	}
-	public static double getDistanceBetween(Node n1, Node n2){
-		Point p1 = getCenterCoords(n1);
-		Point p2 = getCenterCoords(n2);
-		return Math.sqrt(Math.pow(p1.getX()-p2.getX(), 2) + Math.pow(p1.getY()-p2.getY(), 2));
-	}
 	private static Point getCenterCoords(Node node){
 		Bounds b = node.localToScene(node.getBoundsInLocal());
 		return new Point((int)(b.getMinX()+b.getWidth()/2), (int)(b.getMinY()+b.getHeight()/2));
 	}
-	public static void placeTower(TowerIcon ti, Tile tile){
-		Tower t;
-		double x = mapLayout.getLayoutX()+tile.getLayoutX();
-		double y = mapLayout.getLayoutY()+tile.getLayoutY();
-		double width = tile.getWidth();
-		double height = tile.getHeight();
-		switch(ti.getIdCode()){
-		case "boost": 
-			t = new BoosterTower(x,y,width,height);
-			break;
-		case "electric": 
-			t = new ElectricTower(x,y,width,height);break;
-		case "fire": 
-			t = new FireTower(x,y,width,height);break;
-		case "ice": 
-			t = new IceTower(x,y,width,height);break;
-		case "laser": 
-			t = new LaserTower(x,y,width,height);break;
-		case "mine": 
-			t = new MineTower(x,y,width,height);break;
-		case "orbital": 
-			t = new OrbitalTower(x,y,width,height);break;
-		case "shield": 
-			t = new ShieldTower(x,y,width,height);break;
-		case "sniper": 
-			t = new SniperTower(x,y,width,height);break;
-		default: t = null; break;
-		}
-		placedTowers.add(t);
-		addNode(t);
-		
-	}
+	
 	
 	
 	

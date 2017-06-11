@@ -1,6 +1,5 @@
 package objects.towers;
 
-import javafx.scene.image.Image;
 import objects.Tower;
 import ui.Main;
 

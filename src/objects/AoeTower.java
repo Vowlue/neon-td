@@ -1,13 +1,15 @@
 package objects;
 
+import java.util.ArrayList;
+
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 
-public abstract class AttackingTower extends Tower{
+public abstract class AoeTower extends Tower {
 	private int damage;
 	private boolean canFire;
 	private Duration delay; //in ms
-	public AttackingTower(int dmg, double dly, String idCode, Image i, double x, double y, double width, double height, int range) {
+	public AoeTower(int range, int dmg, double dly, String idCode, Image i, double x, double y, double width, double height) {
 		super(idCode, i, x, y, width, height, range);
 		damage = dmg;
 		canFire = true;
@@ -31,6 +33,5 @@ public abstract class AttackingTower extends Tower{
 	public void setDelay(Duration delay) {
 		this.delay = delay;
 	}
-	public abstract void fire(Enemy enemy);
-
+	public abstract void fire(ArrayList<Enemy> enemies);
 }

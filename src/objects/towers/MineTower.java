@@ -1,7 +1,7 @@
 package objects.towers;
 
 import javafx.scene.image.Image;
-import objects.AttackingTower;
+import objects.TargetedTower;
 import objects.Enemy;
 import objects.Tower;
 import ui.Main;

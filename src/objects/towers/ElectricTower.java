@@ -2,11 +2,11 @@ package objects.towers;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import objects.AttackingTower;
+import objects.TargetedTower;
 import objects.Enemy;
 import ui.Main;
 
-public class ElectricTower extends AttackingTower{
+public class ElectricTower extends TargetedTower{
 	private int bounces;
 	private int bounceRange;
 	public ElectricTower(double x, double y, double width, double height) {
