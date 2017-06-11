@@ -18,7 +18,7 @@ public class Tile extends Pane{
 		canPlace = false;
 		hasTower = false;
 		
-		this.setOnMouseClicked(e -> placeTower(Main.getTower().getTowerIcon()));
+		this.setOnMouseClicked(e -> placeTower(Main.getTower()));
 	}
 	public boolean hasTower() {
 		return hasTower;
@@ -40,7 +40,7 @@ public class Tile extends Pane{
 	public void changeImage(Image i){
 		getImageView().setImage(i);
 	}
-	public void placeTower(Tower t){
+	public void placeTower(TowerIcon ti){
 		if(canPlace && !hasTower){
 			ObservableList<Node> nodes = Main.getAllTiles();
 			for(Node n: nodes){
@@ -49,8 +49,8 @@ public class Tile extends Pane{
 				tile.setBackground(Background.EMPTY);
 			}
 			this.hasTower = true;
-			t.getTowerIcon().setClicked(false);
-			Main.placeTower(t, this);
+			ti.setClicked(false);
+			Main.placeTower(ti, this);
 		}
 	}
 	public void setCanPlace(boolean b){

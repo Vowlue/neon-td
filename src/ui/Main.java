@@ -392,9 +392,37 @@ public class Main extends Application{
 		Bounds b = node.localToScene(node.getBoundsInLocal());
 		return new Point((int)(b.getMinX()+b.getWidth()/2), (int)(b.getMinY()+b.getHeight()/2));
 	}
-	public static void placeTower(Tower tower, Tile tile){
-		placedTowers.add(tower);
-		addNode(tower);
+	public static void placeTower(TowerIcon ti, Tile tile){
+		Tower t;
+		double x = mapLayout.getLayoutX()+tile.getLayoutX();
+		double y = mapLayout.getLayoutY()+tile.getLayoutY();
+		double width = tile.getWidth();
+		double height = tile.getHeight();
+		switch(ti.getIdCode()){
+		case "boost": 
+			t = new BoosterTower(x,y,width,height);
+			break;
+		case "electric": 
+			t = new ElectricTower(x,y,width,height);break;
+		case "fire": 
+			t = new FireTower(x,y,width,height);break;
+		case "ice": 
+			t = new IceTower(x,y,width,height);break;
+		case "laser": 
+			t = new LaserTower(x,y,width,height);break;
+		case "mine": 
+			t = new MineTower(x,y,width,height);break;
+		case "orbital": 
+			t = new OrbitalTower(x,y,width,height);break;
+		case "shield": 
+			t = new ShieldTower(x,y,width,height);break;
+		case "sniper": 
+			t = new SniperTower(x,y,width,height);break;
+		default: t = null; break;
+		}
+		placedTowers.add(t);
+		addNode(t);
+		
 	}
 	
 	
