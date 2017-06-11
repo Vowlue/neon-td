@@ -3,6 +3,8 @@ import java.awt.Point;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -26,6 +28,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import objects.Attacker;
 import objects.Enemy;
 import objects.Tile;
 import objects.Tower;
@@ -182,6 +185,23 @@ public class Main extends Application{
 		window.setScene(game);
 		window.setResizable(false);
 		window.sizeToScene();
+		
+		final long startNanoTime = System.nanoTime();
+		 
+	    new AnimationTimer()
+	    {
+	        public void handle(long currentNanoTime)
+	        {
+	            for(Tower t: placedTowers){
+	            	for(Enemy e: enemies){
+	            		if(t instanceof Attacker && t.inRange(e)){
+	            			((Attacker)t).fire(e);
+	            		}
+	            	}
+	            }
+	        }
+	    }.start();
+		
 		window.show();
 	}
 	
@@ -383,12 +403,12 @@ public class Main extends Application{
 		gameLayout.getChildren().add(e);
 		enemies.add(e);
 	}
-	public double getDistanceBetween(Node n1, Node n2){
+	public static double getDistanceBetween(Node n1, Node n2){
 		Point p1 = getCenterCoords(n1);
 		Point p2 = getCenterCoords(n2);
 		return Math.sqrt(Math.pow(p1.getX()-p2.getX(), 2) + Math.pow(p1.getY()-p2.getY(), 2));
 	}
-	private Point getCenterCoords(Node node){
+	private static Point getCenterCoords(Node node){
 		Bounds b = node.localToScene(node.getBoundsInLocal());
 		return new Point((int)(b.getMinX()+b.getWidth()/2), (int)(b.getMinY()+b.getHeight()/2));
 	}

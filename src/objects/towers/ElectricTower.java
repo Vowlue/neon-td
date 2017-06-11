@@ -3,12 +3,12 @@ package objects.towers;
 import javafx.animation.RotateTransition;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
-import objects.Aimer;
+import objects.Attacker;
 import objects.Enemy;
 import objects.Tower;
 import ui.Main;
 
-public class ElectricTower extends Tower implements Aimer{
+public class ElectricTower extends Tower implements Attacker{
 	private final static int RANGE = 100;
 	private Duration fireDelay;
 	//Tower(Image i, double x, double y, double width, double height, int range)
@@ -17,7 +17,6 @@ public class ElectricTower extends Tower implements Aimer{
 		fireDelay = Duration.millis(500);
 	}
 	//tower will aim until it fires, time it aims is the delay on firing
-	@Override
 	public void aim(Enemy e) {
 		//constantly want to set angle to face enemy
 		RotateTransition rt = new RotateTransition();

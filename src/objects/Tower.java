@@ -53,6 +53,9 @@ public abstract class Tower extends ImageView{
 	public int getRange(){
 		return range;
 	}
+	public boolean inRange(Enemy e){
+		return Main.getDistanceBetween(this, e) <= range;
+	}
 	private void rotate(){
 		this.setRotate(this.getRotate()+1);
 	}
