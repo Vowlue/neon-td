@@ -1,6 +1,8 @@
 package objects.towers;
 
-import javafx.scene.image.Image;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 import objects.Attacker;
 import objects.Enemy;
 import objects.Tower;
@@ -19,21 +21,16 @@ public class SniperTower extends Tower implements Attacker{
 	public void setDamage(int dmg){
 		damage = dmg;
 	}
-	//put a delay on firing 
+	//maybe add an animation 
 	@Override
 	public void fire(Enemy e) {
 		if(canFire){
 			e.takeDamage(damage);
 			canFire = false;
-			new java.util.Timer().schedule( 
-			        new java.util.TimerTask() {
-			            @Override
-			            public void run() {
-			                canFire = true;
-			            }
-			        }, 
-			        delay 
-			);
+			Timeline timeline = new Timeline(new KeyFrame(
+			        Duration.millis(delay),
+			        ev -> canFire = true));
+			timeline.play();
 		}
 	}
 

@@ -35,7 +35,7 @@ public class Enemy extends Circle{
 	        path.getElements().add(new LineTo(pathX[i], pathY[i]));
 	    }
 	    pt = new PathTransition();
-	    pt.setDuration(totTime);//10000+2000*stage
+	    pt.setDuration(totTime);
 	    pt.setPath(path);
 	    pt.setNode(this);
 	    pt.setOnFinished(e -> {

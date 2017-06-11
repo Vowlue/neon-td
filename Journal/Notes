@@ -26,6 +26,7 @@ going to use circles for enemies, change color and size when below a certain amo
 as for events, they will be temporary buffs/debuffs that cost currency to buy
 
 find events to add, cause them to do something
+maybe give enemies a variety of colors based on rng
 towers need range X make towers fire??? make projectiles :o
 tower upgrades:::
 animations for firing? animations when enemies die/get hit?
@@ -34,12 +35,12 @@ add upgrade and property menu for towers when they are clicked
 change -fx-whatever into cs form if possible;
 
 towers:
-electric fires an electric shock that spreads to enemies close to each other s
-fire deals damage to the area around it and afflicts burn s
-laser fires repeated instant lasers at the closest enemy s
-icy slows down enemies in its radius s
-shield when set up will protect a life and will sacrifice itself when life is lost s
-sniper will constantly pick the first target to snipe s
+electric fires an electric shock that spreads to enemies close to each other 
+fire deals damage to the area around it and afflicts burn 
+laser fires repeated instant lasers at the closest enemy 
+icy slows down enemies in its radius 
+shield when set up will protect a life and will sacrifice itself when life is lost 
+sniper will constantly pick the first target to snipe 
 mine repeatedly spawns mines that deal a certain amount of damage in area around it
 booster increases fire rate of towers around it
 orbital has orbitals around it that damages enemies that pass through
