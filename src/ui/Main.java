@@ -186,22 +186,28 @@ public class Main extends Application{
 		window.setResizable(false);
 		window.sizeToScene();
 		
-		final long startNanoTime = System.nanoTime();
-		 
+		//game loop
 	    new AnimationTimer()
 	    {
 	        public void handle(long currentNanoTime)
 	        {
 	            for(Tower t: placedTowers){
+	            	Enemy target = null;
+	            	double percentDone = 0;
 	            	for(Enemy e: enemies){
-	            		if(t instanceof Attacker && t.inRange(e)){
-	            			((Attacker)t).fire(e);
+	            		if(t instanceof Attacker && t.inRange(e) && 
+	            		e.getCompletion() > percentDone){
+	            			target = e;
+	            			percentDone = e.getCompletion();
 	            		}
 	            	}
+	            	if(percentDone > 0)
+            			((Attacker)t).fire(target);
 	            }
 	        }
 	    }.start();
 		
+	    //show stage after done with everything
 		window.show();
 	}
 	
