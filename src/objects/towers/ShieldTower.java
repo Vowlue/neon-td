@@ -2,11 +2,12 @@ package objects.towers;
 
 import javafx.scene.image.Image;
 import objects.Tower;
+import ui.Main;
 
 public class ShieldTower extends Tower{
 
-	public ShieldTower(Image i, double x, double y, double width, double height, int range) {
-		super(i, x, y, width, height, range);
+	public ShieldTower(double x, double y, double width, double height) {
+		super(Main.shield, x, y, width, height, 0);
 	}
 
 }

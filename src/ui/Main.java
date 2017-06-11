@@ -31,6 +31,7 @@ import objects.Enemy;
 import objects.Tile;
 import objects.Tower;
 import objects.TowerIcon;
+import objects.towers.*;
 
 public class Main extends Application{
 	// CONSTANTS
@@ -56,7 +57,7 @@ public class Main extends Application{
 	
 	int[][] map;
 	
-	private static Tower storedTower;
+	private static TowerIcon storedIcon;
 	private static TowerIcon[] towerIcons;
 	public static ArrayList<Enemy> enemies;
 	public static ArrayList<Tower> placedTowers;
@@ -92,15 +93,15 @@ public class Main extends Application{
 	private static Image uGreenTile;
 	private static Image uYellowTile;
 	
-	private static Image boost;
-	private static Image electric;
-	private static Image fire;
-	private static Image ice;
-	private static Image laser;
-	private static Image mine;
-	private static Image orbital;
-	private static Image shield;
-	private static Image sniper;
+	public static Image boost;
+	public static Image electric;
+	public static Image fire;
+	public static Image ice;
+	public static Image laser;
+	public static Image mine;
+	public static Image orbital;
+	public static Image shield;
+	public static Image sniper;
 	
 	public static Image heart;
 	public static Image spark;
@@ -134,7 +135,7 @@ public class Main extends Application{
 		
 		placedTowers = new ArrayList<Tower>();
 		towerIcons = new TowerIcon[9];
-		t1 = new TowerIcon(new Tower(), BLACK, BLACK, null, null, null);
+		t1 = null;
 		
 		
 		enemies = new ArrayList<Enemy>();
@@ -252,11 +253,31 @@ public class Main extends Application{
 	public static void addNode(Node n){
 		gameLayout.getChildren().add(n);
 	}
-	public static void storeTower(Tower t){
-		storedTower = t;
+	public static void storeTower(TowerIcon t){
+		storedIcon = t;
 	}
 	public static Tower getTower(){
-		return storedTower;
+		switch(storedIcon.getIdCode()){
+		case "booster": 
+			return new BoosterTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
+		case "electric": 
+			return new ElectricTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
+		case "fire": 
+			return new FireTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
+		case "ice": 
+			return new IceTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
+		case "laser": 
+			return new LaserTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
+		case "mine": 
+			return new MineTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
+		case "orbital": 
+			return new OrbitalTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
+		case "shield": 
+			return new ShieldTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
+		case "sniper": 
+			return new SniperTower(storedIcon.getLayoutX(), storedIcon.getLayoutY(), storedIcon.getPrefWidth(), storedIcon.getPrefHeight());
+		default: return null;
+		}
 	}
 	public static void loseLife(){
 		setPlayerHp(Main.getPlayerHp()-1);

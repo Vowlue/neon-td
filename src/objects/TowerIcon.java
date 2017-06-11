@@ -23,18 +23,17 @@ public class TowerIcon extends VBox{
 	
 	boolean clicked;
 	private ImageView iv;
-	private String description;
 	private int range;
 	private String color;
-	private Tower tower;
+	private String idCode;
 	
-	public TowerIcon(Tower tower, int range, int cost, Image i, String color, String description) {
+	public TowerIcon(String idCode, int range, int cost, Image i, String color, String description) {
 		super();
+		this.idCode = idCode;
 		iv = new ImageView(i);
 		this.setStyle("-fx-background-color: purple; -fx-alignment: center;");
 		this.color = color; 
 		this.range = range;
-		this.tower = tower;
 		iv.setFitWidth(Main.iconWidth);
 		iv.setFitHeight(Main.iconHeight);
 		Label lb = new Label(""+cost);
@@ -53,6 +52,9 @@ public class TowerIcon extends VBox{
 			}
 		);
 		getChildren().addAll(iv, lb);
+	}
+	public String getIdCode(){
+		return idCode;
 	}
 	public int getRange(){
 		return range;
@@ -78,7 +80,7 @@ public class TowerIcon extends VBox{
 		if(!Main.placingTower()){
 			clicked = true;
 			ArrayList<Tile> tiles = Main.getAllTiles(color);
-			Main.storeTower(tower);
+			Main.storeTower(this);
 			for(Tile t: tiles){
 				if(!t.hasTower()){
 					switch(color){

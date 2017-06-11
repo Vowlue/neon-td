@@ -2,11 +2,12 @@ package objects.towers;
 
 import javafx.scene.image.Image;
 import objects.Tower;
+import ui.Main;
 
 public class IceTower extends Tower {
 
-	public IceTower(Image i, double x, double y, double width, double height, int range) {
-		super(i, x, y, width, height, range);
+	public IceTower(double x, double y, double width, double height) {
+		super(Main.ice, x, y, width, height, 150);
 	}
 
 }

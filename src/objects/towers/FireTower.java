@@ -2,11 +2,12 @@ package objects.towers;
 
 import javafx.scene.image.Image;
 import objects.Tower;
+import ui.Main;
 
 public class FireTower extends Tower {
 
-	public FireTower(Image i, double x, double y, double width, double height, int range) {
-		super(i, x, y, width, height, range);
+	public FireTower(double x, double y, double width, double height) {
+		super(Main.fire, x, y, width, height, 100);
 	}
 
 }
