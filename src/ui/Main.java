@@ -92,14 +92,14 @@ public class Main extends Application{
 	private static Image uGreenTile;
 	private static Image uYellowTile;
 	
-	private static Image star;
-	private static Image amp;
-	private static Image battery;
-	private static Image booster;
-	private static Image defender;
-	private static Image gear;
-	private static Image gridshot;
-	private static Image smaller;
+	private static Image boost;
+	private static Image electric;
+	private static Image fire;
+	private static Image ice;
+	private static Image laser;
+	private static Image mine;
+	private static Image orbital;
+	private static Image shield;
 	private static Image sniper;
 	
 	public static Image heart;
@@ -117,14 +117,14 @@ public class Main extends Application{
 		uGreenTile = new Image(new FileInputStream("images/green unshaded tile.png"));
 		uYellowTile = new Image(new FileInputStream("images/yellow unshaded tile.png"));
 		
-		star = new Image(new FileInputStream("images/towers/star.png"));
-		amp = new Image(new FileInputStream("images/towers/amp.png"));
-		battery = new Image(new FileInputStream("images/towers/battery.png"));
-		booster = new Image(new FileInputStream("images/towers/booster.png"));
-		defender = new Image(new FileInputStream("images/towers/defender.png"));
-		gear = new Image(new FileInputStream("images/towers/gear.png"));
-		gridshot = new Image(new FileInputStream("images/towers/gridshot.png"));
-		smaller = new Image(new FileInputStream("images/towers/smaller.png"));
+		boost = new Image(new FileInputStream("images/towers/boost.png"));
+		electric = new Image(new FileInputStream("images/towers/electric.png"));
+		fire = new Image(new FileInputStream("images/towers/fire.png"));
+		ice = new Image(new FileInputStream("images/towers/ice.png"));
+		laser = new Image(new FileInputStream("images/towers/laser.png"));
+		orbital = new Image(new FileInputStream("images/towers/orbital.png"));
+		shield = new Image(new FileInputStream("images/towers/shield.png"));
+		mine = new Image(new FileInputStream("images/towers/mine.png"));
 		sniper = new Image(new FileInputStream("images/towers/sniper.png"));
 		
 		heart = new Image(new FileInputStream("images/heart.png"));
@@ -134,7 +134,7 @@ public class Main extends Application{
 		
 		placedTowers = new ArrayList<Tower>();
 		towerIcons = new TowerIcon[9];
-		//turn to different types of towers later
+		t1 = new TowerIcon(new Tower(), BLACK, BLACK, null, null, null);
 		
 		
 		enemies = new ArrayList<Enemy>();

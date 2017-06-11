@@ -1,6 +1,7 @@
-package objects;
+package objects.towers;
 
 import javafx.scene.image.Image;
+import objects.Tower;
 
 public class SniperTower extends Tower{
 

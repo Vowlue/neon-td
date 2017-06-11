@@ -1,8 +1,11 @@
-package objects;
+package objects.towers;
 
 import javafx.animation.RotateTransition;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
+import objects.Aimer;
+import objects.Enemy;
+import objects.Tower;
 
 public class ElectricTower extends Tower implements Aimer{
 	private final static int RANGE = 100;
