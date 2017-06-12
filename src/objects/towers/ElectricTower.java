@@ -10,7 +10,7 @@ public class ElectricTower extends TargetedTower{
 	private int bounces;
 	private int bounceRange;
 	public ElectricTower(double x, double y, double width, double height) {
-		super(3, 100, "electric", Main.electric, x, y, width, height, 200);
+		super(200, 3, 100, "electric", Main.electric, x, y, width, height);
 		bounces = 3;
 		bounceRange = 5;
 	}

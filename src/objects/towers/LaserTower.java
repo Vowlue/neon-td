@@ -1,5 +1,7 @@
 package objects.towers;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import objects.TargetedTower;
 import objects.Enemy;
@@ -9,13 +11,15 @@ import ui.Main;
 public class LaserTower extends TargetedTower{
 
 	public LaserTower(double x, double y, double width, double height) {
-		super(1, 1, "laser", Main.laser, x, y, width, height, 100);
+		super(150, 4, 50, "laser", Main.laser, x, y, width, height);
 	}
 
-	@Override
-	public void fire(Enemy e) {
-		// TODO Auto-generated method stub
-		
+	public void fire(Enemy enemy) {
+		if(canFire()){
+			enemy.takeDamage(getDamage());
+			setCanFire(false);
+			new Timeline(new KeyFrame(getDelay(), ev -> setCanFire(true))).play();
+		}
 	}
 
 }

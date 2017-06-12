@@ -7,7 +7,7 @@ public abstract class TargetedTower extends Tower{
 	private int damage;
 	private boolean canFire;
 	private Duration delay; //in ms
-	public TargetedTower(int dmg, double dly, String idCode, Image i, double x, double y, double width, double height, int range) {
+	public TargetedTower(int range, int dmg, double dly, String idCode, Image i, double x, double y, double width, double height) {
 		super(idCode, i, x, y, width, height, range);
 		damage = dmg;
 		canFire = true;

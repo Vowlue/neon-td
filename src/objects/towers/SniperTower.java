@@ -8,7 +8,7 @@ import ui.Main;
 
 public class SniperTower extends TargetedTower{
 	public SniperTower(double x, double y, double width, double height) {
-		super(10, 500, "sniper", Main.sniper, x, y, width, height, 500);
+		super(500, 10, 500, "sniper", Main.sniper, x, y, width, height);
 	}
 	//maybe add an animation 
 	public void fire(Enemy enemy) {

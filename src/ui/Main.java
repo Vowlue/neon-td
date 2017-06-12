@@ -57,6 +57,7 @@ public class Main extends Application{
 	//GAME VARIABLES
 	private static int playerLives = 10;
 	private static int playerSparks = 500;
+	private static int shields = 0;
 	
 	int[][] map;
 	
