@@ -463,6 +463,13 @@ public class Main extends Application{
 		Bounds b = node.localToScene(node.getBoundsInLocal());
 		return new Point((int)(b.getMinX()+b.getWidth()/2), (int)(b.getMinY()+b.getHeight()/2));
 	}
+	public static ArrayList<Enemy> getEnemies(){
+		ArrayList<Enemy> current = new ArrayList<Enemy>();
+		for(Enemy e: enemies){
+			current.add(e);
+		}
+		return current;
+	}
 	
 	
 	

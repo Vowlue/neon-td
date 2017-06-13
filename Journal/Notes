@@ -36,9 +36,9 @@ change -fx-whatever into cs form if possible;
 make enemies give money when they die and change speed when attacked?
 
 towers:
-electric fires an electric shock that spreads to enemies close to each other 
+CHECK electric fires an electric shock that spreads to enemies close to each other 
 fire deals damage to the area around it and afflicts burn 
-laser fires repeated instant lasers at the closest enemy 
+CHECK laser fires repeated instant lasers at the closest enemy 
 icy slows down enemies in its radius 
 shield when set up will protect a life and will sacrifice itself when life is lost 
 CHECK sniper will constantly pick the first target to snipe 
