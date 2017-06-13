@@ -111,6 +111,7 @@ public class Main extends Application{
 	public static Image spark;
 	public static Image towersLogo;
 	static Image forward;
+	public static Image crosshair;
 	public static void main(String[] args){
 		launch(args);
 	}
@@ -137,6 +138,8 @@ public class Main extends Application{
 		towersLogo = new Image(new FileInputStream("images/towers.png"));
 		forward = new Image(new FileInputStream("images/forward.png"));
 		
+		crosshair = new Image(new FileInputStream("images/crosshair.png"));
+		
 		placedTowers = new ArrayList<Tower>();
 		towerIcons = new TowerIcon[9];
 		t1 = new TowerIcon("boost", 0, boost, TowerIcon.BLUE, "t1");
@@ -157,7 +160,6 @@ public class Main extends Application{
 		towerIcons[6] = t7;
 		towerIcons[7] = t8;
 		towerIcons[8] = t9;
-		
 		
 		enemies = new ArrayList<Enemy>();
 		
@@ -189,7 +191,7 @@ public class Main extends Application{
 		window.sizeToScene();
 		
 		//game loop
-	    new AnimationTimer()
+	    AnimationTimer gameLoop = new AnimationTimer()
 	    {
 	        public void handle(long currentNanoTime)
 	        {
@@ -217,9 +219,11 @@ public class Main extends Application{
 	            	}
 	            }
 	        }
-	    }.start();
+	    };
+	    
+	    gameLoop.start();
 		
-	    //show stage after done with everything
+	    //show stage after done with setup
 		window.show();
 	}
 	
@@ -372,9 +376,6 @@ public class Main extends Application{
 		}
 		return false;
 	}
-	public static void createIndicator(Circle c){
-		addNode(c);
-	}
 	public static int getPlayerHp() {
 		return playerLives;
 	}
@@ -383,9 +384,6 @@ public class Main extends Application{
 	}
 	public static void removeNode(Node n){
 		gameLayout.getChildren().remove(n);
-	}
-	public static void removeEnemy(Enemy en){
-		gameLayout.getChildren().remove(en);
 	}
 	public static ArrayList<Node> getAllNodes(Parent root) {
 	    ArrayList<Node> nodes = new ArrayList<Node>();
@@ -457,7 +455,11 @@ public class Main extends Application{
 		gameLayout.getChildren().add(e);
 		enemies.add(e);
 	}
-	private static Point getCenterCoords(Node node){
+	public static void removeEnemy(Enemy e){
+		enemies.remove(e);
+		removeNode(e);
+	}
+	public static Point getCenterCoords(Node node){
 		Bounds b = node.localToScene(node.getBoundsInLocal());
 		return new Point((int)(b.getMinX()+b.getWidth()/2), (int)(b.getMinY()+b.getHeight()/2));
 	}
