@@ -63,6 +63,9 @@ public class Enemy extends Circle{
 			return 1;
 		return 0;
 	}
+	public PathTransition getTransition(){
+		return pt;
+	}
 	public void setStage(int stage){
 		this.setRadius(radiusArr[stage]);
 		this.setStroke(colorArr[stage]);

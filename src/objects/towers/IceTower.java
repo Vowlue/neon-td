@@ -19,6 +19,7 @@ public class IceTower extends AoeTower{
 		if(canFire()){
 			for(Enemy e: enemies){
 				e.takeDamage(getDamage());
+				e.getTransition().setRate(0.5);
 			}
 			setCanFire(false);
 			new Timeline(new KeyFrame(getDelay(), ev -> setCanFire(true))).play();
