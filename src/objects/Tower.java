@@ -4,15 +4,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import objects.towers.BoosterTower;
-import objects.towers.ElectricTower;
-import objects.towers.FireTower;
-import objects.towers.IceTower;
-import objects.towers.LaserTower;
-import objects.towers.MineTower;
-import objects.towers.OrbitalTower;
-import objects.towers.ShieldTower;
-import objects.towers.SniperTower;
 import ui.Main;
 
 public abstract class Tower extends ImageView{
@@ -29,8 +20,8 @@ public abstract class Tower extends ImageView{
 		this.idCode = idCode;
 		this.range = range;
 		showingIndicator = false;
-		indicator = new Circle(x+width/2, y+height/2, range, Color.rgb(0, 0, 153, 0.6));
-		indicator.setStroke(Color.rgb(0, 0, 128, 0.8));
+		indicator = new Circle(x+width/2, y+height/2, range, Color.rgb(0, 0, 153, 0.3));
+		indicator.setStroke(Color.rgb(0, 0, 128, 0.4));
 		this.setOnMouseClicked(e -> showOptions());
 	}
 	public boolean isShowing(){

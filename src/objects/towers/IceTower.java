@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -22,6 +23,7 @@ public class IceTower extends AoeTower{
 		if(canFire()){
 			Circle aoe = new Circle(getX()+getFitWidth()/2, getY()+getFitHeight()/2, getRange(), Color.rgb(102, 179, 255, 0.3));
 			aoe.setStroke(Color.rgb(204, 230, 255));
+			aoe.setEffect(new GaussianBlur());
 			Main.addNode(aoe);
 			new Timeline(new KeyFrame(getDelay().divide(2), ev -> {
 				Main.removeNode(aoe);
