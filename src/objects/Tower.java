@@ -55,9 +55,6 @@ public abstract class Tower extends ImageView{
 	public boolean inRange(Enemy e){
 		return Main.getDistanceBetween(this, e) <= range;
 	}
-	private void rotate(){
-		this.setRotate(this.getRotate()+1);
-	}
 	//gets a towericon based on idcode
 	public TowerIcon getTowerIcon(){
 		switch(idCode){

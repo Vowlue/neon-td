@@ -215,7 +215,8 @@ public class Main extends Application{
 	            			if(t.inRange(e))
 	            				inAoe.add(e);
 	            		}
-	            		((AoeTower) t).fire(inAoe);
+	            		if(inAoe.size() > 0)
+	            			((AoeTower) t).fire(inAoe);
 	            	}
 	            }
 	        }
