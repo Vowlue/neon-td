@@ -232,6 +232,9 @@ public class Main extends Application{
 	            		}
 	            		hit.forEach(l -> ot.contactDamage(l));
 	            	}
+	            	else if(t instanceof BoosterTower){
+	            		
+	            	}
 	            }
 	        }
 	    };
@@ -246,7 +249,7 @@ public class Main extends Application{
 	private void setupTopMenu(){
 		topMenu = new HBox(100);
 		topMenu.getStyleClass().add("uimenu");
-		topMenu.setStyle("-fx-background-color:#330033");
+		topMenu.setStyle("-fx-background-color:#000066");
 		topMenu.setPrefWidth(GAME_WIDTH);
 		topMenu.setPrefHeight(.05*GAME_HEIGHT);
 		nextWave = new NextWaveButton();
@@ -343,8 +346,7 @@ public class Main extends Application{
 		double height = tile.getHeight();
 		switch(ti.getIdCode()){
 		case "boost": 
-			t = new BoosterTower(x,y,width,height);
-			break;
+			t = new BoosterTower(x,y,width,height);break;
 		case "electric": 
 			t = new ElectricTower(x,y,width,height);break;
 		case "fire": 
@@ -478,6 +480,10 @@ public class Main extends Application{
 			current.add(e);
 		}
 		return current;
+	}
+	public static void changeMoney(int m){
+		playerSparks += m;
+		sprkInd.setMoney(playerSparks);
 	}
 	
 	

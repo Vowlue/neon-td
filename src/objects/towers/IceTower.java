@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.effect.GaussianBlur;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -15,7 +15,7 @@ import ui.Main;
 public class IceTower extends AoeTower{
 
 	public IceTower(double x, double y, double width, double height) {
-		super(150, 1, 300, "ice", Main.ice, x, y, width, height);
+		super(50, 1, 300, "ice", Main.ice, x, y, width, height);
 	}
 	//deal a little damage and apply a slowing debuff on enemies
 	@Override
@@ -23,7 +23,7 @@ public class IceTower extends AoeTower{
 		if(canFire()){
 			Circle aoe = new Circle(getX()+getFitWidth()/2, getY()+getFitHeight()/2, getRange(), Color.rgb(102, 179, 255, 0.3));
 			aoe.setStroke(Color.rgb(204, 230, 255));
-			aoe.setEffect(new GaussianBlur());
+			aoe.setEffect(new BoxBlur());
 			Main.addNode(aoe);
 			new Timeline(new KeyFrame(getDelay().divide(2), ev -> {
 				Main.removeNode(aoe);

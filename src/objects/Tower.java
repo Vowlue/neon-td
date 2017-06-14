@@ -8,7 +8,7 @@ import ui.Main;
 
 public abstract class Tower extends ImageView{
 	private Circle indicator;
-	private int range;
+	private double range;
 	private boolean showingIndicator;
 	private String idCode;
 	public Tower(String idCode, Image i, double x, double y, double width, double height, int range){
@@ -40,8 +40,11 @@ public abstract class Tower extends ImageView{
 			Main.removeNode(indicator);
 		}
 	}
-	public int getRange(){
+	public double getRange(){
 		return range;
+	}
+	public void setRange(double d){
+		range = d;
 	}
 	public boolean inRange(Enemy e){
 		return Main.getDistanceBetween(this, e) <= range;

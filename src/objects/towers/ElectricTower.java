@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.effect.MotionBlur;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -30,9 +31,9 @@ public class ElectricTower extends TargetedTower{
 			new Timeline(new KeyFrame(getDelay(), ev -> setCanFire(true))).play();
 		}
 	}
-	// turn this to not recursion
 	private void chain(Enemy t, int b){
 		Path p = new Path();
+		p.setEffect(new MotionBlur());
 		Point center = Main.getCenterCoords(this);
 		p.setStroke(Color.YELLOW);
 		p.setStrokeWidth(4);
@@ -67,26 +68,6 @@ public class ElectricTower extends TargetedTower{
 		}
 		Main.addNode(p);
 		new Timeline(new KeyFrame(Duration.millis(30), ev -> Main.removeNode(p))).play();
-		/*if(b == bounces){
-			Point center = Main.getCenterCoords(this);
-			p = new Path();
-			p.setStroke(Color.YELLOW);
-			p.setStrokeWidth(2);
-			Main.addNode(p);
-			p.getElements().add(new MoveTo(center.getX(), center.getY()));
-		}
-		else if(b == 0){
-			new Timeline(new KeyFrame(Duration.millis(30), ev -> Main.removeNode(p))).play();
-		}
-		else if(b > 0){
-			p.getElements().add(new LineTo(t.getTranslateX()+t.getLayoutX()+t.getCenterX(), t.getTranslateY()+t.getLayoutY()+t.getCenterY()));
-			t.takeDamage(getDamage());
-			ArrayList<Enemy> targets = Main.getEnemies();
-			for(Enemy e: targets){
-				if(t.getCompletion() > e.getCompletion() && Main.getDistanceBetween(t, e) <= bounceRange){
-					chain(e, b-1);
-				}
-			}
-		}*/
+		
 	}
 }

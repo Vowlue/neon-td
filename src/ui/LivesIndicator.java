@@ -22,7 +22,7 @@ public class LivesIndicator extends HBox{
 			getChildren().add(iv);
 		}
 		counter = lives;
-		this.setPrefWidth(Main.GAME_WIDTH*.4);
+		this.setPrefWidth(Main.GAME_WIDTH*.45);
 	}
 	public void removeLife(){
 		if(counter >= 0)

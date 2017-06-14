@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.util.Duration;
 
 public abstract class AoeTower extends Tower {
-	private int damage;
+	private double damage;
 	private boolean canFire;
 	private Duration delay; //in ms
 	public AoeTower(int range, int dmg, double dly, String idCode, Image i, double x, double y, double width, double height) {
@@ -15,11 +15,11 @@ public abstract class AoeTower extends Tower {
 		canFire = true;
 		delay = Duration.millis(dly);
 	}
-	public int getDamage() {
+	public double getDamage() {
 		return damage;
 	}
-	public void setDamage(int damage) {
-		this.damage = damage;
+	public void setDamage(double d) {
+		this.damage = d;
 	}
 	public boolean canFire() {
 		return canFire;

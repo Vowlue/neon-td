@@ -1,5 +1,6 @@
 package objects;
 
+import javafx.animation.Interpolator;
 import javafx.animation.PathTransition;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -19,9 +20,11 @@ public class Enemy extends Circle{
 	private int stage;
 	private int hp;
 	private Duration totTime;
+	private int loot;
 	public Enemy(int stage) {
 		super(101+radiusArr[stage], 384, radiusArr[stage]);
 		hp = 10+stage*20;
+		loot = hp/2;
 		totTime = Duration.millis(10000+2000*stage);
 		setStroke(colorArr[stage]);
 		setFill(Color.TRANSPARENT);
@@ -35,6 +38,7 @@ public class Enemy extends Circle{
 	        path.getElements().add(new LineTo(pathX[i], pathY[i]));
 	    }
 	    pt = new PathTransition();
+	    pt.setInterpolator(Interpolator.LINEAR);
 	    pt.setDuration(totTime);
 	    pt.setPath(path);
 	    pt.setNode(this);
@@ -74,6 +78,7 @@ public class Enemy extends Circle{
 		hp-=d;
 		setStage(getNewStage());
 		if(hp <= 0){
+			Main.changeMoney(loot);
 			Main.removeEnemy(this);
 			pt.stop();
 		}
