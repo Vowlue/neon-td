@@ -1,6 +1,6 @@
 .root{
 	-fx-font-family: verdana;
-	-fx-font-size: 20;
+	-fx-font-size: 21;
 }
 #map{
 	-fx-background-color: #110022;
@@ -9,9 +9,9 @@ VBox, .menu  {
     -fx-alignment: center;
 }
 Label .text{
-	-fx-fill: red;
-	-fx-stroke: black;
-	-fx-stroke-width: 0.3;
+	-fx-fill: orange;
+	-fx-stroke: blue;
+	-fx-stroke-width: 0.5;
 }
 .uimenu{
 	-fx-alignment: bottom-center;

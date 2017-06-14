@@ -21,7 +21,6 @@ public class LivesIndicator extends HBox{
 			iv.setFitWidth(.05*Main.GAME_HEIGHT);
 			getChildren().add(iv);
 		}
-		setBackground(new Background(new BackgroundFill(Color.BLUE, new CornerRadii(5), Insets.EMPTY)));
 		counter = lives;
 		this.setPrefWidth(Main.GAME_WIDTH*.4);
 	}

@@ -246,7 +246,7 @@ public class Main extends Application{
 	private void setupTopMenu(){
 		topMenu = new HBox(100);
 		topMenu.getStyleClass().add("uimenu");
-		topMenu.setStyle("-fx-background-color: blue");
+		topMenu.setStyle("-fx-background-color:#330033");
 		topMenu.setPrefWidth(GAME_WIDTH);
 		topMenu.setPrefHeight(.05*GAME_HEIGHT);
 		nextWave = new NextWaveButton();
@@ -260,6 +260,7 @@ public class Main extends Application{
 		upgradeHold.setPrefWidth(.1*GAME_WIDTH);
 		upgradeHold.prefHeight(.95*GAME_HEIGHT);
 		Pane upgradeMenu = new Pane(upgradeHold);
+		upgradeMenu.setStyle("-fx-background-color:#330033");
 		gameLayout.setLeft(upgradeMenu);
 	}
 	private void setupShopMenu() throws FileNotFoundException{
