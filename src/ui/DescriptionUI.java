@@ -6,9 +6,9 @@ import javafx.scene.text.TextAlignment;
 
 public class DescriptionUI extends Pane{
 	Label l;
-	public DescriptionUI(String description){
+	public DescriptionUI(){
 		super();
-		l = new Label(description);
+		l = new Label("");
 		l.setId("description");
 		l.setWrapText(true);
 		l.setTextAlignment(TextAlignment.JUSTIFY);

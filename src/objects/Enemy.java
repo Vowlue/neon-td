@@ -70,8 +70,8 @@ public class Enemy extends Circle{
 		this.setRadius(radiusArr[stage]);
 		this.setStroke(colorArr[stage]);
 	}
-	public void takeDamage(int damage){
-		hp-=damage;
+	public void takeDamage(double d){
+		hp-=d;
 		setStage(getNewStage());
 		if(hp <= 0){
 			Main.removeEnemy(this);

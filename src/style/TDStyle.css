@@ -8,11 +8,13 @@
 VBox, .menu  {
     -fx-alignment: center;
 }
-Label{
-	-fx-text-fill: black;
+Label .text{
+	-fx-fill: red;
+	-fx-stroke: black;
+	-fx-stroke-width: 0.3;
 }
 .uimenu{
-	-fx-alignment: bottom-right;
+	-fx-alignment: bottom-center;
 }
 #description{
 	-fx-font-family: helvetica;

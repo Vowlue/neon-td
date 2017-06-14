@@ -14,8 +14,8 @@ public class SparksIndicator extends HBox{
 		Label lText = new Label(""+sparks);
 		ImageView sparky = new ImageView(Main.spark);
 		getChildren().addAll(lText, sparky);
-		setBackground(new Background(new BackgroundFill(Color.BLUEVIOLET, new CornerRadii(5), Insets.EMPTY)));
-		this.setPrefWidth(Main.GAME_WIDTH*.1);
+		setBackground(new Background(new BackgroundFill(Color.BLUE, new CornerRadii(5), Insets.EMPTY)));
+		this.setPrefWidth(Main.GAME_WIDTH*.2);
 		setStyle("-fx-alignment: center-right");
 	}
 }

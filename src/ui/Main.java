@@ -27,6 +27,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import objects.TargetedTower;
 import objects.AoeTower;
@@ -74,7 +75,7 @@ public class Main extends Application{
 	public static GridPane mapLayout;
 	HBox topMenu;
 	static VBox shopMenu;
-	Pane actionHold;
+	Pane upgradeHold;
 
 	public static TowerIcon t1;
 	public static TowerIcon t2;
@@ -112,6 +113,7 @@ public class Main extends Application{
 	public static Image towersLogo;
 	static Image forward;
 	public static Image crosshair;
+	public static Image orbiter;
 	public static void main(String[] args){
 		launch(args);
 	}
@@ -139,6 +141,7 @@ public class Main extends Application{
 		forward = new Image(new FileInputStream("images/forward.png"));
 		
 		crosshair = new Image(new FileInputStream("images/crosshair.png"));
+		orbiter = new Image(new FileInputStream("images/orbiter.png"));
 		
 		placedTowers = new ArrayList<Tower>();
 		towerIcons = new TowerIcon[9];
@@ -168,7 +171,7 @@ public class Main extends Application{
 		
 		gameLayout = new BorderPane();
 		setupTopMenu();
-		setupActionMenu();
+		setupUpgradeMenu();
 		setupShopMenu();
 		setupMap();
 		
@@ -218,6 +221,17 @@ public class Main extends Application{
 	            		if(inAoe.size() > 0)
 	            			((AoeTower) t).fire(inAoe);
 	            	}
+	            	else if(t instanceof OrbitalTower){
+	            		ArrayList<Enemy> hit = new ArrayList<Enemy>();
+	            		OrbitalTower ot = (OrbitalTower)t;
+	            		ImageView orbiter = ot.getOrbiter();
+	            		for(Enemy e: enemies){
+	            			if(orbiter.localToScene(orbiter.getBoundsInLocal()).intersects(e.localToScene(e.getBoundsInLocal()))){
+	            				hit.add(e);
+	            			}
+	            		}
+	            		hit.forEach(l -> ot.contactDamage(l));
+	            	}
 	            }
 	        }
 	    };
@@ -230,9 +244,9 @@ public class Main extends Application{
 	
 	//SET UP METHODS
 	private void setupTopMenu(){
-		topMenu = new HBox();
+		topMenu = new HBox(100);
 		topMenu.getStyleClass().add("uimenu");
-		topMenu.setStyle("-fx-background-color:#260d0d");
+		topMenu.setStyle("-fx-background-color: blue");
 		topMenu.setPrefWidth(GAME_WIDTH);
 		topMenu.setPrefHeight(.05*GAME_HEIGHT);
 		nextWave = new NextWaveButton();
@@ -241,12 +255,12 @@ public class Main extends Application{
 		topMenu.getChildren().addAll(nextWave, lifeInd, sprkInd);
 		gameLayout.setTop(topMenu);
 	}
-	private void setupActionMenu(){
-		actionHold = new Pane();
-		actionHold.setPrefWidth(.1*GAME_WIDTH);
-		actionHold.prefHeight(.95*GAME_HEIGHT);
-		Pane actionMenu = new Pane(actionHold);
-		gameLayout.setLeft(actionMenu);
+	private void setupUpgradeMenu(){
+		upgradeHold = new Pane();
+		upgradeHold.setPrefWidth(.1*GAME_WIDTH);
+		upgradeHold.prefHeight(.95*GAME_HEIGHT);
+		Pane upgradeMenu = new Pane(upgradeHold);
+		gameLayout.setLeft(upgradeMenu);
 	}
 	private void setupShopMenu() throws FileNotFoundException{
 		shopMenu = new VBox();
@@ -260,15 +274,8 @@ public class Main extends Application{
 		TowerMenu yellowMenu = new TowerMenu("Yellow Towers", t4, t5, t6, "yellow");
 		TowerMenu greenMenu = new TowerMenu("Green Towers", t7, t8, t9, "green");
 		towerMenu.getChildren().addAll(towerTitle, blueMenu, yellowMenu, greenMenu);
-		VBox eventContainer = new VBox();
-		Label eventTitle = new Label("Events");
-		HBox eventMenu = new HBox(5);
-		eventMenu.setPadding(new Insets(10, 5, 10, 5));
-		eventMenu.setStyle("-fx-background-color:pink");
-		//eventMenu.getChildren().addAll(new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13), new PlaceHolder(new Image(new FileInputStream("images/placehold3.png")), (.2*GAME_WIDTH)/4, (.95*GAME_HEIGHT)/13));
-		eventContainer.getChildren().addAll(eventTitle, eventMenu);
-		dui = new DescriptionUI("");
-		shopMenu.getChildren().addAll(towerMenu, eventContainer, dui);
+		dui = new DescriptionUI();
+		shopMenu.getChildren().addAll(towerMenu, dui);
 		gameLayout.setRight(shopMenu);
 	}
 	private void setupMap() throws FileNotFoundException{
