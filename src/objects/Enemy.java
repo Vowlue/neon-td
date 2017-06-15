@@ -23,7 +23,7 @@ public class Enemy extends Circle{
 	private int loot;
 	public Enemy(int stage) {
 		super(101+radiusArr[stage], 384, radiusArr[stage]);
-		hp = 10+stage*20;
+		hp = 10+stage*50;
 		loot = hp/2;
 		totTime = Duration.millis(10000+2000*stage);
 		setStroke(colorArr[stage]);

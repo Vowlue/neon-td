@@ -13,6 +13,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -26,6 +27,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import objects.AoeTower;
 import objects.Enemy;
@@ -79,7 +81,7 @@ public class Main extends Application{
 	public static BorderPane gameLayout;
 	
 	public static GridPane mapLayout;
-	HBox topMenu;
+	public static HBox topMenu;
 	static VBox shopMenu;
 	public static Pane upgradeMenu;
 
@@ -97,6 +99,9 @@ public class Main extends Application{
 	private static LivesIndicator lifeInd;
 	private static SparksIndicator sprkInd;
 	public static DescriptionUI dui;
+	public static int wave;
+	
+	private static Label wavesSurvived;
 	
 	//GAME IMAGES
 	private static Image blackTile;
@@ -126,6 +131,8 @@ public class Main extends Application{
 	public static Image neonTD;
 	public static Image start1;
 	public static Image start2;
+	public static Image stars;
+	public static Image end;
 	
 	//game scenes
 	private Scene start;
@@ -166,6 +173,8 @@ public class Main extends Application{
 		neonTD = new Image(new FileInputStream("images/neontd.png"));
 		start1 = new Image(new FileInputStream("images/start1.png"));
 		start2 = new Image(new FileInputStream("images/start2.png"));
+		stars = new Image(new FileInputStream("images/stars.jpg"));
+		end = new Image(new FileInputStream("images/end.png"));
 		
 		placedTowers = new ArrayList<Tower>();
 		towerIcons = new TowerIcon[9];
@@ -189,6 +198,7 @@ public class Main extends Application{
 		towerIcons[8] = t9;
 		
 		enemies = new ArrayList<Enemy>();
+		wave = 0;
 		
 		window = stage;
 		window.setTitle("Neon Tower Defense");
@@ -227,15 +237,31 @@ public class Main extends Application{
 			}
 		});
 		
-		//window.setScene(game);
+		Pane gameOverPane = new Pane();
+		gameOverPane.setBackground(new Background(new BackgroundImage(stars, null, null, null, null)));
+		gameOver = new Scene(gameOverPane, GAME_WIDTH, GAME_HEIGHT);
+		ImageView overTitle = new ImageView(end);
+		overTitle.setX(GAME_WIDTH/2-320);
+		overTitle.setY(50);
+		wavesSurvived = new Label();
+		wavesSurvived.setLayoutX(GAME_WIDTH/2-150);
+		wavesSurvived.setLayoutY(GAME_HEIGHT/2-50);
+		wavesSurvived.setTextFill(Color.RED);
+		wavesSurvived.setStyle("-fx-font-family: verdana;-fx-font-size: 21;");
+		gameOverPane.getChildren().addAll(overTitle, wavesSurvived);
 		window.setResizable(false);
 		window.sizeToScene();
+		//window.setScene(gameOver);
 		
 		//game loop
 	    AnimationTimer gameLoop = new AnimationTimer()
 	    {
 	        public void handle(long currentNanoTime)
 	        {
+	        	if(playerLives == 0){
+	        		wavesSurvived.setText("You have survived "+wave+" waves.");
+	        		window.setScene(gameOver);
+	        	}
 	        	shields = 0;
 	            for(Tower t: placedTowers){
 	            	if(t instanceof TargetedTower){
@@ -516,7 +542,7 @@ public class Main extends Application{
 			}
 		}
 	}
-	private void spawnEnemy(Enemy e){
+	public static void spawnEnemy(Enemy e){
 		gameLayout.getChildren().add(e);
 		enemies.add(e);
 	}
