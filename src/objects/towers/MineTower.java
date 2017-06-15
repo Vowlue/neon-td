@@ -44,7 +44,7 @@ public class MineTower extends TargetedTower{
 					ArrayList<Enemy> enemies = Main.getEnemies();
 					for(Enemy enem: enemies){
 						if(Main.getDistanceBetween(aoe, enem) <= getRange()){
-							enem.takeDamage(getBaseDamage());
+							enem.takeDamage(getDamage());
 						}
 					}
 					Main.removeNode(aoe);

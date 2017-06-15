@@ -63,6 +63,7 @@ public class Main extends Application{
 	private static int playerLives = 10;
 	public static int playerSparks = 500;
 	private static int shields;
+	public static double dmgMult = 1.1;
 	
 	int[][] map;
 	
@@ -209,7 +210,7 @@ public class Main extends Application{
 	            for(Tower t: placedTowers){
 	            	if(t instanceof TargetedTower){
 	            		TargetedTower tt = (TargetedTower)t;
-	            		tt.setDamage(tt.getBaseDamage());
+	            		tt.setDamage(tt.getDamage());
 		            	Enemy target = null;
 		            	double percentDone = 0;
 		            	for(Enemy e: enemies){
@@ -266,7 +267,7 @@ public class Main extends Application{
 	private void setupTopMenu(){
 		topMenu = new HBox(100);
 		topMenu.getStyleClass().add("uimenu");
-		topMenu.setStyle("-fx-background-color:#000066");
+		topMenu.setStyle("-fx-background-color:#d1d1e0");
 		topMenu.setPrefWidth(GAME_WIDTH);
 		topMenu.setPrefHeight(.05*GAME_HEIGHT);
 		nextWave = new NextWaveButton();
@@ -475,6 +476,7 @@ public class Main extends Application{
 	private static void handle(Event e){
 		//if the target of the event is a Tower and it is currently showing its indicator, don't allow the event to happen
 		EventTarget et = e.getTarget();
+		System.out.println(et);
 		if(et instanceof Node && ((Node)et).getId() != null &&((Node)et).getId().equals("options") || et instanceof Tower && ((Tower)et).isShowing()){
 			return;
 		}

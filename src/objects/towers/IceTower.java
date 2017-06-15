@@ -28,7 +28,7 @@ public class IceTower extends AoeTower{
 			new Timeline(new KeyFrame(getDelay().divide(2), ev -> {
 				Main.removeNode(aoe);
 				for(Enemy e: enemies){
-					e.takeDamage(getBaseDamage());
+					e.takeDamage(getDamage());
 					if(e.getTransition().getCurrentRate() == 1){
 						e.getTransition().setRate(0.5);
 						new Timeline(new KeyFrame(Duration.seconds(2), af -> e.getTransition().setRate(1))).play();

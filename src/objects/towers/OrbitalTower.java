@@ -46,6 +46,9 @@ public class OrbitalTower extends Tower{
         node.setTranslateY(y);
     }
 	public double getDamage(){
+		if(isBoosted()){
+			return damage*Main.dmgMult;
+		}
 		return damage;
 	}
 	public ImageView getOrbiter(){

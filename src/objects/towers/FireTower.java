@@ -26,7 +26,7 @@ public class FireTower extends AoeTower{
 			new Timeline(new KeyFrame(getDelay().divide(2), ev -> {
 				Main.removeNode(aoe);
 				for(Enemy e: enemies){
-					e.takeDamage(getBaseDamage());
+					e.takeDamage(getDamage());
 				}
 			})).play();
 			setCanFire(false);

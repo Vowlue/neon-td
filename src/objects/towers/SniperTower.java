@@ -24,7 +24,7 @@ public class SniperTower extends TargetedTower{
 			crosshair.yProperty().bind(enemy.translateYProperty());
 			Main.addNode(crosshair);
 			new Timeline(new KeyFrame(halfDelay, ev -> {
-				enemy.takeDamage(getBaseDamage());
+				enemy.takeDamage(getDamage());
 				Main.removeNode(crosshair);
 			})).play();
 			setCanFire(false);
