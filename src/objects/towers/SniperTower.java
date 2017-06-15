@@ -10,7 +10,7 @@ import ui.Main;
 
 public class SniperTower extends TargetedTower{
 	public SniperTower(double x, double y, double width, double height) {
-		super(500, 20, 1000, "sniper", Main.sniper, x, y, width, height);
+		super(500, 100, 2000, "sniper", Main.sniper, x, y, width, height);
 	}
 	public void fire(Enemy enemy) {
 		Duration halfDelay = getDelay().divide(2);
@@ -24,7 +24,7 @@ public class SniperTower extends TargetedTower{
 			crosshair.yProperty().bind(enemy.translateYProperty());
 			Main.addNode(crosshair);
 			new Timeline(new KeyFrame(halfDelay, ev -> {
-				enemy.takeDamage(getDamage());
+				enemy.takeDamage(getBaseDamage());
 				Main.removeNode(crosshair);
 			})).play();
 			setCanFire(false);

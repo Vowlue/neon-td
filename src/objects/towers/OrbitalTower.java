@@ -57,5 +57,8 @@ public class OrbitalTower extends Tower{
 			hitEnemies.add(e);
 		}
 	}
+	public void setDamage(double d) {
+		damage = d;
+	}
 
 }

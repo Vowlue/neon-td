@@ -4,20 +4,20 @@ import javafx.scene.image.Image;
 import javafx.util.Duration;
 
 public abstract class TargetedTower extends Tower{
-	private int damage;
+	private double baseDamage;
 	private boolean canFire;
 	private Duration delay; //in ms
 	public TargetedTower(int range, int dmg, double dly, String idCode, Image i, double x, double y, double width, double height) {
 		super(idCode, i, x, y, width, height, range);
-		damage = dmg;
+		baseDamage = dmg;
 		canFire = true;
 		delay = Duration.millis(dly);
 	}
-	public int getDamage() {
-		return damage;
+	public double getBaseDamage() {
+		return baseDamage;
 	}
-	public void setDamage(int damage) {
-		this.damage = damage;
+	public void setDamage(double d) {
+		baseDamage = d;
 	}
 	public boolean canFire() {
 		return canFire;

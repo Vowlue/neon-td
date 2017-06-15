@@ -43,8 +43,7 @@ public class Enemy extends Circle{
 	    pt.setPath(path);
 	    pt.setNode(this);
 	    pt.setOnFinished(e -> {
-	    	Main.removeEnemy(this);
-	    	Main.loseLife();
+	    	Main.takeDamage(this);
 	    });
 	    pt.play();
 	    

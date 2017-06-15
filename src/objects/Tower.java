@@ -11,6 +11,7 @@ public abstract class Tower extends ImageView{
 	private double range;
 	private boolean showingIndicator;
 	private String idCode;
+	private boolean boosted;
 	public Tower(String idCode, Image i, double x, double y, double width, double height, int range){
 		super(i);
 		setX(x);
@@ -19,6 +20,7 @@ public abstract class Tower extends ImageView{
 		setFitHeight(height);
 		this.idCode = idCode;
 		this.range = range;
+		boosted = false;
 		showingIndicator = false;
 		indicator = new Circle(x+width/2, y+height/2, range, Color.rgb(0, 0, 153, 0.3));
 		indicator.setStroke(Color.rgb(0, 0, 128, 0.4));
@@ -26,6 +28,12 @@ public abstract class Tower extends ImageView{
 	}
 	public boolean isShowing(){
 		return showingIndicator;
+	}
+	public boolean isBoosted() {
+		return boosted;
+	}
+	public void setBoosted(boolean boosted) {
+		this.boosted = boosted;
 	}
 	private void showOptions(){
 		if(!showingIndicator){

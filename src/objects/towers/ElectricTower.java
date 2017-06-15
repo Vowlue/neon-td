@@ -42,7 +42,7 @@ public class ElectricTower extends TargetedTower{
 		targets.add(t);
 		p.getElements().add(new LineTo(t.getTranslateX()+t.getLayoutX()+t.getCenterX(), t.getTranslateY()+t.getLayoutY()+t.getCenterY()));
 		Enemy current = t;
-		t.takeDamage(getDamage());
+		t.takeDamage(getBaseDamage());
 		while(b > 0){
 			//find closest enemy behind the first that is within the bounce range
 			ArrayList<Enemy> enemies = Main.getEnemies();
@@ -59,7 +59,7 @@ public class ElectricTower extends TargetedTower{
 			}
 			if(next == null)
 				break;
-			next.takeDamage(getDamage());
+			next.takeDamage(getBaseDamage());
 			targets.add(next);
 			p.getElements().add(new LineTo(next.getTranslateX()+next.getLayoutX()+next.getCenterX(), next.getTranslateY()+next.getLayoutY()+next.getCenterY()));
 			current = next;

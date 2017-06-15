@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
 public class LivesIndicator extends HBox{
 	private int counter;
 	public LivesIndicator(int lives) {
-		Label lText = new Label("Lives");
+		Label lText = new Label("Lives   ");
 		getChildren().add(lText);
 		setStyle("-fx-alignment: center-left");
 		for(int i = 0; i<lives; i++){

@@ -31,7 +31,7 @@ public class LaserTower extends TargetedTower{
 			p.getElements().add(new LineTo(enemy.getTranslateX()+enemy.getLayoutX()+enemy.getCenterX(), enemy.getTranslateY()+enemy.getLayoutY()+enemy.getCenterY()));
 			Main.addNode(p);
 			new Timeline(new KeyFrame(Duration.millis(30), ev -> {
-				enemy.takeDamage(getDamage());
+				enemy.takeDamage(getBaseDamage());
 				Main.removeNode(p);
 			})).play();
 			setCanFire(false);

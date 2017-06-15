@@ -10,11 +10,9 @@ import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventTarget;
 import javafx.geometry.Bounds;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -26,16 +24,22 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
-import objects.TargetedTower;
 import objects.AoeTower;
 import objects.Enemy;
+import objects.TargetedTower;
 import objects.Tile;
 import objects.Tower;
 import objects.TowerIcon;
-import objects.towers.*;
+import objects.towers.BoosterTower;
+import objects.towers.ElectricTower;
+import objects.towers.FireTower;
+import objects.towers.IceTower;
+import objects.towers.LaserTower;
+import objects.towers.MineTower;
+import objects.towers.OrbitalTower;
+import objects.towers.ShieldTower;
+import objects.towers.SniperTower;
 
 public class Main extends Application{
 	// CONSTANTS
@@ -58,7 +62,7 @@ public class Main extends Application{
 	//GAME VARIABLES
 	private static int playerLives = 10;
 	private static int playerSparks = 500;
-	private static int shields = 0;
+	private static int shields;
 	
 	int[][] map;
 	
@@ -198,8 +202,11 @@ public class Main extends Application{
 	    {
 	        public void handle(long currentNanoTime)
 	        {
+	        	shields = 0;
 	            for(Tower t: placedTowers){
 	            	if(t instanceof TargetedTower){
+	            		TargetedTower tt = (TargetedTower)t;
+	            		tt.setDamage(tt.getBaseDamage());
 		            	Enemy target = null;
 		            	double percentDone = 0;
 		            	for(Enemy e: enemies){
@@ -233,7 +240,14 @@ public class Main extends Application{
 	            		hit.forEach(l -> ot.contactDamage(l));
 	            	}
 	            	else if(t instanceof BoosterTower){
-	            		
+	            		ArrayList<Tower> towers = getPlacedTowers();
+	            		for(Tower tow: towers){
+	            			if(getDistanceBetween(tow, t) <= t.getRange() && !tow.isBoosted())
+	            			((BoosterTower)t).boostTower(tow);
+	            		}
+	            	}
+	            	else if(t instanceof ShieldTower){
+	            		shields++;
 	            	}
 	            }
 	        }
@@ -328,6 +342,13 @@ public class Main extends Application{
 	}
 	public static TowerIcon getTower(){
 		return storedIcon;
+	}
+	public static ArrayList<Tower> getPlacedTowers(){
+		ArrayList<Tower> t = new ArrayList<Tower>();
+		for(Tower tw: placedTowers){
+			t.add(tw);
+		}
+		return t;
 	}
 	public static void loseLife(){
 		setPlayerHp(Main.getPlayerHp()-1);
@@ -485,7 +506,20 @@ public class Main extends Application{
 		playerSparks += m;
 		sprkInd.setMoney(playerSparks);
 	}
-	
+	public static void takeDamage(Enemy e){
+		if(shields > 0){
+			for(Tower t: placedTowers){
+				if(t instanceof ShieldTower){
+					removeNode(t);
+					placedTowers.remove(t);
+					break;
+				}
+			}
+		}
+		else
+			loseLife();
+		removeEnemy(e);
+	}
 	
 	
 	
