@@ -1,5 +1,7 @@
 package ui;
 
+import java.util.ArrayList;
+
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -7,12 +9,11 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import objects.AoeTower;
 import objects.Tower;
+import objects.towers.BoosterTower;
 
 public class OptionsMenu extends VBox{
 	public OptionsMenu(Tower t){
@@ -29,14 +30,18 @@ public class OptionsMenu extends VBox{
 			t.unshowOptions();
 			Main.removeNode(t);
 			Main.changeMoney((int)(.75*t.getTowerIcon().getCost()));
+			if(t instanceof BoosterTower){
+				ArrayList<Tower> towers = Main.getPlacedTowers();
+				for(Tower to: towers){
+					if(Main.getDistanceBetween(t, to) <= t.getRange()){
+						to.setBoosted(false);
+					}
+				}
+			}
 		});
 		Text upgradeText = new Text("Upgrades");
 		upgradeText.setId("options");
 		upgradeText.setFill(Color.ALICEBLUE);
 		getChildren().addAll(sellText, sellButton, upgradeText);
-		
-		if(t instanceof AoeTower){
-			
-		}
 	}
 }

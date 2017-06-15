@@ -17,6 +17,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -74,7 +76,6 @@ public class Main extends Application{
 	
 	//GAME ELEMENTS
 	private Stage window;
-	private Scene game;
 	public static BorderPane gameLayout;
 	
 	public static GridPane mapLayout;
@@ -121,6 +122,16 @@ public class Main extends Application{
 	public static Image orbiter;
 	public static Image bomb;
 	
+	public static Image starry;
+	public static Image neonTD;
+	public static Image start1;
+	public static Image start2;
+	
+	//game scenes
+	private Scene start;
+	private Scene game;
+	private Scene gameOver;
+	
 	public static void main(String[] args){
 		launch(args);
 	}
@@ -150,6 +161,11 @@ public class Main extends Application{
 		crosshair = new Image(new FileInputStream("images/crosshair.png"));
 		orbiter = new Image(new FileInputStream("images/orbiter.png"));
 		bomb = new Image(new FileInputStream("images/bomb.png"));
+		
+		starry = new Image(new FileInputStream("images/starry.png"));
+		neonTD = new Image(new FileInputStream("images/neontd.png"));
+		start1 = new Image(new FileInputStream("images/start1.png"));
+		start2 = new Image(new FileInputStream("images/start2.png"));
 		
 		placedTowers = new ArrayList<Tower>();
 		towerIcons = new TowerIcon[9];
@@ -183,6 +199,20 @@ public class Main extends Application{
 		setupShopMenu();
 		setupMap();
 		
+		Pane startPane = new Pane();
+		startPane.setBackground(new Background(new BackgroundImage(starry, null, null, null, null)));
+		ImageView title = new ImageView(neonTD);
+		title.setX(GAME_WIDTH/2-250);
+		ImageView startButton = new ImageView(start1);
+		startButton.setX(GAME_WIDTH/2-100);
+		startButton.setY(GAME_HEIGHT/2);
+		startButton.setOnMouseEntered(e -> startButton.setImage(start2));
+		startButton.setOnMouseExited(e -> startButton.setImage(start1));
+		startButton.setOnMouseClicked(e -> window.setScene(game));
+		startPane.getChildren().addAll(title, startButton);
+		start = new Scene(startPane, GAME_WIDTH, GAME_HEIGHT);
+		window.setScene(start);
+		
 		game = new Scene(gameLayout, GAME_WIDTH, GAME_HEIGHT);
 		//game.addEventFilter(MouseEvent.MOUSE_PRESSED, x -> {System.out.println(x.getSceneX() + " " + x.getSceneY());handle(x);});
 		game.addEventFilter(MouseEvent.MOUSE_PRESSED, x -> {handle(x);});
@@ -197,7 +227,7 @@ public class Main extends Application{
 			}
 		});
 		
-		window.setScene(game);
+		//window.setScene(game);
 		window.setResizable(false);
 		window.sizeToScene();
 		
@@ -476,7 +506,6 @@ public class Main extends Application{
 	private static void handle(Event e){
 		//if the target of the event is a Tower and it is currently showing its indicator, don't allow the event to happen
 		EventTarget et = e.getTarget();
-		System.out.println(et);
 		if(et instanceof Node && ((Node)et).getId() != null &&((Node)et).getId().equals("options") || et instanceof Tower && ((Tower)et).isShowing()){
 			return;
 		}

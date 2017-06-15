@@ -28,14 +28,3 @@ tower upgrades:::
 work on game over;
 add upgrade and property menu for towers when they are clicked
 change -fx-whatever into cs form if possible;
-
-towers:
-CHECK electric fires an electric shock that spreads to enemies close to each other 
-CHECK fire deals damage to the area around it and afflicts burn 
-CHECK laser fires repeated instant lasers at the closest enemy 
-CHECK icy slows down enemies in its radius 
-shield when set up will protect a life and will sacrifice itself when life is lost 
-CHECK sniper will constantly pick the first target to snipe 
-mine repeatedly spawns mines that deal a certain amount of damage in area around it
-booster increases fire rate of towers around it
-orbital has orbitals around it that damages enemies that pass through
