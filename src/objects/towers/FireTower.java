@@ -14,7 +14,7 @@ import ui.Main;
 
 public class FireTower extends AoeTower{
 	public FireTower(double x, double y, double width, double height) {
-		super(50, 3, 100, "fire", Main.fire, x, y, width, height);
+		super(100, 3, 100, "fire", Main.fire, x, y, width, height);
 	}
 	@Override
 	public void fire(ArrayList<Enemy> enemies) {

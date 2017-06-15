@@ -61,7 +61,7 @@ public class Main extends Application{
 	public static final double iconHeight = (.95*GAME_HEIGHT)/13;
 	//GAME VARIABLES
 	private static int playerLives = 10;
-	private static int playerSparks = 500;
+	public static int playerSparks = 500;
 	private static int shields;
 	
 	int[][] map;
@@ -79,7 +79,7 @@ public class Main extends Application{
 	public static GridPane mapLayout;
 	HBox topMenu;
 	static VBox shopMenu;
-	Pane upgradeHold;
+	public static Pane upgradeMenu;
 
 	public static TowerIcon t1;
 	public static TowerIcon t2;
@@ -115,9 +115,11 @@ public class Main extends Application{
 	public static Image heart;
 	public static Image spark;
 	public static Image towersLogo;
-	static Image forward;
+	public static Image forward;
 	public static Image crosshair;
 	public static Image orbiter;
+	public static Image bomb;
+	
 	public static void main(String[] args){
 		launch(args);
 	}
@@ -146,18 +148,19 @@ public class Main extends Application{
 		
 		crosshair = new Image(new FileInputStream("images/crosshair.png"));
 		orbiter = new Image(new FileInputStream("images/orbiter.png"));
+		bomb = new Image(new FileInputStream("images/bomb.png"));
 		
 		placedTowers = new ArrayList<Tower>();
 		towerIcons = new TowerIcon[9];
-		t1 = new TowerIcon("boost", 0, boost, TowerIcon.BLUE, "t1");
-		t2 = new TowerIcon("electric", 0, electric, TowerIcon.BLUE, "t2");
-		t3 = new TowerIcon("fire", 0, fire, TowerIcon.BLUE, "t3");
-		t4 = new TowerIcon("ice", 0, ice, TowerIcon.YELLOW, "t4");
-		t5 = new TowerIcon("laser", 0, laser, TowerIcon.YELLOW, "t5");
-		t6 = new TowerIcon("orbital", 0, orbital, TowerIcon.YELLOW, "t6");
-		t7 = new TowerIcon("shield", 0, shield, TowerIcon.GREEN, "t7");
-		t8 = new TowerIcon("mine", 0, mine, TowerIcon.GREEN, "t8");
-		t9 = new TowerIcon("sniper", 0, sniper, TowerIcon.GREEN, "t9");
+		t1 = new TowerIcon("boost", 800, boost, TowerIcon.BLUE, "Booster Tower: \nWith its leafy prowlress, this tower boosts the power of each tower situated in its radius. However, it does nothing on its own."); //800
+		t2 = new TowerIcon("electric", 400, electric, TowerIcon.BLUE, "Electric Tower: \nWith a shocking blast at its dispoal, this tower blasts ememies with electricity, bouncing if they are close enough."); // 400
+		t3 = new TowerIcon("fire", 200, fire, TowerIcon.BLUE, "Fire Tower: \nVery hot; Any enemies in its area will be roasted with heat."); // 200
+		t4 = new TowerIcon("ice", 200, ice, TowerIcon.YELLOW, "Ice Tower: \nChillingly cold, this tower applies a slowing debuff on enemies with a twinge of pain."); // 200 
+		t5 = new TowerIcon("laser", 250, laser, TowerIcon.YELLOW, "Laser Tower: \nThis tower repeatedly fires on enemies with red lasers.");// 250? but nerf
+		t6 = new TowerIcon("orbital", 500, orbital, TowerIcon.YELLOW, "Orbital Tower: \nAlthough this tower itself does nothing, it has a little orbital that hits enemies it contacts."); // 500?
+		t7 = new TowerIcon("shield", 1000, shield, TowerIcon.GREEN, "Shield Tower: \nIf you're feeling like you need less arsenal and more protection, this tower protects your life once."); // 1000?
+		t8 = new TowerIcon("mine", 1000, mine, TowerIcon.GREEN, "Mine Tower: \nIt launches a sticky bomb that attaches itself to an enemy and blowing up; if the enemy dies, it falls to the ground."); //pretty op 1000?
+		t9 = new TowerIcon("sniper", 600, sniper, TowerIcon.GREEN, "Sniper Tower: \nAiming at the first target with a deft range, this tower snipes down its targets."); // 600
 		towerIcons[0] = t1;
 		towerIcons[1] = t2;
 		towerIcons[2] = t3;
@@ -273,10 +276,9 @@ public class Main extends Application{
 		gameLayout.setTop(topMenu);
 	}
 	private void setupUpgradeMenu(){
-		upgradeHold = new Pane();
-		upgradeHold.setPrefWidth(.1*GAME_WIDTH);
-		upgradeHold.prefHeight(.95*GAME_HEIGHT);
-		Pane upgradeMenu = new Pane(upgradeHold);
+		upgradeMenu = new Pane();
+		upgradeMenu.setPrefWidth(.1*GAME_WIDTH);
+		upgradeMenu.prefHeight(.95*GAME_HEIGHT);
 		upgradeMenu.setStyle("-fx-background-color:#330033");
 		gameLayout.setLeft(upgradeMenu);
 	}
@@ -473,7 +475,7 @@ public class Main extends Application{
 	private static void handle(Event e){
 		//if the target of the event is a Tower and it is currently showing its indicator, don't allow the event to happen
 		EventTarget et = e.getTarget();
-		if(et instanceof Tower && ((Tower)et).isShowing()){
+		if(et instanceof Node && ((Node)et).getId() != null &&((Node)et).getId().equals("options") || et instanceof Tower && ((Tower)et).isShowing()){
 			return;
 		}
 		Object[] nodes = gameLayout.getChildren().toArray();

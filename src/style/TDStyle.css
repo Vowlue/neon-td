@@ -5,12 +5,11 @@
 #map{
 	-fx-background-color: #110022;
 }
-VBox, .menu  {
+VBox, HBox, .menu {
     -fx-alignment: center;
 }
-Label .text{
-	-fx-fill: orange;
-	-fx-stroke: blue;
+.text{
+	-fx-fill: black;
 	-fx-stroke-width: 0.5;
 }
 .uimenu{
@@ -18,8 +17,12 @@ Label .text{
 }
 #description{
 	-fx-font-family: helvetica;
-	-fx-font-size: 15;
+	-fx-font-size: 18;
 }
 Label{
 	-fx-alignment: top-left;
+}
+OptionsMenu{
+	-fx-font-size: 17;
+	-fx-alignment: center;
 }

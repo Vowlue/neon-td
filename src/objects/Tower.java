@@ -5,6 +5,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import ui.Main;
+import ui.OptionsMenu;
 
 public abstract class Tower extends ImageView{
 	private Circle indicator;
@@ -12,6 +13,7 @@ public abstract class Tower extends ImageView{
 	private boolean showingIndicator;
 	private String idCode;
 	private boolean boosted;
+	private OptionsMenu options;
 	public Tower(String idCode, Image i, double x, double y, double width, double height, int range){
 		super(i);
 		setX(x);
@@ -20,6 +22,7 @@ public abstract class Tower extends ImageView{
 		setFitHeight(height);
 		this.idCode = idCode;
 		this.range = range;
+		options = new OptionsMenu(this);
 		boosted = false;
 		showingIndicator = false;
 		indicator = new Circle(x+width/2, y+height/2, range, Color.rgb(0, 0, 153, 0.3));
@@ -40,12 +43,14 @@ public abstract class Tower extends ImageView{
 			showingIndicator = true;
 			Main.addNode(indicator);
 			toFront();
+			Main.upgradeMenu.getChildren().add(options);
 		}
 	}
 	public void unshowOptions(){
 		if(showingIndicator){
 			showingIndicator = false;
 			Main.removeNode(indicator);
+			Main.upgradeMenu.getChildren().remove(options);
 		}
 	}
 	public double getRange(){

@@ -7,7 +7,7 @@ import javafx.scene.layout.HBox;
 public class SparksIndicator extends HBox{
 	Label lText;
 	public SparksIndicator(int sparks){
-		lText = new Label(""+sparks);
+		lText = new Label(sparks+" ");
 		ImageView sparky = new ImageView(Main.spark);
 		getChildren().addAll(lText, sparky);
 		this.setPrefWidth(Main.GAME_WIDTH*.2);

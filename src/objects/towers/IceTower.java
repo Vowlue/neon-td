@@ -15,7 +15,7 @@ import ui.Main;
 public class IceTower extends AoeTower{
 
 	public IceTower(double x, double y, double width, double height) {
-		super(50, 1, 300, "ice", Main.ice, x, y, width, height);
+		super(100, 1, 300, "ice", Main.ice, x, y, width, height);
 	}
 	//deal a little damage and apply a slowing debuff on enemies
 	@Override

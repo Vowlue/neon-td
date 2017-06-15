@@ -42,6 +42,7 @@ public class Tile extends Pane{
 	}
 	public void placeTower(TowerIcon ti){
 		if(canPlace && !hasTower){
+			Main.changeMoney(-ti.getCost());
 			ObservableList<Node> nodes = Main.getAllTiles();
 			for(Node n: nodes){
 				Tile tile = (Tile)n;
